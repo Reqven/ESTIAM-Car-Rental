@@ -6,9 +6,8 @@ services:
     ports:
       - "8181:80"
     volumes:
-      - $PWD/app:/var/www/html
-      #- symfony-sync:/var/www/html
-      #- /var/www/html/var/
+      #- $PWD/app:/var/www/html
+      - symfony-sync:/var/www/html:nocopy
     links:
       - database:database
   database:
@@ -24,6 +23,6 @@ services:
       - MYSQL_PASSWORD=root
       - MYSQL_DATABASE=symfony
 
-#volumes:
-#  symfony-sync:
-#    external: true
+volumes:
+  symfony-sync:
+    external: true

@@ -1,5 +1,8 @@
-version: '2'
+version: "2"
+options:
+  verbose: true
 syncs:
   symfony-sync:
-    sync_strategy: 'native_osx'
-    src: './app/src/'
+    sync_strategy: 'unison'
+    src: './app/'
+    #sync_excludes: ['var']
