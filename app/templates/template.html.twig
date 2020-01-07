@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="ltr" lang="en" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="ltr" lang="en" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="ltr" lang="en">
+<!--<![endif]-->
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Eposi 1 - Responsive Opencart Theme</title>
+	<!--base href="http://demo.towerthemes.com/tt_eposi/" /-->
+	<meta name="description" content="Eposi, Responsive, Opencart Theme, Fashion Theme" />
+	<link href="{{ asset('plugin/owl-carousel/owl.carousel.min.css') }}" rel="stylesheet" />
+	<link href="{{ asset('plugin/owl-carousel/owl.theme.green.min.css') }}" rel="stylesheet" />
+	<link href="{{ asset('theme/ocmegamenu/menu.css') }}" rel="stylesheet" />
+	<link href="{{ asset('theme/opentheme/animate.css') }}" rel="stylesheet" />
+	<link href="{{ asset('plugin/bootstrap/bootstrap.min.css') }}" rel="stylesheet" media="screen" />
+	<link href="{{ asset('theme/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('theme/ionicons.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('theme/opentheme/ocslideshow/ocslideshow.css') }}" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" />
+	<link href="{{ asset('theme/stylesheet.css') }}" rel="stylesheet" />
+	<script src="{{ asset('plugin/jquery/jquery-2.1.1.min.js') }}"></script>
+	<script src="{{ asset('plugin/owl-carousel/owl.carousel.min.js') }}"></script>
+	<script src="{{ asset('plugin/jquery/jquery.plugin.min.js') }}"></script>
+	<script src="{{ asset('plugin/jquery/jquery.countdown.min.js') }}"></script>
+	<script src="{{ asset('theme/ocmegamenu/menu.js') }}"></script>
+	<script src="{{ asset('theme/opentheme/ocslideshow/jquery.nivo.slider.js') }}"></script>
+	<script src="{{ asset('plugin/cloudzoom/cloud-zoom.1.0.2.min.js') }}"></script>
+	<script src="{{ asset('plugin/cloudzoom/zoom.js') }}"></script>
+	<script src="{{ asset('theme/ocquickview/ocquickview.js') }}"></script>
+	<link href="{{ asset('theme/ocquickview/ocquickview.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('theme/ocajaxlogin/ocajaxlogin.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<link href="{{ asset('plugin/bootstrap/bootstrap-datetimepicker.min.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<link href="{{ asset('theme/ocpagebuilder.css') }}" type="text/css" rel="stylesheet" media="screen" />
+	<script src="{{ asset('plugin/jquery/jquery.bpopup.min.js') }}"></script>
+	<script src="{{ asset('plugin/jquery/jquery.cookie.js') }}"></script>
+	<script src="{{ asset('theme/ocajaxlogin/ocajaxlogin.js') }}"></script>
+	<script src="{{ asset('plugin/moment/moment.min.js') }}"></script>
+	<script src="{{ asset('plugin/moment/moment-with-locales.min.js') }}"></script>
+	<script src="{{ asset('plugin/bootstrap/bootstrap-datetimepicker.min.js') }}"></script>
+	<script src="{{ asset('javascript/common.js') }}"></script>
+	<link href="{{ asset('image/cart.png') }}" rel="icon" />
+	<script src="{{ asset('plugin/bootstrap/bootstrap.min.js') }}"></script>
+
+  {% block stylesheet %}
+  {% endblock %}
+
+</head>
+
+<body class="common-home home1">
+	<div class="wrapper">
+
+		<header>
+			<div class="header-inner fix">
+				<div class="container">
+					<div class="container-inner">
+						<div class="inner">
+							<div class="inner-inner">
+								<div class="col-menu-mobile">
+									<style>
+										#oc-menu-8790 .oc-menu-bar {
+											background: #FFFFFF;
+											color: #FFFFFF;
+											padding: 14px 15px 14px 15px;
+											position: relative;
+										}
+
+										#oc-menu-8790.oc-menu-bar {
+											background: #FFFFFF;
+											color: #FFFFFF;
+										}
+
+										#oc-menu-8790 .ul-top-items .li-top-item {
+											background: #FFFFFF;
+											color: #292929;
+										}
+
+										#oc-menu-8790 .ul-top-items .li-top-item .a-top-link {
+											padding: 5px 20px 5px 20px;
+											color: #292929;
+											font-size: 12px;
+											line-height: 25px;
+											text-transform: uppercase;
+											font-weight: 600;
+										}
+
+										#oc-menu-8790 .ul-top-items .li-top-item:hover,
+										#oc-menu-8790 .ul-top-items .li-top-item.active {
+											background: #FFFFFF;
+											color: #EE3333;
+										}
+
+										#oc-menu-8790 .ul-top-items .li-top-item:hover .a-top-link,
+										#oc-menu-8790 .ul-top-items .li-top-item.active .a-top-link {
+											color: #EE3333;
+											font-weight: 600;
+										}
+
+										#oc-menu-8790 .mega-menu-container {
+											width: 100%;
+											background: #FFFFFF;
+											padding: 30px 30px 30px 30px;
+
+										}
+
+										#oc-menu-8790 .mega-menu-container .a-mega-second-link,
+										#oc-menu-8790 .mega-menu-container .widget-html-title {
+											color: #FFFFFF;
+										}
+
+										#oc-menu-8790 .mega-menu-container .a-mega-third-link {
+											color: #FFFFFF;
+										}
+
+										#oc-menu-8790 .ul-second-items .li-second-items {
+											background: #FFFFFF;
+											color: #292929;
+										}
+
+										#oc-menu-8790 .ul-second-items .li-second-items:hover,
+										#oc-menu-8790 .ul-second-items .li-second-items.active {
+											background: #FFFFFF;
+											color: #EE3333;
+										}
+
+										#oc-menu-8790 .ul-second-items .li-second-items .a-second-link {
+											color: #292929;
+											font-size: 12px;
+											text-transform: uppercase;
+											font-weight: 600;
+										}
+
+										#oc-menu-8790 .ul-second-items .li-second-items:hover .a-second-link,
+										#oc-menu-8790 .ul-second-items .li-second-items.active .a-second-link {
+											color: #EE3333;
+											font-weight: 600;
+										}
+
+										#oc-menu-8790 .ul-third-items .li-third-items {
+											background: #FFFFFF;
+										}
+
+										#oc-menu-8790 .ul-third-items .li-third-items:hover,
+										#oc-menu-8790 .ul-third-items .li-third-items.active {
+											background: #FFFFFF;
+										}
+
+										#oc-menu-8790 .ul-third-items .li-third-items .a-third-link {
+											color: #707070;
+											font-size: 12px;
+											text-transform: capitalize;
+											font-weight: 400;
+										}
+
+										#oc-menu-8790 .ul-third-items .li-third-items:hover .a-third-link,
+										#oc-menu-8790 .ul-third-items .li-third-items.active .a-third-link {
+											color: #EE3333;
+											font-weight: 400;
+										}
+									</style>
+
+
+									<div class="oc-menu mobile-menu hidden-lg " id="oc-menu-8790">
+										<input type="hidden" id="menu-effect-8790" class="menu-effect" value="none" />
+										<div class="oc-menu-bar">
+											<div class="left"><i class="ion-android-menu"></i> <span>Mobile Menu</span></div>
+
+										</div>
+										<ul class="ul-top-items">
+											<li class="li-top-item">
+												<a class="a-top-link a-item" href="index.php?route=common/home">
+													<span>Home</span>
+												</a>
+											</li>
+											<li class="li-top-item">
+												<a class="a-top-link a-item"
+													href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20">
+													<span>Shop</span>
+												</a>
+												<span class="top-click-show a-click-show">
+													<i class="fa fa-angle-down" aria-hidden="true"></i>
+													<i class="fa fa-angle-up" aria-hidden="true"></i>
+												</span>
+
+												<div class="sub-menu-container">
+													<ul class="ul-second-items">
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_307"
+																class="a-second-link a-item">
+																<span class="a-second-title">Bedroom</span>
+															</a>
+															<span class="second-click-show a-click-show">
+																<i class="fa fa-angle-down" aria-hidden="true"></i>
+																<i class="fa fa-angle-up" aria-hidden="true"></i>
+															</span>
+															<div class="flyout-third-items">
+																<ul class="ul-third-items">
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_307_414"
+																			class="a-third-link"><span class="a-third-title">Brushes Kits</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_307_416"
+																			class="a-third-link"><span class="a-third-title">Eye Brushes</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_307_360"
+																			class="a-third-link"><span class="a-third-title">Face Brushes</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_307_417"
+																			class="a-third-link"><span class="a-third-title">Lip Brushes</span></a>
+																	</li>
+																</ul>
+															</div>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_48"
+																class="a-second-link a-item">
+																<span class="a-second-title">Storage</span>
+															</a>
+															<span class="second-click-show a-click-show">
+																<i class="fa fa-angle-down" aria-hidden="true"></i>
+																<i class="fa fa-angle-up" aria-hidden="true"></i>
+															</span>
+															<div class="flyout-third-items">
+																<ul class="ul-third-items">
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_48_361"
+																			class="a-third-link"><span class="a-third-title">4G LTE Tablets</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_48_358"
+																			class="a-third-link"><span class="a-third-title">Apple iPad</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_48_365"
+																			class="a-third-link"><span class="a-third-title">E-Readers</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_48_364"
+																			class="a-third-link"><span class="a-third-title">iPad &amp; Tablet
+																				Accessories</span></a>
+																	</li>
+																</ul>
+															</div>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_50"
+																class="a-second-link a-item">
+																<span class="a-second-title">Decoration</span>
+															</a>
+															<span class="second-click-show a-click-show">
+																<i class="fa fa-angle-down" aria-hidden="true"></i>
+																<i class="fa fa-angle-up" aria-hidden="true"></i>
+															</span>
+															<div class="flyout-third-items">
+																<ul class="ul-third-items">
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_50_472"
+																			class="a-third-link"><span class="a-third-title">Face Palettes</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_50_420"
+																			class="a-third-link"><span class="a-third-title">Face Primer</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_50_418"
+																			class="a-third-link"><span class="a-third-title">Lipstick </span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_50_421"
+																			class="a-third-link"><span class="a-third-title">Mascara</span></a>
+																	</li>
+																</ul>
+															</div>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_304"
+																class="a-second-link a-item">
+																<span class="a-second-title">Lighting</span>
+															</a>
+															<span class="second-click-show a-click-show">
+																<i class="fa fa-angle-down" aria-hidden="true"></i>
+																<i class="fa fa-angle-up" aria-hidden="true"></i>
+															</span>
+															<div class="flyout-third-items">
+																<ul class="ul-third-items">
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_304_474"
+																			class="a-third-link"><span class="a-third-title">Body Cleansing</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_304_424"
+																			class="a-third-link"><span class="a-third-title">Creams &amp;
+																				Moisturizers</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_304_423"
+																			class="a-third-link"><span class="a-third-title">Face</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_304_422"
+																			class="a-third-link"><span class="a-third-title">Face Moisturizers</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_304_359"
+																			class="a-third-link"><span class="a-third-title">Masks</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_304_473"
+																			class="a-third-link"><span class="a-third-title">Mousse</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=20_304_475"
+																			class="a-third-link"><span class="a-third-title">Skin Care Sets &amp;
+																				Kits</span></a>
+																	</li>
+																</ul>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</li>
+											<li class="li-top-item">
+												<a class="a-top-link a-item"
+													href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56">
+													<span>Eyes</span>
+												</a>
+												<span class="top-click-show a-click-show">
+													<i class="fa fa-angle-down" aria-hidden="true"></i>
+													<i class="fa fa-angle-up" aria-hidden="true"></i>
+												</span>
+
+												<div class="sub-menu-container">
+													<ul class="ul-second-items">
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_84"
+																class="a-second-link a-item">
+																<span class="a-second-title">Brushes</span>
+															</a>
+															<span class="second-click-show a-click-show">
+																<i class="fa fa-angle-down" aria-hidden="true"></i>
+																<i class="fa fa-angle-up" aria-hidden="true"></i>
+															</span>
+															<div class="flyout-third-items">
+																<ul class="ul-third-items">
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_84_329"
+																			class="a-third-link"><span class="a-third-title">Bags &amp; Cases</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_84_330"
+																			class="a-third-link"><span class="a-third-title">Binoculars &amp;
+																				Scopes</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_84_331"
+																			class="a-third-link"><span class="a-third-title">Digital Cameras</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_84_332"
+																			class="a-third-link"><span class="a-third-title">Film Photography</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_84_334"
+																			class="a-third-link"><span class="a-third-title">Lighting &amp; Studio</span></a>
+																	</li>
+																</ul>
+															</div>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_86"
+																class="a-second-link a-item">
+																<span class="a-second-title">Mascara</span>
+															</a>
+															<span class="second-click-show a-click-show">
+																<i class="fa fa-angle-down" aria-hidden="true"></i>
+																<i class="fa fa-angle-up" aria-hidden="true"></i>
+															</span>
+															<div class="flyout-third-items">
+																<ul class="ul-third-items">
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_86_396"
+																			class="a-third-link"><span class="a-third-title">DSLR Body &amp; Lens</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_86_397"
+																			class="a-third-link"><span class="a-third-title">DSLR Body Only</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_86_399"
+																			class="a-third-link"><span class="a-third-title">DSLR Lenses</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_86_398"
+																			class="a-third-link"><span class="a-third-title">DSLR Package Deals</span></a>
+																	</li>
+																</ul>
+															</div>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_62"
+																class="a-second-link a-item">
+																<span class="a-second-title">Eye Shadow</span>
+															</a>
+															<span class="second-click-show a-click-show">
+																<i class="fa fa-angle-down" aria-hidden="true"></i>
+																<i class="fa fa-angle-up" aria-hidden="true"></i>
+															</span>
+															<div class="flyout-third-items">
+																<ul class="ul-third-items">
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_62_401"
+																			class="a-third-link"><span class="a-third-title">Camera Lenses</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_62_400"
+																			class="a-third-link"><span class="a-third-title">DSLR Lenses</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_62_402"
+																			class="a-third-link"><span class="a-third-title">Lens Accessories</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_62_408"
+																			class="a-third-link"><span class="a-third-title">Lowepro</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_62_410"
+																			class="a-third-link"><span class="a-third-title">SanDisk</span></a>
+																	</li>
+																</ul>
+															</div>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_91"
+																class="a-second-link a-item">
+																<span class="a-second-title">Eye Brushes</span>
+															</a>
+															<span class="second-click-show a-click-show">
+																<i class="fa fa-angle-down" aria-hidden="true"></i>
+																<i class="fa fa-angle-up" aria-hidden="true"></i>
+															</span>
+															<div class="flyout-third-items">
+																<ul class="ul-third-items">
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_91_407"
+																			class="a-third-link"><span class="a-third-title">Bower</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_91_411"
+																			class="a-third-link"><span class="a-third-title">Celestron</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_91_412"
+																			class="a-third-link"><span class="a-third-title">Flipbac</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_91_409"
+																			class="a-third-link"><span class="a-third-title">Gary Fong</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_91_413"
+																			class="a-third-link"><span class="a-third-title">GigaPan</span></a>
+																	</li>
+																</ul>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</li>
+											<li class="li-top-item">
+												<a class="a-top-link a-item"
+													href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=451">
+													<span>Lips</span>
+												</a>
+												<span class="top-click-show a-click-show">
+													<i class="fa fa-angle-down" aria-hidden="true"></i>
+													<i class="fa fa-angle-up" aria-hidden="true"></i>
+												</span>
+
+												<div class="sub-menu-container">
+													<ul class="ul-second-items">
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=451_452"
+																class="a-second-link a-item">
+																<span class="a-second-title">Brake Tools</span>
+															</a>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=451_453"
+																class="a-second-link a-item">
+																<span class="a-second-title">Drive shafts</span>
+															</a>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=451_455"
+																class="a-second-link a-item">
+																<span class="a-second-title">Emergency Brake</span>
+															</a>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=451_454"
+																class="a-second-link a-item">
+																<span class="a-second-title">Spools</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</li>
+											<li class="li-top-item">
+												<a class="a-top-link a-item"
+													href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=456">
+													<span>Face</span>
+												</a>
+												<span class="top-click-show a-click-show">
+													<i class="fa fa-angle-down" aria-hidden="true"></i>
+													<i class="fa fa-angle-up" aria-hidden="true"></i>
+												</span>
+
+												<div class="sub-menu-container">
+													<ul class="ul-second-items">
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=456_457"
+																class="a-second-link a-item">
+																<span class="a-second-title">2-Stroke</span>
+															</a>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=456_460"
+																class="a-second-link a-item">
+																<span class="a-second-title">4-Stroke</span>
+															</a>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=456_459"
+																class="a-second-link a-item">
+																<span class="a-second-title">Diesel</span>
+															</a>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=456_458"
+																class="a-second-link a-item">
+																<span class="a-second-title">Gasoline</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</li>
+											<li class="li-top-item">
+												<a class="a-top-link a-item"
+													href="index.php?route=information/information&amp;information_id=4">
+													<span>About us</span>
+												</a>
+											</li>
+											<li class="li-top-item">
+												<a class="a-top-link a-item" href="index.php?route=information/contact">
+													<span>Contact us</span>
+												</a>
+											</li>
+											<li class="li-top-item">
+												<a class="a-top-link a-item" href="index.php?route=product/special">
+													<span>Specials</span>
+												</a>
+											</li>
+											<li class="li-top-item">
+												<a class="a-top-link a-item" href="index.php?route=blog/blog">
+													<span>Blog</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+
+
+								</div>
+								<div class="logo-container">
+									<div id="logo">
+										<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=common/home"><img
+												src="{{ asset('image/logo/logo.png') }}"title="Eposi1" alt="Eposi1" class="img-responsive" /></a>
+									</div>
+								</div>
+								<div class="col-hoz ">
+									<style>
+										#oc-menu-8524 .oc-menu-bar {
+											background: #FFFFFF;
+											color: #FFFFFF;
+											padding: 15px 15px 15px 15px;
+											position: relative;
+										}
+
+										#oc-menu-8524.oc-menu-bar {
+											background: #FFFFFF;
+											color: #FFFFFF;
+										}
+
+										#oc-menu-8524 .ul-top-items .li-top-item {
+											background: #FFFFFF;
+											color: #292929;
+										}
+
+										#oc-menu-8524 .ul-top-items .li-top-item .a-top-link {
+											padding: 14px 20px 14px 20px;
+											color: #292929;
+											font-size: 12px;
+											line-height: 26px;
+											text-transform: uppercase;
+											font-weight: 600;
+										}
+
+										#oc-menu-8524 .ul-top-items .li-top-item:hover,
+										#oc-menu-8524 .ul-top-items .li-top-item.active {
+											background: #FFFFFF;
+											color: #EE3333;
+										}
+
+										#oc-menu-8524 .ul-top-items .li-top-item:hover .a-top-link,
+										#oc-menu-8524 .ul-top-items .li-top-item.active .a-top-link {
+											color: #EE3333;
+											font-weight: 600;
+										}
+
+										#oc-menu-8524 .mega-menu-container {
+											width: 1020px;
+											background: #FFFFFF;
+											padding: 45px 50px 50px 50px;
+
+										}
+
+										#oc-menu-8524 .mega-menu-container .a-mega-second-link,
+										#oc-menu-8524 .mega-menu-container .widget-html-title {
+											color: #292929;
+										}
+
+										#oc-menu-8524 .mega-menu-container .a-mega-third-link {
+											color: #707070;
+										}
+
+										#oc-menu-8524 .ul-second-items .li-second-items {
+											background: #FFFFFF;
+											color: #292929;
+										}
+
+										#oc-menu-8524 .ul-second-items .li-second-items:hover,
+										#oc-menu-8524 .ul-second-items .li-second-items.active {
+											background: #FFFFFF;
+											color: #EE3333;
+										}
+
+										#oc-menu-8524 .ul-second-items .li-second-items .a-second-link {
+											color: #292929;
+											font-size: 12px;
+											text-transform: uppercase;
+											font-weight: 600;
+										}
+
+										#oc-menu-8524 .ul-second-items .li-second-items:hover .a-second-link,
+										#oc-menu-8524 .ul-second-items .li-second-items.active .a-second-link {
+											color: #EE3333;
+											font-weight: 600;
+										}
+
+										#oc-menu-8524 .ul-third-items .li-third-items {
+											background: #FFFFFF;
+										}
+
+										#oc-menu-8524 .ul-third-items .li-third-items:hover,
+										#oc-menu-8524 .ul-third-items .li-third-items.active {
+											background: #FFFFFF;
+										}
+
+										#oc-menu-8524 .ul-third-items .li-third-items .a-third-link {
+											color: #707070;
+											font-size: 12px;
+											text-transform: capitalize;
+											font-weight: 400;
+										}
+
+										#oc-menu-8524 .ul-third-items .li-third-items:hover .a-third-link,
+										#oc-menu-8524 .ul-third-items .li-third-items.active .a-third-link {
+											color: #EE3333;
+											font-weight: 400;
+										}
+									</style>
+									<div class="oc-menu horizontal-menu oc-menu-bar visible-lg " id="oc-menu-8524">
+
+										<input type="hidden" id="menu-effect-8524" class="menu-effect" value="none" />
+										<ul class="ul-top-items">
+											<li class="li-top-item left " style="float: left">
+												<a class="a-top-link" href="index.php?route=common/home">
+													<span>Home</span>
+												</a>
+											</li>
+											<li class="li-top-item left has-child" style="float: left">
+												<a class="a-top-link" href="index.php?route=product/category&amp;path=20">
+													<span>Shop</span>
+													<i class="fa fa-angle-down" aria-hidden="true"></i>
+												</a>
+												<!-- Mega Menu -->
+
+
+												<div class="mega-menu-container sub-menu-container left ">
+													<div class="row">
+														<div class="col-md-3 sub-item2-content sub-item2-category-content" data-cols="3">
+															<h4><a class="a-mega-second-link"
+																	href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=307">Bedroom</a>
+															</h4>
+															<div class="sub_item3-content">
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=307_414">Brushes
+																		Kits</a></h5>
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=307_416">Eye
+																		Brushes</a></h5>
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=307_360">Face
+																		Brushes</a></h5>
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=307_417">Lip
+																		Brushes</a></h5>
+															</div>
+														</div>
+
+
+
+														<div class="col-md-3 sub-item2-content sub-item2-category-content" data-cols="3">
+															<h4><a class="a-mega-second-link"
+																	href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=124">Living
+																	Room</a></h4>
+															<div class="sub_item3-content">
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=124_305">Handbag</a>
+																</h5>
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=124_362">Kids'
+																		Table</a></h5>
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=124_133">Clothing</a>
+																</h5>
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=124_137">Shoes</a>
+																</h5>
+															</div>
+														</div>
+
+
+
+														<div class="col-md-3 sub-item2-content sub-item2-category-content" data-cols="3">
+															<h4><a class="a-mega-second-link"
+																	href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=50">Decoration</a>
+															</h4>
+															<div class="sub_item3-content">
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=50_472">Face
+																		Palettes</a></h5>
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=50_420">Face
+																		Primer</a></h5>
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=50_418">Lipstick
+																	</a></h5>
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=50_421">Mascara</a>
+																</h5>
+															</div>
+														</div>
+
+
+
+														<div class="col-md-3 sub-item2-content sub-item2-category-content" data-cols="3">
+															<h4><a class="a-mega-second-link"
+																	href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=48">Storage</a>
+															</h4>
+															<div class="sub_item3-content">
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=48_361">4G
+																		LTE Tablets</a></h5>
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=48_358">Apple
+																		iPad</a></h5>
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=48_365">E-Readers</a>
+																</h5>
+																<h5><a class="a-mega-third-link"
+																		href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=48_364">iPad
+																		&amp; Tablet Accessories</a></h5>
+															</div>
+														</div>
+
+
+
+
+
+														<div class="col-md-12 sub-item2-content" data-cols="12">
+															<p class="widget-html-title"></p>
+															<div>
+																<div class="banner-static static-bottom-menu">
+																	<div class="image">
+																		<a href="index.php?route=product/category&amp;path=20">
+																			<img src="{{ asset('image/img-bottom-menu.jpg') }}" alt="img-bottom-menu">
+																		</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+													</div>
+												</div>
+
+												<!-- Flyout Menu -->
+											</li>
+											<li class="li-top-item left has-child" style="float: left">
+												<a class="a-top-link"
+													href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56">
+													<span>Accessories</span>
+													<i class="fa fa-angle-down" aria-hidden="true"></i>
+												</a>
+												<!-- Mega Menu -->
+
+												<!-- Flyout Menu -->
+
+												<div class="flyout-menu-container sub-menu-container left">
+													<ul class="ul-second-items">
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_84"
+																class="a-second-link a-item">
+																<span class="a-second-title">Brushes</span>
+																<i class="fa fa-angle-right" aria-hidden="true"></i>
+															</a>
+															<div class="flyout-third-items left">
+																<ul class="ul-third-items">
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_84_329"
+																			class="a-third-link"><span class="a-third-title">Bags &amp; Cases</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_84_330"
+																			class="a-third-link"><span class="a-third-title">Binoculars &amp;
+																				Scopes</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_84_331"
+																			class="a-third-link"><span class="a-third-title">Digital Cameras</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_84_332"
+																			class="a-third-link"><span class="a-third-title">Film Photography</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_84_334"
+																			class="a-third-link"><span class="a-third-title">Lighting &amp; Studio</span></a>
+																	</li>
+																</ul>
+															</div>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_86"
+																class="a-second-link a-item">
+																<span class="a-second-title">Mascara</span>
+																<i class="fa fa-angle-right" aria-hidden="true"></i>
+															</a>
+															<div class="flyout-third-items left">
+																<ul class="ul-third-items">
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_86_396"
+																			class="a-third-link"><span class="a-third-title">DSLR Body &amp; Lens</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_86_397"
+																			class="a-third-link"><span class="a-third-title">DSLR Body Only</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_86_399"
+																			class="a-third-link"><span class="a-third-title">DSLR Lenses</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_86_398"
+																			class="a-third-link"><span class="a-third-title">DSLR Package Deals</span></a>
+																	</li>
+																</ul>
+															</div>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_62"
+																class="a-second-link a-item">
+																<span class="a-second-title">Eye Shadow</span>
+																<i class="fa fa-angle-right" aria-hidden="true"></i>
+															</a>
+															<div class="flyout-third-items left">
+																<ul class="ul-third-items">
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_62_401"
+																			class="a-third-link"><span class="a-third-title">Camera Lenses</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_62_400"
+																			class="a-third-link"><span class="a-third-title">DSLR Lenses</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_62_402"
+																			class="a-third-link"><span class="a-third-title">Lens Accessories</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_62_408"
+																			class="a-third-link"><span class="a-third-title">Lowepro</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_62_410"
+																			class="a-third-link"><span class="a-third-title">SanDisk</span></a>
+																	</li>
+																</ul>
+															</div>
+														</li>
+														<li class="li-second-items">
+															<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_91"
+																class="a-second-link a-item">
+																<span class="a-second-title">Eye Brushes</span>
+																<i class="fa fa-angle-right" aria-hidden="true"></i>
+															</a>
+															<div class="flyout-third-items left">
+																<ul class="ul-third-items">
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_91_407"
+																			class="a-third-link"><span class="a-third-title">Bower</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_91_411"
+																			class="a-third-link"><span class="a-third-title">Celestron</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_91_412"
+																			class="a-third-link"><span class="a-third-title">Flipbac</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_91_409"
+																			class="a-third-link"><span class="a-third-title">Gary Fong</span></a>
+																	</li>
+																	<li class="li-third-items">
+																		<a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/category&amp;path=56_91_413"
+																			class="a-third-link"><span class="a-third-title">GigaPan</span></a>
+																	</li>
+																</ul>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</li>
+											<li class="li-top-item left " style="float: left">
+												<a class="a-top-link" href="index.php?route=information/contact">
+													<span>Contact us</span>
+												</a>
+											</li>
+											<li class="li-top-item left " style="float: left">
+												<a class="a-top-link" href="index.php?route=product/special">
+													<span>Specials</span>
+												</a>
+											</li>
+											<li class="li-top-item left " style="float: left">
+												<a class="a-top-link" href="index.php?route=blog/blog">
+													<span>Blog</span>
+												</a>
+											</li>
+										</ul>
+
+									</div>
+
+
+
+
+								</div>
+								<div class="box-cart">
+									<div id="search-by-category" class="input-group">
+										<div class="btn-group">
+											<div class="dropdown-toggle search-button" data-toggle="dropdown"></div>
+											<div class="dropdown-menu search-content">
+												<button class="button-close"><i class="ion-ios-close-empty"></i></button>
+												<div class="container">
+													<div class="inner">
+														<div class="search-container">
+															<div class="categories-container">
+																<div class="hover-cate">
+																	<p><span class="cate-selected" data-value="0">All Categories</span><i
+																			class="fa fa-caret-down"></i></p>
+																	<ul class="cate-items">
+																		<li class="item-cate" data-value="0">All Categories</li>
+																		<li data-value="56" class="item-cate">accessories</li>
+																		<li data-value="84" class="item-cate f1">Brushes</li>
+																		<li data-value="329" class="item-cate f2">Bags &amp; Cases</li>
+																		<li data-value="330" class="item-cate f2">Binoculars &amp; Scopes</li>
+																		<li data-value="331" class="item-cate f2">Digital Cameras</li>
+																		<li data-value="332" class="item-cate f2">Film Photography</li>
+																		<li data-value="334" class="item-cate f2">Lighting &amp; Studio</li>
+																		<li data-value="86" class="item-cate f1">Mascara</li>
+																		<li data-value="396" class="item-cate f2">DSLR Body &amp; Lens</li>
+																		<li data-value="397" class="item-cate f2">DSLR Body Only</li>
+																		<li data-value="399" class="item-cate f2">DSLR Lenses</li>
+																		<li data-value="398" class="item-cate f2">DSLR Package Deals</li>
+																		<li data-value="62" class="item-cate f1">Eye Shadow</li>
+																		<li data-value="401" class="item-cate f2">Camera Lenses</li>
+																		<li data-value="400" class="item-cate f2">DSLR Lenses</li>
+																		<li data-value="402" class="item-cate f2">Lens Accessories</li>
+																		<li data-value="408" class="item-cate f2">Lowepro</li>
+																		<li data-value="410" class="item-cate f2">SanDisk</li>
+																		<li data-value="91" class="item-cate f1">Eye Brushes</li>
+																		<li data-value="407" class="item-cate f2">Bower</li>
+																		<li data-value="411" class="item-cate f2">Celestron</li>
+																		<li data-value="412" class="item-cate f2">Flipbac</li>
+																		<li data-value="409" class="item-cate f2">Gary Fong</li>
+																		<li data-value="413" class="item-cate f2">GigaPan</li>
+																		<li data-value="461" class="item-cate">Car Seats</li>
+																		<li data-value="463" class="item-cate f1">Booster</li>
+																		<li data-value="462" class="item-cate f1">Convertible</li>
+																		<li data-value="464" class="item-cate f1">Infant</li>
+																		<li data-value="465" class="item-cate f1">Toddler</li>
+																		<li data-value="312" class="item-cate">Chairs</li>
+																		<li data-value="386" class="item-cate f1">Bridge</li>
+																		<li data-value="385" class="item-cate f1">Hub</li>
+																		<li data-value="384" class="item-cate f1">Repeater</li>
+																		<li data-value="387" class="item-cate f1">Switch</li>
+																		<li data-value="308" class="item-cate f1">Video Games Cosoles</li>
+																		<li data-value="373" class="item-cate f2">PlayStation 3</li>
+																		<li data-value="372" class="item-cate f2">PlayStation 4</li>
+																		<li data-value="375" class="item-cate f2">Xbox 360</li>
+																		<li data-value="374" class="item-cate f2">Xbox One</li>
+																		<li data-value="309" class="item-cate">Engine Parts</li>
+																		<li data-value="376" class="item-cate f1">Calculators</li>
+																		<li data-value="425" class="item-cate f1">Check Trousers</li>
+																		<li data-value="377" class="item-cate f1">Ink &amp; Toner</li>
+																		<li data-value="426" class="item-cate f1">Low-Cut Jeans</li>
+																		<li data-value="431" class="item-cate">House Plants</li>
+																		<li data-value="21" class="item-cate">Lawn Care</li>
+																		<li data-value="440" class="item-cate f1">Hoes</li>
+																		<li data-value="438" class="item-cate f1">Shovels &amp; Trowels</li>
+																		<li data-value="436" class="item-cate f1">Trowels</li>
+																		<li data-value="437" class="item-cate f1">Workseats</li>
+																		<li data-value="451" class="item-cate">Lips</li>
+																		<li data-value="452" class="item-cate f1">Brake Tools</li>
+																		<li data-value="453" class="item-cate f1">Drive shafts</li>
+																		<li data-value="455" class="item-cate f1">Emergency Brake</li>
+																		<li data-value="454" class="item-cate f1">Spools</li>
+																		<li data-value="427" class="item-cate">Perfomance Filters</li>
+																		<li data-value="441" class="item-cate">Power Tools</li>
+																		<li data-value="442" class="item-cate f1">Battery Packs</li>
+																		<li data-value="444" class="item-cate f1">Chainsaws</li>
+																		<li data-value="445" class="item-cate f1">Cultivators &amp; Tillers</li>
+																		<li data-value="443" class="item-cate f1">Hedge Trimmers</li>
+																		<li data-value="466" class="item-cate">Repair parts</li>
+																		<li data-value="467" class="item-cate f1">Bearings</li>
+																		<li data-value="469" class="item-cate f1">Rim Screws</li>
+																		<li data-value="468" class="item-cate f1">Seals &amp; Hubs</li>
+																		<li data-value="470" class="item-cate f1">Simulators</li>
+																		<li data-value="430" class="item-cate">Seals &amp; Hubs</li>
+																		<li data-value="20" class="item-cate">Shop</li>
+																		<li data-value="307" class="item-cate f1">Bedroom</li>
+																		<li data-value="414" class="item-cate f2">Brushes Kits</li>
+																		<li data-value="416" class="item-cate f2">Eye Brushes</li>
+																		<li data-value="360" class="item-cate f2">Face Brushes</li>
+																		<li data-value="417" class="item-cate f2">Lip Brushes</li>
+																		<li data-value="124" class="item-cate f1">Living Room</li>
+																		<li data-value="305" class="item-cate f2">Handbag</li>
+																		<li data-value="362" class="item-cate f2">Kids' Table</li>
+																		<li data-value="133" class="item-cate f2">Clothing</li>
+																		<li data-value="137" class="item-cate f2">Shoes</li>
+																		<li data-value="48" class="item-cate f1">Storage</li>
+																		<li data-value="361" class="item-cate f2">4G LTE Tablets</li>
+																		<li data-value="358" class="item-cate f2">Apple iPad</li>
+																		<li data-value="365" class="item-cate f2">E-Readers</li>
+																		<li data-value="364" class="item-cate f2">iPad &amp; Tablet Accessories</li>
+																		<li data-value="50" class="item-cate f1">Decoration</li>
+																		<li data-value="472" class="item-cate f2">Face Palettes</li>
+																		<li data-value="420" class="item-cate f2">Face Primer</li>
+																		<li data-value="418" class="item-cate f2">Lipstick </li>
+																		<li data-value="421" class="item-cate f2">Mascara</li>
+																		<li data-value="304" class="item-cate f1">Lighting</li>
+																		<li data-value="474" class="item-cate f2">Body Cleansing</li>
+																		<li data-value="424" class="item-cate f2">Creams &amp; Moisturizers</li>
+																		<li data-value="423" class="item-cate f2">Face</li>
+																		<li data-value="422" class="item-cate f2">Face Moisturizers</li>
+																		<li data-value="359" class="item-cate f2">Masks</li>
+																		<li data-value="473" class="item-cate f2">Mousse</li>
+																		<li data-value="475" class="item-cate f2">Skin Care Sets &amp; Kits</li>
+																		<li data-value="456" class="item-cate">Sofas</li>
+																		<li data-value="457" class="item-cate f1">2-Stroke</li>
+																		<li data-value="460" class="item-cate f1">4-Stroke</li>
+																		<li data-value="459" class="item-cate f1">Diesel</li>
+																		<li data-value="458" class="item-cate f1">Gasoline</li>
+																	</ul>
+																</div>
+															</div>
+															<input type="text" name="search" id="text-search" value=""
+																placeholder="Search entire store here ..." class="" />
+
+														</div>
+														<div id="sp-btn-search" class="">
+															<button type="button" id="btn-search-category" class="btn btn-default btn-lg">
+																<span>Search</span>
+															</button>
+														</div>
+														<div class="search-ajax">
+															<div class="ajax-loader-container" style="display: none;">
+																<img src="{{ asset('image/AjaxLoader.gif') }}" class="ajax-load-img" width="30" height="30"
+																	alt="plazathemes.com" />
+															</div>
+															<div class="ajax-result-container">
+																<!-- Content of search results -->
+															</div>
+														</div>
+														<input type="hidden" id="ajax-search-enable" value="1" />
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+									<script>
+										$(document).ready(function () {
+											var flag = false;
+											var ajax_search_enable = $('#ajax-search-enable').val();
+
+											var current_cate_value = $('ul.cate-items li.selected').data('value');
+											var current_cate_text = $('ul.cate-items li.selected').html();
+
+											$('.cate-selected').attr('data-value', current_cate_value);
+											$('.cate-selected').html(current_cate_text);
+
+											$('.hover-cate p').click(function () {
+												$(".cate-items").toggle("slow");
+											});
+
+											$('.ajax-result-container').hover(
+												function () {
+													flag = true;
+												},
+												function () {
+													flag = false;
+												}
+											);
+
+											$('.hover-cate').hover(
+												function () {
+													flag = true;
+												},
+												function () {
+													flag = false;
+												}
+											);
+
+											$('#search-by-category').focusout(function () {
+												if (flag == true) {
+													$('.ajax-result-container').show();
+												} else {
+													$('.ajax-result-container').hide();
+												}
+											});
+
+											$('#search-by-category').focusin(function () {
+												$('.ajax-result-container').show();
+											});
+
+											$('#btn-search-category').click(function () {
+												var url = 'http://demo.towerthemes.com/tt_eposi/index.php?route=product/search';
+												var text_search = $('#text-search').val();
+												if (text_search) {
+													url += '&search=' + encodeURIComponent(text_search);
+												}
+
+												var category_search = $('.cate-selected').attr("data-value");
+												if (category_search) {
+													url += '&category_id=' + encodeURIComponent(category_search);
+												}
+
+												location = url;
+											});
+
+											if (ajax_search_enable == '1') {
+												$('#text-search').keyup(function (e) {
+													var text_search = $(this).val();
+													var cate_search = $('.cate-selected').attr("data-value");
+													if (text_search != null && text_search != '') {
+														ajaxSearch(text_search, cate_search);
+													} else {
+														$('.ajax-result-container').html('');
+														$('.ajax-loader-container').hide();
+													}
+												});
+
+												$('ul.cate-items li.item-cate').click(function () {
+													var cate_search = $(this).data('value');
+													var text_search = $('#text-search').val();
+													$('.cate-selected').attr('data-value', cate_search);
+													$('.cate-selected').html($(this).html());
+													if (text_search != null && text_search != '') {
+														ajaxSearch(text_search, cate_search);
+													} else {
+														$('.ajax-result-container').html('');
+														$('.ajax-loader-container').hide();
+													}
+													$(".cate-items").hide();
+													$('#text-search').focus();
+												});
+
+											}
+
+											function ajaxSearch(text_search, cate_search) {
+												$.ajax({
+													url: 'http://demo.towerthemes.com/tt_eposi/index.php?route=extension/module/ocsearchcategory/ajaxSearch',
+													type: 'post',
+													data: { text_search: text_search, cate_search: cate_search },
+													beforeSend: function () {
+														$('.ajax-loader-container').show();
+													},
+													success: function (json) {
+														if (json['success'] == true) {
+															$('.ajax-result-container').html(json['result_html']);
+															$('.ajax-loader-container').hide();
+														}
+													}
+												});
+											}
+
+										});    
+									</script>
+									<div id="cart" class="btn-group btn-block">
+										<button type="button" data-toggle="dropdown" data-loading-text="Loading..."
+											class="btn dropdown-toggle"><span id="cart-total"><span class="txt_number">0</span><span
+													class="txt_items">My Cart </span><span class="total-price">$0.00</span></span></button>
+										<ul class="dropdown-menu pull-right">
+											<li>
+												<p class="text-center cart-empty">Your shopping cart is empty!</p>
+											</li>
+										</ul>
+									</div>
+
+									<div class="box-setting">
+										<div class="btn-group">
+											<div class="dropdown-toggle setting-button" data-toggle="dropdown">
+												<span></span><span></span><span></span></div>
+											<div class="dropdown-menu setting-content">
+												<div class="account">
+													<button class="btn btn-link btn-link-current">My Account <i
+															class="icon-arrow-down"></i></button>
+													<div class="content" id="top-links">
+														<ul class="ul-account list-unstyled">
+															<li>
+																<a id="a-register-link"
+																	href="http://demo.towerthemes.com/tt_eposi/index.php?route=account/register">Register</a>
+															</li>
+															<li>
+																<a id="a-login-link"
+																	href="http://demo.towerthemes.com/tt_eposi/index.php?route=account/login">Login</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+												<div class="currency">
+													<form action="http://demo.towerthemes.com/tt_eposi/index.php?route=common/currency/currency"
+														method="post" enctype="multipart/form-data" id="form-currency">
+
+														<span class="pull-left hidden-xs hidden-sm hidden-md text-ex">Currency:</span>
+														<button class="btn btn-link btn-link-current">
+
+															USD
+															<i class="icon-arrow-down"></i>
+
+														</button>
+														<ul class="content">
+															<li>
+																<button class="currency-select btn btn-link btn-block" type="button" name="EUR">
+
+																	€
+
+																	Euro
+																</button>
+															</li>
+															<li>
+																<button class="currency-select btn btn-link btn-block" type="button" name="GBP">
+
+																	£
+
+																	Pound Sterling
+																</button>
+															</li>
+															<li>
+																<button class="item-selected currency-select btn btn-link btn-block" type="button"
+																	name="USD">
+
+																	$
+
+																	US Dollar
+																</button>
+															</li>
+														</ul>
+
+														<input type="hidden" name="code" value="" />
+														<input type="hidden" name="redirect"
+															value="http://demo.towerthemes.com/tt_eposi/index.php?route=common/home" />
+													</form>
+												</div>
+												<div class="language">
+													<form action="http://demo.towerthemes.com/tt_eposi/index.php?route=common/language/language"
+														method="post" enctype="multipart/form-data" id="form-language">
+
+														<span class="pull-left hidden-xs hidden-sm hidden-md text-ex">Language:</span>
+														<button class="btn btn-link btn-link-current">
+
+															en-gb
+															<i class="icon-arrow-down"></i>
+														</button>
+														<ul class="content">
+															<li><button class="btn btn-link btn-block language-select item-selected" type="button"
+																	name="en-gb"><img src="{{ asset('image/language/en-gb.png') }}"alt="English" title="English" />
+																	English</button></li>
+															<li><button class="btn btn-link btn-block language-select" type="button" name="de-de"><img
+																		src="{{ asset('image/language/de-de.png') }}"alt="Germany" title="Germany" />
+																	Germany</button></li>
+														</ul>
+
+														<input type="hidden" name="code" value="" />
+														<input type="hidden" name="redirect"
+															value="http://demo.towerthemes.com/tt_eposi/index.php?route=common/home" />
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div id="content">
+      {% block content %}
+      {% endblock %}
+		</div>
+		<footer>
+			<div class="container">
+				<div class="newletter-subscribe-container">
+					<div class="container-inner">
+						<div class="newletter-subscribe">
+							<div id="boxes-normal" class="newletter-container">
+								<div style="" id="dialog-normal">
+									<div class="box">
+										<div class="newletter-title">
+											<p class="sub-title">Special Ofers For Subscribers</p>
+											<h5>Ten Percent Member Discount</h5>
+											<p class="des">Subscribe to our newsletters now and stay up to date with new collections, the
+												latest lookbooks and exclusive offers.</p>
+										</div>
+										<div class="box-content newleter-content">
+
+											<div id="frm_subscribe-normal">
+												<form name="subscribe" id="subscribe-normal">
+													<input type="text" value="" name="subscribe_email" id="subscribe_email-normal"
+														placeholder="Enter you email address here...">
+													<input type="hidden" value="" name="subscribe_name" id="subscribe_name" />
+													<a class="btn" onclick="email_subscribe()" title="Subscribe"><span>Subscribe</span></a>
+
+													<div id="notification-normal"></div>
+												</form>
+
+											</div><!-- /#frm_subscribe -->
+
+										</div><!-- /.box-content -->
+									</div>
+								</div>
+								<!--script>
+									function email_subscribe() {
+										$.ajax({
+											type: 'post',
+											url: 'index.php?route=extension/module/newslettersubscribe/subscribe',
+											dataType: 'html',
+											data: $("#subscribe-normal").serialize(),
+											success: function (html) {
+												try {
+													eval(html);
+												}
+												catch (e) {
+												}
+											}
+										});
+									}
+									function email_unsubscribe() {
+										$.ajax({
+											type: 'post',
+											url: 'index.php?route=extension/module/newslettersubscribe/unsubscribe',
+											dataType: 'html',
+											data: $("#subscribe").serialize(),
+											success: function (html) {
+												try {
+													eval(html);
+												} catch (e) {
+												}
+											}
+										});
+										$('html, body').delay(1500).animate({ scrollTop: 0 }, 'slow');
+									}
+								</!--script>
+								<script>
+									$(document).ready(function () {
+										$('#subscribe_email').keypress(function (e) {
+											if (e.which == 13) {
+												e.preventDefault();
+												email_subscribe();
+											}
+											var name = $(this).val();
+											$('#subscribe_name').val(name);
+										});
+										$('#subscribe_email').change(function () {
+											var name = $(this).val();
+											$('#subscribe_name').val(name);
+										});
+									});
+								</script-->
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="footer-bottom ">
+				<div class="footer-bottom-inner ">
+					<div class="container">
+						<div class="container-inner">
+							<div class="logo-footer">
+								<a href="#"><img src="{{ asset('image/logo/logo.png') }}"alt="logo-footer"></a>
+							</div>
+
+							<div class="footer-copyright">
+								<p>Copyright &copy; 2019 <a href="http://www.plazathemes.com">PlazaThemes</a>.<span> All Right
+										Reserved.</span></p>
+							</div>
+							<div class="follow">
+								<label>Follow Us On Social:</label>
+								<ul class="link-follow">
+									<li><a class="facebook fa fa-facebook" title="Facebook" target="_blank"
+											href="https://www.facebook.com/plazathemes1"><span>facebook</span></a></li>
+									<li><a class="twitter fa fa-twitter" title="Twitter" target="_blank"
+											href="https://twitter.com/plazathemes"><span>twitter</span></a></li>
+									<li><a class="google fa fa-google-plus" title="Google" target="_blank" href="#"><span>google
+											</span></a></li>
+
+									<li><a class="youtube fa fa-youtube" title="Youtube" target="_blank"
+											href="https://www.youtube.com/user/plazathemes"><span>youtube </span></a></li>
+
+								</ul>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="back-top"><span>Back to top</span><i class="ion-chevron-right"></i><i class="ion-chevron-right"></i>
+			</div>
+		</footer>
+		<script>
+			$(document).ready(function () {
+				// hide #back-top first
+				$("#back-top").hide();
+				// fade in #back-top
+				$(function () {
+					$(window).scroll(function () {
+						if ($(this).scrollTop() > $('body').height() / 3) {
+							$('#back-top').fadeIn();
+						} else {
+							$('#back-top').fadeOut();
+						}
+					});
+					// scroll body to 0px on click
+					$('#back-top').click(function () {
+						$('body,html').animate({ scrollTop: 0 }, 800);
+						return false;
+					});
+				});
+			});
+		</script>
+  </div><!-- wrapper -->
+  
+  {% block javascript %}
+  {% endblock %}
+
+</body>
+</html>

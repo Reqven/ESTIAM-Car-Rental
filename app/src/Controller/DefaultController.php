@@ -20,11 +20,14 @@ class DefaultController extends AbstractController
      */
     public function devRoute()
     {
-        dump('dev');
-        // dump allows you to inspect any variable's
-        // content at a time on the front end
+        $data = array(
+            "dump allows you to inspect any variable's",
+            "content at a time on the front end"
+        );
+        dump($data);
 
-        return $this->render('base.html.twig', [
+        return $this->render('dev.html.twig', [
+            'myData' => $data
             // insert in this array the data variables
             // needed for the twig template
         ]);

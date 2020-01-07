@@ -1,0 +1,32 @@
+{% extends 'template.html.twig' %}
+
+{% block stylesheet %}
+  {# Here goes any css files related to this specific page #}
+	<link href="{{ asset('link/to/your/file/in/public') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+  {{ dump('Your page content goes right here !') }}
+  {{ dump( 'Available variables :') }}
+  {{ dump() }}
+
+  <div class="main-row fluid-width">
+    <div class="container">
+      <div class="row">
+        <div class="main-col col-sm-12 col-md-12">
+          <div class="row sub-row">
+            <div class="sub-col col-sm-12 col-md-12">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  {# Here goes any javascript code related to this specific page #}
+  <script>
+    console.log('hello');
+  </script>
+{% endblock %}
