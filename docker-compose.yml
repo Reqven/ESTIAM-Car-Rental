@@ -1,0 +1,29 @@
+version: "2"
+services:
+  webserver:
+    build: $PWD/server/apache
+    container_name: webserver
+    ports:
+      - "8181:80"
+    volumes:
+      - $PWD/app:/var/www/html
+      #- symfony-sync:/var/www/html
+      #- /var/www/html/var/
+    links:
+      - database:database
+  database:
+    container_name: database
+    image: mysql:5.7.27
+    #volumes:
+    #  - $PWD/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=symfony
+
+#volumes:
+#  symfony-sync:
+#    external: true
