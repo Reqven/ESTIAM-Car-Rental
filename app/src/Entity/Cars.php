@@ -17,9 +17,25 @@ class Cars
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Agences", inversedBy="cars")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_agence;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Customers", inversedBy="cars")
+     */
+    private $id_client;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $matricule;
+    private $plaque_matricule;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $categorie;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -44,17 +60,12 @@ class Cars
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $cylindree;
+    private $cylindre;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $carburant;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $categorie;
 
     /**
      * @ORM\Column(type="boolean")
@@ -67,11 +78,6 @@ class Cars
     private $prix;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_agence;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $disponible;
@@ -81,14 +87,50 @@ class Cars
         return $this->id;
     }
 
-    public function getMatricule(): ?string
+    public function getIdAgence(): ?Agences
     {
-        return $this->matricule;
+        return $this->id_agence;
     }
 
-    public function setMatricule(string $matricule): self
+    public function setIdAgence(?Agences $id_agence): self
     {
-        $this->matricule = $matricule;
+        $this->id_agence = $id_agence;
+
+        return $this;
+    }
+
+    public function getIdClient(): ?Customers
+    {
+        return $this->id_client;
+    }
+
+    public function setIdClient(?Customers $id_client): self
+    {
+        $this->id_client = $id_client;
+
+        return $this;
+    }
+
+    public function getPlaqueMatricule(): ?string
+    {
+        return $this->plaque_matricule;
+    }
+
+    public function setPlaqueMatricule(string $plaque_matricule): self
+    {
+        $this->plaque_matricule = $plaque_matricule;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?string
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(string $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
@@ -141,14 +183,14 @@ class Cars
         return $this;
     }
 
-    public function getCylindree(): ?string
+    public function getCylindre(): ?string
     {
-        return $this->cylindree;
+        return $this->cylindre;
     }
 
-    public function setCylindree(string $cylindree): self
+    public function setCylindre(string $cylindre): self
     {
-        $this->cylindree = $cylindree;
+        $this->cylindre = $cylindre;
 
         return $this;
     }
@@ -161,18 +203,6 @@ class Cars
     public function setCarburant(string $carburant): self
     {
         $this->carburant = $carburant;
-
-        return $this;
-    }
-
-    public function getCategorie(): ?string
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(string $categorie): self
-    {
-        $this->categorie = $categorie;
 
         return $this;
     }
@@ -197,18 +227,6 @@ class Cars
     public function setPrix(float $prix): self
     {
         $this->prix = $prix;
-
-        return $this;
-    }
-
-    public function getIdAgence(): ?int
-    {
-        return $this->id_agence;
-    }
-
-    public function setIdAgence(int $id_agence): self
-    {
-        $this->id_agence = $id_agence;
 
         return $this;
     }

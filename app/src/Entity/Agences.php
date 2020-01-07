@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,7 +34,7 @@ class Agences
     private $nom_rue;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $code_postal;
 
@@ -40,6 +42,22 @@ class Agences
      * @ORM\Column(type="string", length=255)
      */
     private $ville;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Employees", mappedBy="id_agence")
+     */
+    private $id_employe;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Cars", mappedBy="id_agence")
+     */
+    private $cars;
+
+    public function __construct()
+    {
+        $this->id_employe = new ArrayCollection();
+        $this->cars = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -82,12 +100,12 @@ class Agences
         return $this;
     }
 
-    public function getCodePostal(): ?string
+    public function getCodePostal(): ?int
     {
         return $this->code_postal;
     }
 
-    public function setCodePostal(string $code_postal): self
+    public function setCodePostal(int $code_postal): self
     {
         $this->code_postal = $code_postal;
 
@@ -102,6 +120,68 @@ class Agences
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Employees[]
+     */
+    public function getIdEmploye(): Collection
+    {
+        return $this->id_employe;
+    }
+
+    public function addIdEmploye(Employees $idEmploye): self
+    {
+        if (!$this->id_employe->contains($idEmploye)) {
+            $this->id_employe[] = $idEmploye;
+            $idEmploye->setIdAgence($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdEmploye(Employees $idEmploye): self
+    {
+        if ($this->id_employe->contains($idEmploye)) {
+            $this->id_employe->removeElement($idEmploye);
+            // set the owning side to null (unless already changed)
+            if ($idEmploye->getIdAgence() === $this) {
+                $idEmploye->setIdAgence(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cars[]
+     */
+    public function getCars(): Collection
+    {
+        return $this->cars;
+    }
+
+    public function addCar(Cars $car): self
+    {
+        if (!$this->cars->contains($car)) {
+            $this->cars[] = $car;
+            $car->setIdAgence($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCar(Cars $car): self
+    {
+        if ($this->cars->contains($car)) {
+            $this->cars->removeElement($car);
+            // set the owning side to null (unless already changed)
+            if ($car->getIdAgence() === $this) {
+                $car->setIdAgence(null);
+            }
+        }
 
         return $this;
     }

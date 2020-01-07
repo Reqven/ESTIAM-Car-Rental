@@ -61,6 +61,16 @@ class Peoples
      */
     private $email;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Customers", mappedBy="id_personne", cascade={"persist", "remove"})
+     */
+    private $clients;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Employees", mappedBy="id_personne", cascade={"persist", "remove"})
+     */
+    private $employees;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -170,6 +180,40 @@ class Peoples
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getClients(): ?Customers
+    {
+        return $this->clients;
+    }
+
+    public function setClients(Customers $clients): self
+    {
+        $this->clients = $clients;
+
+        // set the owning side of the relation if necessary
+        if ($clients->getIdPersonne() !== $this) {
+            $clients->setIdPersonne($this);
+        }
+
+        return $this;
+    }
+
+    public function getEmployees(): ?Employees
+    {
+        return $this->employees;
+    }
+
+    public function setEmployees(Employees $employees): self
+    {
+        $this->employees = $employees;
+
+        // set the owning side of the relation if necessary
+        if ($employees->getIdPersonne() !== $this) {
+            $employees->setIdPersonne($this);
+        }
 
         return $this;
     }

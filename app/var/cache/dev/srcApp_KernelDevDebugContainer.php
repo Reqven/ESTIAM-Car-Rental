@@ -16,6 +16,6 @@ if (!\class_exists(srcApp_KernelDevDebugContainer::class, false)) {
 
 return new \ContainerMxiF5rx\srcApp_KernelDevDebugContainer([
     'container.build_hash' => 'MxiF5rx',
-    'container.build_id' => 'd522fcee',
-    'container.build_time' => 1578411495,
+    'container.build_id' => '9a04804a',
+    'container.build_time' => 1578414896,
 ], __DIR__.\DIRECTORY_SEPARATOR.'ContainerMxiF5rx');

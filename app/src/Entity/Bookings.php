@@ -17,14 +17,10 @@ class Bookings
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Customers", inversedBy="bookings")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $id_client;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $id_agence;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -32,12 +28,7 @@ class Bookings
     private $statut;
 
     /**
-     * @ORM\Column(type="float")
-     */
-    private $prix;
-
-    /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $date_reservation;
 
@@ -51,31 +42,24 @@ class Bookings
      */
     private $date_retour;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $prix;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdClient(): ?int
+    public function getIdClient(): ?Customers
     {
         return $this->id_client;
     }
 
-    public function setIdClient(int $id_client): self
+    public function setIdClient(?Customers $id_client): self
     {
         $this->id_client = $id_client;
-
-        return $this;
-    }
-
-    public function getIdAgence(): ?string
-    {
-        return $this->id_agence;
-    }
-
-    public function setIdAgence(string $id_agence): self
-    {
-        $this->id_agence = $id_agence;
 
         return $this;
     }
@@ -88,18 +72,6 @@ class Bookings
     public function setStatut(string $statut): self
     {
         $this->statut = $statut;
-
-        return $this;
-    }
-
-    public function getPrix(): ?float
-    {
-        return $this->prix;
-    }
-
-    public function setPrix(float $prix): self
-    {
-        $this->prix = $prix;
 
         return $this;
     }
@@ -136,6 +108,18 @@ class Bookings
     public function setDateRetour(\DateTimeInterface $date_retour): self
     {
         $this->date_retour = $date_retour;
+
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): self
+    {
+        $this->prix = $prix;
 
         return $this;
     }

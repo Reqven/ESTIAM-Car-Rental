@@ -17,50 +17,47 @@ class Employees
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_employe;
-
-    /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Agences", inversedBy="id_employe")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $id_agence;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToOne(targetEntity="App\Entity\Peoples", inversedBy="employees", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $poste;
+    private $id_personne;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=255)
      */
-    private $date_embauche;
+    private $poste;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdEmploye(): ?int
-    {
-        return $this->id_employe;
-    }
-
-    public function setIdEmploye(int $id_employe): self
-    {
-        $this->id_employe = $id_employe;
-
-        return $this;
-    }
-
-    public function getIdAgence(): ?int
+    public function getIdAgence(): ?Agences
     {
         return $this->id_agence;
     }
 
-    public function setIdAgence(int $id_agence): self
+    public function setIdAgence(?Agences $id_agence): self
     {
         $this->id_agence = $id_agence;
+
+        return $this;
+    }
+
+    public function getIdPersonne(): ?Peoples
+    {
+        return $this->id_personne;
+    }
+
+    public function setIdPersonne(Peoples $id_personne): self
+    {
+        $this->id_personne = $id_personne;
 
         return $this;
     }
@@ -73,18 +70,6 @@ class Employees
     public function setPoste(string $poste): self
     {
         $this->poste = $poste;
-
-        return $this;
-    }
-
-    public function getDateEmbauche(): ?\DateTimeInterface
-    {
-        return $this->date_embauche;
-    }
-
-    public function setDateEmbauche(\DateTimeInterface $date_embauche): self
-    {
-        $this->date_embauche = $date_embauche;
 
         return $this;
     }
