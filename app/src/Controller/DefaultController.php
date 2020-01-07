@@ -22,7 +22,7 @@ class DefaultController extends AbstractController
      */
     public function devRoute()
     {
-        dump('dev');
+        dump('test');
         return $this->render('base.html.twig');
     }
 }
