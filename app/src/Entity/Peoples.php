@@ -3,11 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PeoplesRepository")
+ * @UniqueEntity(
+ * fields= {"email"}
+ * message= "L'email que vous avez indiqué est déjà utilisé")
  */
-class Peoples
+class Peoples implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -58,6 +63,7 @@ class Peoples
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
      */
     private $email;
 
@@ -70,6 +76,17 @@ class Peoples
      * @ORM\OneToOne(targetEntity="App\Entity\Employees", mappedBy="id_personne", cascade={"persist", "remove"})
      */
     private $employees;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=8, minMessage="votre mot de passe doit faire minimum 8 caractères)
+     */
+    private $password;
+
+    /**
+     * @Assert\EqualTo(propertyPath="password",message="les mots de passes sont différents")
+     */
+    public $confirm_password;
 
     public function getId(): ?int
     {
@@ -216,5 +233,27 @@ class Peoples
         }
 
         return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function eraseCredentials(){}
+
+    public function getUsername(){}
+
+    public function getSalt() {}
+
+    public function getRoles(){
+        return ['ROLE_USER'];
     }
 }

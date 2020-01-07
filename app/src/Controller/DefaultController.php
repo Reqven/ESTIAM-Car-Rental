@@ -32,4 +32,6 @@ class DefaultController extends AbstractController
             // needed for the twig template
         ]);
     }
+
+    
 }

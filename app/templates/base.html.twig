@@ -6,7 +6,13 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        <!-- {% if not app.user %} 
+                <a href={{path('security_login') }}"> Connexion </a>
+             {% else %}
+                <a href={{path('security_logout') }}"> Deconnexion </a> 
+             {% endif %} -->
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+
     </body>
 </html>
