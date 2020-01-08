@@ -3,13 +3,13 @@ security:
 
     always_authenticate_before_granting: true
     encoders:
-        App\Entity\Peoples: 
+        App\Entity\User: 
             algorithm: bcrypt
 
     providers:
         default:
             entity:
-                class: App\Entity\Peoples
+                class: App\Entity\User
                 property: email
 
     firewalls:

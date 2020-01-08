@@ -2,9 +2,11 @@
 
 namespace App\Form;
 
-use App\Entity\Peoples;
+use App\Entity\User;
+use App\Entity\Customer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type as Types;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
@@ -12,6 +14,10 @@ class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $user = new Customer();
+        if (array_key_exists('data', $options)) {
+            $user = $options['data'];
+        }
         $builder
             ->add('Nom')
             ->add('Prenom')
@@ -21,15 +27,38 @@ class RegistrationType extends AbstractType
             ->add('code_postale')
             ->add('ville')
             ->add('portable')
-            ->add('email')
-            ->add('password', PasswordType::class)
-            ->add('confirm_password',PasswordType::class);
+            ->add('email');
+
+            if ($user instanceof Customer) {
+                $builder->add('carte_credit');
+            }
+
+            if ($user instanceof Employee) {
+                $builder
+                    ->add('id_agence')
+                    ->add('poste');
+            }
+
+            if (!$user->getId()) {
+                $builder->add(
+                    'password', Types\RepeatedType::class, array(
+                        'type' => Types\PasswordType::class,
+                        'mapped' => false,
+                        'first_options' => array(
+                            'label' => 'Password'
+                        ),
+                        'second_options' => array(
+                            'label' => 'Confirm',
+                        )
+                    )
+                );
+            }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Peoples::class,
+            'data_class' => User::class,
         ]);
     }
 }

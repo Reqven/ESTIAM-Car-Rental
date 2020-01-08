@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Entity\People;
+use App\Entity\User;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,23 +44,22 @@ class Authenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request)
     {
-        return 'app_login' === $request->attributes->get('_route')
+        //die($request->attributes->get('_route'));
+        return 'login' === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
     public function getCredentials(Request $request)
     {
-        dump('cred');
         $credentials = [
-            'email' => $request->request->get('email'),
-            'password' => $request->request->get('password'),
+            'email' => $request->request->get('_username'),
+            'password' => $request->request->get('_password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
             $credentials['email']
         );
-
         return $credentials;
     }
 
@@ -70,8 +69,7 @@ class Authenticator extends AbstractFormLoginAuthenticator
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
-        $user = $this->entityManager->getRepository(People::class)->findOneBy(['email' => $credentials['email']]);
-
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
         if (!$user) {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
@@ -81,6 +79,9 @@ class Authenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
+        dump($user, $credentials);
+        dump($this->passwordEncoder->encodePassword($user, $credentials['password']));
+        dump($this->passwordEncoder->isPasswordValid($user, $credentials['password']));
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 

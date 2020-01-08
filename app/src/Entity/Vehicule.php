@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CarsRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\VehiculeRepository")
  */
-class Cars
+class Vehicule
 {
     /**
      * @ORM\Id()
@@ -17,13 +17,13 @@ class Cars
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Agences", inversedBy="cars")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Agency", inversedBy="cars")
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_agence;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Customers", inversedBy="cars")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="cars")
      */
     private $id_client;
 
@@ -87,12 +87,12 @@ class Cars
         return $this->id;
     }
 
-    public function getIdAgence(): ?Agences
+    public function getIdAgence(): ?Agency
     {
         return $this->id_agence;
     }
 
-    public function setIdAgence(?Agences $id_agence): self
+    public function setIdAgence(?Agency $id_agence): self
     {
         $this->id_agence = $id_agence;
 

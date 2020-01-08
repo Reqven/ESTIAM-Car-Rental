@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\Agences;
+use App\Entity\Agency;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Agences|null find($id, $lockMode = null, $lockVersion = null)
- * @method Agences|null findOneBy(array $criteria, array $orderBy = null)
- * @method Agences[]    findAll()
- * @method Agences[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Agency|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Agency|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Agency[]    findAll()
+ * @method Agency[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AgencesRepository extends ServiceEntityRepository
+class AgencyRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Agences::class);
+        parent::__construct($registry, Agency::class);
     }
 
     // /**

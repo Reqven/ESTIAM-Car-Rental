@@ -8,86 +8,78 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PeoplesRepository")
- * @UniqueEntity(
- * fields= {"email"},
- * message= "L'email que vous avez indiqué est déjà utilisé")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields= {"email"}, message= "L'email que vous avez indiqué est déjà utilisé")
+ * 
+ * @ORM\MappedSuperclass
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({
+ *  "User" = "User",
+ *  "Customer" = "Customer",
+ *  "Employee" = "Employee"})
  */
-class Peoples implements UserInterface
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Nom;
+    protected $Nom;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Prenom;
+    protected $Prenom;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $Date_Naissance;
+    protected $Date_Naissance;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $num_voie;
+    protected $num_voie;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nom_rue;
+    protected $nom_rue;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $code_postale;
+    protected $code_postale;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $ville;
+    protected $ville;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $portable;
+    protected $portable;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Email()
      */
-    private $email;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Customers", mappedBy="id_personne", cascade={"persist", "remove"})
-     */
-    private $clients;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Employees", mappedBy="id_personne", cascade={"persist", "remove"})
-     */
-    private $employees;
+    protected $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min=8, minMessage="votre mot de passe doit faire minimum 8 caractères")
      */
-    private $password;
+    protected $password;
 
-    /**
-     * @Assert\EqualTo(propertyPath="password",message="les mots de passes sont différents")
-     */
-    public $confirm_password;
 
     public function getId(): ?int
     {
@@ -202,40 +194,6 @@ class Peoples implements UserInterface
         return $this;
     }
 
-    public function getClients(): ?Customers
-    {
-        return $this->clients;
-    }
-
-    public function setClients(Customers $clients): self
-    {
-        $this->clients = $clients;
-
-        // set the owning side of the relation if necessary
-        if ($clients->getIdPersonne() !== $this) {
-            $clients->setIdPersonne($this);
-        }
-
-        return $this;
-    }
-
-    public function getEmployees(): ?Employees
-    {
-        return $this->employees;
-    }
-
-    public function setEmployees(Employees $employees): self
-    {
-        $this->employees = $employees;
-
-        // set the owning side of the relation if necessary
-        if ($employees->getIdPersonne() !== $this) {
-            $employees->setIdPersonne($this);
-        }
-
-        return $this;
-    }
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -244,20 +202,23 @@ class Peoples implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
         return $this;
     }
 
-    public function eraseCredentials(){}
+    public function eraseCredentials() {}
 
     public function getUsername()
     {
         return $this->email;
     }
 
-    public function getSalt(){}
+    public function getSalt()
+    {
+        return null;
+    }
 
-    public function getRoles(){
+    public function getRoles()
+    {
         return ['ROLE_USER'];
     }
 }

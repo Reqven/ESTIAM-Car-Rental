@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AgencesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\AgencyRepository")
  */
-class Agences
+class Agency
 {
     /**
      * @ORM\Id()
@@ -44,12 +44,12 @@ class Agences
     private $ville;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Employees", mappedBy="id_agence")
+     * @ORM\OneToMany(targetEntity="App\Entity\Employee", mappedBy="id_agence")
      */
     private $id_employe;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Cars", mappedBy="id_agence")
+     * @ORM\OneToMany(targetEntity="App\Entity\Vehicule", mappedBy="id_agence")
      */
     private $cars;
 
@@ -64,12 +64,12 @@ class Agences
         return $this->id;
     }
 
-    public function getNomAgence(): ?string
+    public function getNomAgency(): ?string
     {
         return $this->nom_agence;
     }
 
-    public function setNomAgence(string $nom_agence): self
+    public function setNomAgency(string $nom_agence): self
     {
         $this->nom_agence = $nom_agence;
 
@@ -136,7 +136,7 @@ class Agences
     {
         if (!$this->id_employe->contains($idEmploye)) {
             $this->id_employe[] = $idEmploye;
-            $idEmploye->setIdAgence($this);
+            $idEmploye->setIdAgency($this);
         }
 
         return $this;
@@ -147,8 +147,8 @@ class Agences
         if ($this->id_employe->contains($idEmploye)) {
             $this->id_employe->removeElement($idEmploye);
             // set the owning side to null (unless already changed)
-            if ($idEmploye->getIdAgence() === $this) {
-                $idEmploye->setIdAgence(null);
+            if ($idEmploye->getIdAgency() === $this) {
+                $idEmploye->setIdAgency(null);
             }
         }
 
@@ -167,7 +167,7 @@ class Agences
     {
         if (!$this->cars->contains($car)) {
             $this->cars[] = $car;
-            $car->setIdAgence($this);
+            $car->setIdAgency($this);
         }
 
         return $this;
@@ -178,8 +178,8 @@ class Agences
         if ($this->cars->contains($car)) {
             $this->cars->removeElement($car);
             // set the owning side to null (unless already changed)
-            if ($car->getIdAgence() === $this) {
-                $car->setIdAgence(null);
+            if ($car->getIdAgency() === $this) {
+                $car->setIdAgency(null);
             }
         }
 

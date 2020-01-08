@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Peoples;
+use App\Entity\User;
+use App\Entity\Customer;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,7 @@ class SecurityController extends AbstractController
             //May need to implement translations here
             //$username = $authUtils->getLastUsername();
             //$this->addFlash('error', $error->getMessageKey());
+            dump($error);
             return $this->render('security/login.html.twig', [
                 'error' => $error
             ]);
@@ -36,13 +38,15 @@ class SecurityController extends AbstractController
      * @Route("/register", name="register")
      */
     public function register(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder){
-        $user = new Peoples();
+        $user = new Customer();
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $hash = $encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($hash);
+            $user = $form->getData();
+            $password = $form->get('password')->getNormData();
+            $password = $encoder->encodePassword($user, $password);
+            $user->setPassword($password);
 
             $manager->persist($user);
             $manager->flush();

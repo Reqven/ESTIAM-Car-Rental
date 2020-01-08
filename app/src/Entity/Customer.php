@@ -2,69 +2,55 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CustomersRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CustomerRepository")
  */
-class Customers
+class Customer extends User
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Id
+     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="id", referencedColumnName="id")
      */
-    private $id;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Peoples", inversedBy="clients", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $id_personne;
+    protected $id;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $date_inscription;
+    protected $date_inscription;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $carte_credit;
+    protected $carte_credit;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Cars", mappedBy="id_client")
+     * @ORM\OneToMany(targetEntity="App\Entity\Vehicule", mappedBy="id_client")
      */
-    private $cars;
+    protected $cars;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Bookings", mappedBy="id_client")
+     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="id_client")
      */
-    private $bookings;
+    protected $bookings;
 
     public function __construct()
     {
         $this->cars = new ArrayCollection();
         $this->bookings = new ArrayCollection();
+        $this->date_inscription = new \DateTime();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdPersonne(): ?Peoples
-    {
-        return $this->id_personne;
-    }
-
-    public function setIdPersonne(Peoples $id_personne): self
-    {
-        $this->id_personne = $id_personne;
-
-        return $this;
     }
 
     public function getDateInscription(): ?\DateTimeInterface
@@ -75,7 +61,6 @@ class Customers
     public function setDateInscription(\DateTimeInterface $date_inscription): self
     {
         $this->date_inscription = $date_inscription;
-
         return $this;
     }
 

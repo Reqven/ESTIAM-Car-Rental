@@ -26,7 +26,7 @@
                     <h2>Register</h2>
 
                     {{ form_start(form) }}
-                    {{ form_row(form.email, {'label': 'Adresse email', 'attr': {'placeholder': 'plonge.dubois@estiam_car.com'}})
+                    {# form_row(form.email, {'label': 'Adresse email', 'attr': {'placeholder': 'plonge.dubois@estiam_car.com'}})
                     }}
                     {{ form_row(form.password, {'label': 'Mot de passe', 'attr': {'placeholder': '*******'}}) }}
                     {{ form_row(form.confirm_password, {'label': 'Confirmer mot de passe', 'attr': {'placeholder': '*******'}})
@@ -38,8 +38,9 @@
                     {{ form_row(form.nom_rue,{'label': 'Nom de voie'}) }}
                     {{ form_row(form.code_postale,{'label': 'Code postal'}) }}
                     {{ form_row(form.ville,{'label': 'Ville'}) }}
-                    {{ form_row(form.portable,{'label': 'Portable'}) }}
+                    {{ form_row(form.portable,{'label': 'Portable'}) #}
 
+                    {{form_widget(form)}}
                     <button class="button" type="submit"><span>Register</span></button>
                     {{form_end(form)}}
                 </div>
