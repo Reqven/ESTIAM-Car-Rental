@@ -31,42 +31,27 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    protected $Nom;
+    protected $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    protected $Prenom;
+    protected $lastname;
 
     /**
      * @ORM\Column(type="date")
      */
-    protected $Date_Naissance;
+    protected $date_birth;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Place", mappedBy="user")
+     */
+    protected $place;
 
     /**
      * @ORM\Column(type="integer")
      */
-    protected $num_voie;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    protected $nom_rue;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    protected $code_postale;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    protected $ville;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    protected $portable;
+    protected $phone;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -86,99 +71,58 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getFirstname(): ?string
     {
-        return $this->Nom;
+        return $this->firstname;
     }
 
-    public function setNom(string $Nom): self
+    public function setFirstname(string $firstname): self
     {
-        $this->Nom = $Nom;
-
+        $this->firstname = $firstname;
         return $this;
     }
 
-    public function getPrenom(): ?string
+    public function getLastname(): ?string
     {
-        return $this->Prenom;
+        return $this->lastname;
     }
 
-    public function setPrenom(string $Prenom): self
+    public function setLastname(string $lastname): self
     {
-        $this->Prenom = $Prenom;
-
+        $this->lastname = $lastname;
         return $this;
     }
 
-    public function getDateNaissance(): ?\DateTimeInterface
+    public function getDateBirth(): ?\DateTimeInterface
     {
-        return $this->Date_Naissance;
+        return $this->date_birth;
     }
 
-    public function setDateNaissance(\DateTimeInterface $Date_Naissance): self
+    public function setDateBirth(\DateTimeInterface $date_birth): self
     {
-        $this->Date_Naissance = $Date_Naissance;
-
+        $this->date_birth = $date_birth;
         return $this;
     }
 
-    public function getNumVoie(): ?int
+    public function getPlace(Place $place): self
     {
-        return $this->num_voie;
+        return $this->place;
     }
 
-    public function setNumVoie(int $num_voie): self
+    public function setPlace(Place $place): self
     {
-        $this->num_voie = $num_voie;
-
+        $this->place = $place;
         return $this;
     }
 
-    public function getNomRue(): ?string
+    public function getPhone(): ?int
     {
-        return $this->nom_rue;
+        return $this->phone;
     }
 
-    public function setNomRue(string $nom_rue): self
+    public function setPhone(int $phone): self
     {
-        $this->nom_rue = $nom_rue;
-
-        return $this;
-    }
-
-    public function getCodePostale(): ?int
-    {
-        return $this->code_postale;
-    }
-
-    public function setCodePostale(int $code_postale): self
-    {
-        $this->code_postale = $code_postale;
-
-        return $this;
-    }
-
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(string $ville): self
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    public function getPortable(): ?int
-    {
-        return $this->portable;
-    }
-
-    public function setPortable(int $portable): self
-    {
-        $this->portable = $portable;
-
+        $this->phone = $phone;
         return $this;
     }
 

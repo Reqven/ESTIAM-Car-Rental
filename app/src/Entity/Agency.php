@@ -21,42 +21,28 @@ class Agency
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nom_agence;
+    private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToOne(targetEntity="Place", mappedBy="agency")
      */
-    private $num_voie;
+    private $place;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity="Employee", mappedBy="agency")
      */
-    private $nom_rue;
+    private $employees;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="Vehicule", mappedBy="agency")
      */
-    private $code_postal;
+    private $vehicules;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $ville;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Employee", mappedBy="id_agence")
-     */
-    private $id_employe;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Vehicule", mappedBy="id_agence")
-     */
-    private $cars;
 
     public function __construct()
     {
-        $this->id_employe = new ArrayCollection();
-        $this->cars = new ArrayCollection();
+        $this->employees = new ArrayCollection();
+        $this->vehicules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -64,125 +50,84 @@ class Agency
         return $this->id;
     }
 
-    public function getNomAgency(): ?string
+    public function getName(): ?string
     {
-        return $this->nom_agence;
+        return $this->name;
     }
 
-    public function setNomAgency(string $nom_agence): self
+    public function setName(string $name): self
     {
-        $this->nom_agence = $nom_agence;
-
+        $this->name = $name;
         return $this;
     }
 
-    public function getNumVoie(): ?string
+    public function getPlace(Place $place): self
     {
-        return $this->num_voie;
+        return $this->place;
     }
 
-    public function setNumVoie(string $num_voie): self
+    public function setPlace(Place $place): self
     {
-        $this->num_voie = $num_voie;
-
-        return $this;
-    }
-
-    public function getNomRue(): ?string
-    {
-        return $this->nom_rue;
-    }
-
-    public function setNomRue(string $nom_rue): self
-    {
-        $this->nom_rue = $nom_rue;
-
-        return $this;
-    }
-
-    public function getCodePostal(): ?int
-    {
-        return $this->code_postal;
-    }
-
-    public function setCodePostal(int $code_postal): self
-    {
-        $this->code_postal = $code_postal;
-
-        return $this;
-    }
-
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(string $ville): self
-    {
-        $this->ville = $ville;
-
+        $this->place = $place;
         return $this;
     }
 
     /**
      * @return Collection|Employees[]
      */
-    public function getIdEmploye(): Collection
+    public function getEmployees(): Collection
     {
-        return $this->id_employe;
+        return $this->employees;
     }
 
-    public function addIdEmploye(Employees $idEmploye): self
+    public function addEmployee(Employee $employee): self
     {
-        if (!$this->id_employe->contains($idEmploye)) {
-            $this->id_employe[] = $idEmploye;
-            $idEmploye->setIdAgency($this);
+        if (!$this->employees->contains($employee)) {
+            $this->employees[] = $employee;
+            $employee->setIdAgency($this);
         }
 
         return $this;
     }
 
-    public function removeIdEmploye(Employees $idEmploye): self
+    public function removeEmployee(Employee $employee): self
     {
-        if ($this->id_employe->contains($idEmploye)) {
-            $this->id_employe->removeElement($idEmploye);
+        if ($this->employees->contains($employee)) {
+            $this->employees->removeElement($employee);
             // set the owning side to null (unless already changed)
-            if ($idEmploye->getIdAgency() === $this) {
-                $idEmploye->setIdAgency(null);
+            if ($employee->getAgency() === $this) {
+                $employee->setAgency(null);
             }
         }
-
         return $this;
     }
 
     /**
-     * @return Collection|Cars[]
+     * @return Collection|Vehicules[]
      */
-    public function getCars(): Collection
+    public function getVehicules(): Collection
     {
-        return $this->cars;
+        return $this->vehicules;
     }
 
-    public function addCar(Cars $car): self
+    public function addVehicule(Vehicules $vehicule): self
     {
-        if (!$this->cars->contains($car)) {
-            $this->cars[] = $car;
-            $car->setIdAgency($this);
+        if (!$this->vehicules->contains($vehicule)) {
+            $this->vehicules[] = $vehicule;
+            $vehicule->setAgency($this);
         }
-
         return $this;
     }
 
-    public function removeCar(Cars $car): self
+    public function removeVehicule(Vehicules $vehicule): self
     {
-        if ($this->cars->contains($car)) {
-            $this->cars->removeElement($car);
+        if ($this->vehicules->contains($vehicule)) {
+            $this->vehicules->removeElement($vehicule);
             // set the owning side to null (unless already changed)
-            if ($car->getIdAgency() === $this) {
-                $car->setIdAgency(null);
+            if ($vehicule->getAgency() === $this) {
+                $vehicule->setAgency(null);
             }
         }
-
         return $this;
     }
 }

@@ -17,229 +17,188 @@ class Vehicule
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Agency", inversedBy="cars")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="Agency", inversedBy="vehicules")
+     * @ORM\JoinColumn(name="agency_id", referencedColumnName="id", nullable=true)
      */
-    private $id_agence;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="cars")
-     */
-    private $id_client;
+    private $agency;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $plaque_matricule;
+    private $numberplate;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $categorie;
+    private $category;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $marque;
+    private $brand;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $modele;
+    private $model;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $annee;
+    private $year;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $boite_vitesse;
+    private $gearbox;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $cylindre;
+    private $cylinder;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $carburant;
+    private $fuel;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $jeune_conducteur;
+    private $young_driver;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $prix;
+    private $price;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $disponible;
 
+    
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdAgence(): ?Agency
+    public function getAgency(): ?Agency
     {
-        return $this->id_agence;
+        return $this->agency;
     }
 
-    public function setIdAgence(?Agency $id_agence): self
+    public function setAgency(?Agency $agency): self
     {
-        $this->id_agence = $id_agence;
+        $this->agency = $agency;
+        return $this;
+    }
+
+    public function getNumberplate(): ?string
+    {
+        return $this->numberplate;
+    }
+
+    public function setNumberplate(string $numberplate): self
+    {
+        $this->numberplate = $numberplate;
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): self
+    {
+        $this->category = $category;
+        return $this;
+    }
+
+    public function getBrand(): ?string
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(string $brand): self
+    {
+        $this->brand = $brand;
+        return $this;
+    }
+
+    public function getModel(): ?string
+    {
+        return $this->model;
+    }
+
+    public function setModel(string $model): self
+    {
+        $this->model = $model;
 
         return $this;
     }
 
-    public function getIdClient(): ?Customers
+    public function getYear(): ?\DateTimeInterface
     {
-        return $this->id_client;
+        return $this->year;
     }
 
-    public function setIdClient(?Customers $id_client): self
+    public function setYear(\DateTimeInterface $year): self
     {
-        $this->id_client = $id_client;
+        $this->year = $year;
 
         return $this;
     }
 
-    public function getPlaqueMatricule(): ?string
+    public function getGearbox(): ?string
     {
-        return $this->plaque_matricule;
+        return $this->gearbox;
     }
 
-    public function setPlaqueMatricule(string $plaque_matricule): self
+    public function setGearbox(string $gearbox): self
     {
-        $this->plaque_matricule = $plaque_matricule;
-
+        $this->gearbox = $gearbox;
         return $this;
     }
 
-    public function getCategorie(): ?string
+    public function getCylinder(): ?string
     {
-        return $this->categorie;
+        return $this->cylinder;
     }
 
-    public function setCategorie(string $categorie): self
+    public function setCylinder(string $cylinder): self
     {
-        $this->categorie = $categorie;
-
+        $this->cylinder = $cylinder;
         return $this;
     }
 
-    public function getMarque(): ?string
+    public function getFuel(): ?string
     {
-        return $this->marque;
+        return $this->fuel;
     }
 
-    public function setMarque(string $marque): self
+    public function setFuel(string $fuel): self
     {
-        $this->marque = $marque;
-
+        $this->fuel = $fuel;
         return $this;
     }
 
-    public function getModele(): ?string
+    public function getYoungDriver(): ?bool
     {
-        return $this->modele;
+        return $this->young_driver;
     }
 
-    public function setModele(string $modele): self
+    public function setYoungDriver(bool $young_driver): self
     {
-        $this->modele = $modele;
-
+        $this->young_driver = $young_driver;
         return $this;
     }
 
-    public function getAnnee(): ?\DateTimeInterface
+    public function getPrice(): ?float
     {
-        return $this->annee;
+        return $this->price;
     }
 
-    public function setAnnee(\DateTimeInterface $annee): self
+    public function setPrice(float $price): self
     {
-        $this->annee = $annee;
-
-        return $this;
-    }
-
-    public function getBoiteVitesse(): ?string
-    {
-        return $this->boite_vitesse;
-    }
-
-    public function setBoiteVitesse(string $boite_vitesse): self
-    {
-        $this->boite_vitesse = $boite_vitesse;
-
-        return $this;
-    }
-
-    public function getCylindre(): ?string
-    {
-        return $this->cylindre;
-    }
-
-    public function setCylindre(string $cylindre): self
-    {
-        $this->cylindre = $cylindre;
-
-        return $this;
-    }
-
-    public function getCarburant(): ?string
-    {
-        return $this->carburant;
-    }
-
-    public function setCarburant(string $carburant): self
-    {
-        $this->carburant = $carburant;
-
-        return $this;
-    }
-
-    public function getJeuneConducteur(): ?bool
-    {
-        return $this->jeune_conducteur;
-    }
-
-    public function setJeuneConducteur(bool $jeune_conducteur): self
-    {
-        $this->jeune_conducteur = $jeune_conducteur;
-
-        return $this;
-    }
-
-    public function getPrix(): ?float
-    {
-        return $this->prix;
-    }
-
-    public function setPrix(float $prix): self
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
-    public function getDisponible(): ?bool
-    {
-        return $this->disponible;
-    }
-
-    public function setDisponible(bool $disponible): self
-    {
-        $this->disponible = $disponible;
-
+        $this->price = $price;
         return $this;
     }
 }

@@ -20,10 +20,10 @@ class Employee extends User
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Agency", inversedBy="id_employe")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="Agency", inversedBy="employees")
+     * @ORM\JoinColumn(name="agency_id", referencedColumnName="id", nullable=false)
      */
-    protected $id_agence;
+    protected $agency;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -36,14 +36,14 @@ class Employee extends User
         return $this->id;
     }
 
-    public function getIdAgence(): ?Agency
+    public function getAgency(): ?Agency
     {
-        return $this->id_agence;
+        return $this->agency;
     }
 
-    public function setIdAgence(?Agency $id_agence): self
+    public function setAgency(?Agency $agency): self
     {
-        $this->id_agence = $id_agence;
+        $this->agency = $agency;
         return $this;
     }
 

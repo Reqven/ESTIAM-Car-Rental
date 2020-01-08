@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\User;
+use App\Entity\Booking;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -24,28 +25,24 @@ class Customer extends User
     /**
      * @ORM\Column(type="date")
      */
-    protected $date_inscription;
+    protected $date_register;
 
     /**
      * @ORM\Column(type="integer")
      */
-    protected $carte_credit;
+    protected $credit_card;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Vehicule", mappedBy="id_client")
-     */
-    protected $cars;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="id_client")
+     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="customer", fetch="EAGER")
      */
     protected $bookings;
+
 
     public function __construct()
     {
         $this->cars = new ArrayCollection();
         $this->bookings = new ArrayCollection();
-        $this->date_inscription = new \DateTime();
+        $this->date_register = new \DateTime();
     }
 
     public function getId(): ?int
@@ -53,57 +50,25 @@ class Customer extends User
         return $this->id;
     }
 
-    public function getDateInscription(): ?\DateTimeInterface
+    public function getDateRegister(): ?\DateTimeInterface
     {
-        return $this->date_inscription;
+        return $this->date_register;
     }
 
-    public function setDateInscription(\DateTimeInterface $date_inscription): self
+    public function setDateRegister(\DateTimeInterface $date_register): self
     {
-        $this->date_inscription = $date_inscription;
+        $this->date_register = $date_register;
         return $this;
     }
 
-    public function getCarteCredit(): ?int
+    public function getCreditCard(): ?int
     {
-        return $this->carte_credit;
+        return $this->credit_card;
     }
 
-    public function setCarteCredit(int $carte_credit): self
+    public function setCreditCard(int $credit_card): self
     {
-        $this->carte_credit = $carte_credit;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Cars[]
-     */
-    public function getCars(): Collection
-    {
-        return $this->cars;
-    }
-
-    public function addCar(Cars $car): self
-    {
-        if (!$this->cars->contains($car)) {
-            $this->cars[] = $car;
-            $car->setIdClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCar(Cars $car): self
-    {
-        if ($this->cars->contains($car)) {
-            $this->cars->removeElement($car);
-            // set the owning side to null (unless already changed)
-            if ($car->getIdClient() === $this) {
-                $car->setIdClient(null);
-            }
-        }
-
+        $this->credit_card = $credit_card;
         return $this;
     }
 
@@ -115,17 +80,16 @@ class Customer extends User
         return $this->bookings;
     }
 
-    public function addBooking(Bookings $booking): self
+    public function addBooking(Booking $booking): self
     {
         if (!$this->bookings->contains($booking)) {
             $this->bookings[] = $booking;
             $booking->setIdClient($this);
         }
-
         return $this;
     }
 
-    public function removeBooking(Bookings $booking): self
+    public function removeBooking(Booking $booking): self
     {
         if ($this->bookings->contains($booking)) {
             $this->bookings->removeElement($booking);
@@ -134,7 +98,6 @@ class Customer extends User
                 $booking->setIdClient(null);
             }
         }
-
         return $this;
     }
 }

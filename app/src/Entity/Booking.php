@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\Customer;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,110 +20,137 @@ class Booking
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="bookings")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="Customer", cascade={"detach", "merge"}, inversedBy="bookings")
+     * @ORM\JoinColumn(name="customer", referencedColumnName="id", nullable=false)
      */
-    private $id_client;
+    private $customer;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $statut;
+    private $status;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_reservation;
+    private $date_booked;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $date_depart;
+    private $date_start;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $date_retour;
+    private $date_end;
+
+    /* @ORM\ManyToMany(targetEntity="Vehicule")
+     * @ORM\JoinTable(name="booking_vehicule",
+     *    joinColumns={@ORM\JoinColumn(name="booking_id", referencedColumnName="id")},
+     *    inverseJoinColumns={@ORM\JoinColumn(name="vehicule_id", referencedColumnName="id")}
+     * )
+     */
+    private $vehicules;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $prix;
+    private $price;
+
+
+    public function __construct()
+    {
+        $this->vehicules = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdClient(): ?Customers
+    public function getCustomer()
     {
-        return $this->id_client;
+        return $this->customer;
     }
 
-    public function setIdClient(?Customers $id_client): self
+    public function setCustomer(Customer $customer)
     {
-        $this->id_client = $id_client;
-
+        $this->customer = $customer;
         return $this;
     }
 
-    public function getStatut(): ?string
+    public function getStatus(): ?string
     {
-        return $this->statut;
+        return $this->status;
     }
 
-    public function setStatut(string $statut): self
+    public function setStatus(string $status): self
     {
-        $this->statut = $statut;
-
+        $this->status = $status;
         return $this;
     }
 
-    public function getDateReservation(): ?\DateTimeInterface
+    public function getDateBooked(): ?\DateTimeInterface
     {
-        return $this->date_reservation;
+        return $this->date_booked;
     }
 
-    public function setDateReservation(\DateTimeInterface $date_reservation): self
+    public function setDateBooked(\DateTimeInterface $date_booked): self
     {
-        $this->date_reservation = $date_reservation;
-
+        $this->date_booked = $date_booked;
         return $this;
     }
 
-    public function getDateDepart(): ?\DateTimeInterface
+    public function getDateStart(): ?\DateTimeInterface
     {
-        return $this->date_depart;
+        return $this->date_start;
     }
 
-    public function setDateDepart(\DateTimeInterface $date_depart): self
+    public function setDateStart(\DateTimeInterface $date_start): self
     {
-        $this->date_depart = $date_depart;
-
+        $this->date_start = $date_start;
         return $this;
     }
 
-    public function getDateRetour(): ?\DateTimeInterface
+    public function getDateEnd(): ?\DateTimeInterface
     {
-        return $this->date_retour;
+        return $this->date_end;
     }
 
-    public function setDateRetour(\DateTimeInterface $date_retour): self
+    public function setDateEnd(\DateTimeInterface $date_end): self
     {
-        $this->date_retour = $date_retour;
-
+        $this->date_end = $date_end;
         return $this;
     }
 
-    public function getPrix(): ?float
+
+    public function addVehicule(Vehicule $vehicule)
     {
-        return $this->prix;
+        if ($this->vehicules->contains($vehicule)) {
+            return;
+        }
+        $this->vehicules->add($vehicule);
+        //$vehicule->addUser($this);
     }
 
-    public function setPrix(float $prix): self
+    public function removeVehicule(Vehicule $Vehicule)
     {
-        $this->prix = $prix;
+        if (!$this->vehicules->contains($vehicule)) {
+            return;
+        }
+        $this->vehicules->removeElement($vehicule);
+        //$vehicule->removeUser($this);
+    }
 
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
         return $this;
     }
 }
