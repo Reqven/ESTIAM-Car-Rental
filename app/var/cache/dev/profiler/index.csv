@@ -125,3 +125,9 @@ fc3a48,::1,GET,http://localhost/Shared/VM/ESTIAM-Car-Rental/app/public/index.php
 6c4a2c,::1,GET,http://localhost/Shared/VM/ESTIAM-Car-Rental/app/public/index.php/inscription,1578424127,,500
 24a590,::1,GET,http://localhost/Shared/VM/ESTIAM-Car-Rental/app/public/index.php/inscription,1578425691,345002,500
 345002,::1,GET,http://localhost/Shared/VM/ESTIAM-Car-Rental/app/public/index.php/inscription,1578425691,,500
+255a51,::1,GET,http://localhost/Shared/VM/ESTIAM-Car-Rental/app/public/,1578431033,699d5e,500
+699d5e,::1,GET,http://localhost/Shared/VM/ESTIAM-Car-Rental/app/public/,1578431033,,500
+999e6f,::1,GET,http://localhost/Shared/VM/ESTIAM-Car-Rental/app/public/,1578431312,c87d1e,500
+c87d1e,::1,GET,http://localhost/Shared/VM/ESTIAM-Car-Rental/app/public/,1578431312,,500
+773d19,::1,GET,http://localhost/Shared/VM/ESTIAM-Car-Rental/app/public/index.php/,1578431338,bee0ac,500
+bee0ac,::1,GET,http://localhost/Shared/VM/ESTIAM-Car-Rental/app/public/index.php/,1578431338,,500
