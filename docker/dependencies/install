@@ -3,8 +3,12 @@
 cd /var/www/html
 echo "Installing dependencies.."
 php -d memory_limit=-1 /bin/composer install --prefer-dist --no-interaction
-echo "Dependencies installed!"
+echo "Dependencies OK!"
 
 echo "Fixing permissions"
 chown -R www-data:www-data /var/www/html
-echo "Permissions fixed!"
+echo "Permissions OK!"
+
+echo "Symfony Migration.."
+php bin/console doctrine:migrations:migrate --no-interaction
+echo "Migration OK!"
