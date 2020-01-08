@@ -43,16 +43,6 @@ class Place
      */
     private $city;
 
-    /**
-     * @ORM\OneToOne(targetEntity="Agency", inversedBy="place")
-     */
-    private $agency;
-
-    /**
-     * @ORM\OneToOne(targetEntity="User", inversedBy="place")
-     */
-    private $user;
-
 
     public function __clone()
     {

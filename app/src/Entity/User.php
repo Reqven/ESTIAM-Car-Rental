@@ -43,8 +43,10 @@ class User implements UserInterface
      */
     protected $date_birth;
 
+
     /**
-     * @ORM\OneToOne(targetEntity="Place", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="Place", cascade={"persist", "remove"}, fetch="EAGER")
+     * @ORM\JoinColumn(name="place_id", referencedColumnName="id", nullable=false)
      */
     protected $place;
 
@@ -104,13 +106,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPlace(Place $place): self
+    public function getPlace(): ?Place
     {
         return $this->place;
     }
 
-    public function setPlace(Place $place): self
+    public function setPlace(?Place $place): self
     {
+        dump($place);
         $this->place = $place;
         return $this;
     }
@@ -134,7 +137,6 @@ class User implements UserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
 

@@ -26,7 +26,6 @@ class SecurityController extends AbstractController
             //May need to implement translations here
             //$username = $authUtils->getLastUsername();
             //$this->addFlash('error', $error->getMessageKey());
-            dump($error);
             return $this->render('security/login.html.twig', [
                 'error' => $error
             ]);
@@ -41,6 +40,7 @@ class SecurityController extends AbstractController
         $user = new Customer();
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
+        dump($form->getData());
 
         if($form->isSubmitted() && $form->isValid()){
             $user = $form->getData();

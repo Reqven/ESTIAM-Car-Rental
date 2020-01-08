@@ -24,7 +24,8 @@ class Agency
     private $name;
 
     /**
-     * @ORM\OneToOne(targetEntity="Place", mappedBy="agency")
+     * @ORM\OneToOne(targetEntity="Place", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="place_id", referencedColumnName="id", nullable=false)
      */
     private $place;
 
@@ -61,7 +62,7 @@ class Agency
         return $this;
     }
 
-    public function getPlace(Place $place): self
+    public function getPlace(): self
     {
         return $this->place;
     }
