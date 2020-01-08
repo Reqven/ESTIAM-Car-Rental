@@ -23,10 +23,7 @@ class RegistrationType extends AbstractType
             ->add('portable')
             ->add('email')
             ->add('password', PasswordType::class)
-            ->add('confirm_password',PasswordType::class)
-            ->add('clients')
-            ->add('employees')
-        ;
+            ->add('confirm_password',PasswordType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

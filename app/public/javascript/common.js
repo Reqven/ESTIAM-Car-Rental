@@ -90,7 +90,7 @@ $(document).ready(function() {
 	}
 		
 	// move breadcrumbs
-	$("header").after('<div class="breadcrumbs"><div class="container"><div class="inner"></div></div></div>');	
+	/*$("header").after('<div class="breadcrumbs"><div class="container"><div class="inner"></div></div></div>');	
 	var breadcrumb = $('ul.breadcrumb');
 	var breadcrumbs_container = $('.breadcrumbs .container');
 	var breadcrumbs_container_inner = $('.breadcrumbs .container .inner');
@@ -100,7 +100,7 @@ $(document).ready(function() {
 	
 	breadcrumb.prependTo(breadcrumbs_container_inner);
 	page_title.prependTo(breadcrumbs_container_inner);
-	category_image.prependTo(breadcrumbs);
+	category_image.prependTo(breadcrumbs);*/
 	
 	// Highlight any found errors
 	$('.text-danger').each(function() {

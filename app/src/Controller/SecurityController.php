@@ -4,48 +4,53 @@ namespace App\Controller;
 
 use App\Entity\Peoples;
 use App\Form\RegistrationType;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/inscription", name="security_registration")
+     * @Route("/login", name="login")
      */
-    public function registration(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder){
+    public function login(AuthenticationUtils $auth)
+    {       
+        if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('homepage');
+        }
+        if ($error = $auth->getLastAuthenticationError()) {
+            //May need to implement translations here
+            //$username = $authUtils->getLastUsername();
+            //$this->addFlash('error', $error->getMessageKey());
+            return $this->render('security/login.html.twig', [
+                'error' => $error
+            ]);
+        }
+        return $this->render('security/login.html.twig');
+    }
+
+    /**
+     * @Route("/register", name="register")
+     */
+    public function register(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder){
         $user = new Peoples();
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $hash = $encoder->encodePassword($user,$user->getPassword());
-            $user -> setPassword($hash);
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($hash);
 
             $manager->persist($user);
             $manager->flush();
 
-            return $this->redirectToRoute('security_login');
+            return $this->redirectToRoute('login');
         }
-
-        return $this->render('security/registration.html.twig', [
+        return $this->render('security/register.html.twig', [
             'form' => $form->createView()
         ]);
     }
-
-    /**
-     * @Route("/connexion", name="security_login")
-     */
-    public function login() {
-        return $this->render('security/login.html.twig');
-    }
-
-    /**
-     * @Route("/deconnexion", name="security_logout")
-     */
-    public function logout() {}
 }

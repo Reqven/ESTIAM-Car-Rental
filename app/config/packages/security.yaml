@@ -1,34 +1,36 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
 
+    always_authenticate_before_granting: true
     encoders:
-        app\Entity\Peoples:
-            # use native password encoder
-            # this value auto-selects the best possible hashting algorithm
+        App\Entity\Peoples: 
             algorithm: bcrypt
+
     providers:
-        in_memory: { memory: null }
-        in_database:
+        default:
             entity:
-                class: app\Entity\Peoples
+                class: App\Entity\Peoples
                 property: email
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
         main:
-            anonymous: lazy
-
-            provider: in_database
-
+            pattern: ^/
+            anonymous: true
+            provider: default
+            logout_on_user_change: true
+            guard:
+                authenticators:
+                    - App\Security\Authenticator
             form_login:
-                login_path: security_login
-                check_path: security_login
-            
+                login_path: login
+                check_path: login
             logout:
-                path: security_logout
-                target: dev
+                path: logout
+                target: /
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -39,5 +41,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/account, roles: IS_AUTHENTICATED_FULLY }

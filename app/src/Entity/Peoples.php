@@ -250,7 +250,10 @@ class Peoples implements UserInterface
 
     public function eraseCredentials(){}
 
-    public function getUsername(){}
+    public function getUsername()
+    {
+        return $this->email;
+    }
 
     public function getSalt(){}
 

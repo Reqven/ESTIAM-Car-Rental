@@ -52,7 +52,7 @@
 
 </head>
 
-<body class="common-home home1">
+<body class="{{ body | default('common-home home1') }}">
 	<div class="wrapper">
 
 		<header>
@@ -1243,21 +1243,32 @@
 												<span></span><span></span><span></span></div>
 											<div class="dropdown-menu setting-content">
 												<div class="account">
-													<button class="btn btn-link btn-link-current">My Account <i
-															class="icon-arrow-down"></i></button>
+													<button class="btn btn-link btn-link-current">
+														{% if not is_granted('IS_AUTHENTICATED_FULLY') %}My Account
+														{% else %}Welcome, {{ app.user.prenom}}{% endif %}
+														 <i class="icon-arrow-down"></i>
+													</button>
 													<div class="content" id="top-links">
 														<ul class="ul-account list-unstyled">
-															<li>
-																<a id="a-register-link"
-																	href="#">Register</a>
-															</li>
-															<li>
-																<a id="a-login-link"
-																	href="#">Login</a>
-															</li>
+															{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+																<li>
+																	<a href="{{ path('account') }}">My Account</a>
+																</li>
+																<li>
+																	<a href="{{ path('logout') }}">Disconnect</a>
+																</li>
+															{% else %}
+																<li>
+																	<a href="{{ path('register') }}">Register</a>
+																</li>
+																<li>
+																	<a href="{{ path('login') }}">Login</a>
+																</li>
+															{% endif %}
 														</ul>
 													</div>
 												</div>
+												{#
 												<div class="currency">
 													<form action="#"
 														method="post" enctype="multipart/form-data" id="form-currency">
@@ -1326,6 +1337,7 @@
 															value="#" />
 													</form>
 												</div>
+												#}
 											</div>
 										</div>
 									</div>
@@ -1339,11 +1351,10 @@
 				</div>
 			</div>
 		</header>
-
-		<div id="content">
+		
       {% block content %}
-      {% endblock %}
-		</div>
+			{% endblock %}
+			
 		<footer>
 			<div class="container">
 				<div class="newletter-subscribe-container">

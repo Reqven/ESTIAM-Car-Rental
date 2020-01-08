@@ -1,0 +1,32 @@
+{% extends 'template.html.twig' %}
+{% set body = 'home1 product-category' %}
+
+{% block stylesheet %}
+{% endblock %}
+
+{% block content %}
+
+  <div class="breadcrumbs">
+    <div class="container">
+        <div class="inner">
+            <h1>My Account</h1>
+            <ul class="breadcrumb">
+                <li><a href="{{ path('homepage') }}">Home</a></li>
+                <li><a href="#">My Account</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </div>
+  <div id="product-category" class="container layer-category">
+    <div class="row">
+        <div class="container">
+
+        </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}
