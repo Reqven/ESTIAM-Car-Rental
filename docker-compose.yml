@@ -1,20 +1,28 @@
 version: "2"
 services:
   webserver:
-    build: $PWD/server/apache
     container_name: webserver
+    build: 
+      context: .
+      dockerfile: ./docker/apache/Dockerfile
     ports:
       - "8181:80"
     volumes:
-      #- $PWD/app:/var/www/html
-      - symfony-sync:/var/www/html:nocopy
+      - ./app:/var/www/html
     links:
       - database:database
+
+  dependencies:
+    container_name: dependencies
+    build: 
+      context: .
+      dockerfile: ./docker/dependencies/Dockerfile
+    volumes:
+      - ./app:/var/www/html
+  
   database:
     container_name: database
     image: mysql:5.7.27
-    #volumes:
-    #  - $PWD/mysql:/var/lib/mysql
     ports:
       - "3306:3306"
     environment:
@@ -22,7 +30,3 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=root
       - MYSQL_DATABASE=symfony
-
-volumes:
-  symfony-sync:
-    external: true

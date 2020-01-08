@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd /var/www/html
+echo "Installing dependencies.."
+composer install --prefer-dist --no-interaction
+echo "Dependencies installed!"
+
+echo "Fixing permissions"
+chown -R www-data:www-data /var/www/html
+echo "Permissions fixed!"

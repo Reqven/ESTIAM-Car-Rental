@@ -4,5 +4,6 @@ options:
 syncs:
   symfony-sync:
     sync_strategy: 'unison'
+    sync_userid: '33'
     src: './app/'
-    #sync_excludes: ['var']
+    sync_excludes: ['var', 'vendor']

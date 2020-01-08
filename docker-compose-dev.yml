@@ -1,0 +1,13 @@
+version: "2"
+services:
+  webserver:
+    volumes:
+      - symfony-sync:/var/www/html:nocopy
+
+  dependencies:
+    volumes:
+      - symfony-sync:/var/www/html:nocopy
+  
+volumes:
+  symfony-sync:
+    external: true
