@@ -1,0 +1,43 @@
+{% extends 'template.html.twig' %}
+{% set body = 'home1 product-category' %}
+
+{% block stylesheet %}
+  <style>
+    .container {
+      text-align: center;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+  <div class="breadcrumbs container-pushed">
+    <div class="container">
+      <div class="inner">
+        <h1>Checkout</h1>
+        <ul class="breadcrumb">
+          <li><a href="{{ path('homepage') }}">Home</a></li>
+          <li><a href="{{ path('booking_create') }}">Booking</a></li>
+          <li><a href="{{ path('booking_create_confirm') }}">Confirm</a></li>
+          <li><a href="{{ path('booking_create_checkout') }}">Checkout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="checkout-cart" class="container layer-category">
+    <div class="row">
+      <div id="content" class="col-sm-12">
+
+        <h2>Booking confirmed!</h2>
+        <p>It now appears in your account.</p>
+        <br>
+        <a href="{{ path('account') }}" class="button">My account</a>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

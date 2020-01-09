@@ -19,6 +19,34 @@ class VehiculeRepository extends ServiceEntityRepository
         parent::__construct($registry, Vehicule::class);
     }
 
+    public function findPopularBrands()
+    {
+        return $this
+        ->createQueryBuilder('v')
+        ->select('
+            v.brand as name,
+            count(v.brand) as popularity'
+        )
+        ->groupBy('v.brand')
+        ->orderBy('popularity', 'DESC')
+        ->getQuery()
+        ->getResult();
+    }
+
+    public function findCategories()
+    {
+        return $this
+        ->createQueryBuilder('v')
+        ->select('
+            v.category as name,
+            count(v.category) as amount'
+        )
+        ->groupBy('name')
+        ->orderBy('name', 'ASC')
+        ->getQuery()
+        ->getResult();
+    }
+
     // /**
     //  * @return Vehicule[] Returns an array of Vehicule objects
     //  */

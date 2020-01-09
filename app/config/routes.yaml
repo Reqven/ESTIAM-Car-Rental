@@ -5,3 +5,10 @@
 logout:
   path: /logout
   methods: GET
+
+register:
+  path: /register
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+  defaults:
+    path: /register/individual
+    permanent: true

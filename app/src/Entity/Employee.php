@@ -16,6 +16,7 @@ class Employee extends User
      * @ORM\Id
      * @ORM\OneToOne(targetEntity="User")
      * @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * @Serializer\Groups({"booking"})
      */
     protected $id;
 

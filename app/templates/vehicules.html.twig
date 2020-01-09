@@ -1,0 +1,191 @@
+{% extends 'template.html.twig' %}
+{% set body = 'home1 product-category' %}
+
+{% block stylesheet %}
+<style>
+  .badge-danger {
+    background-color: #ee3333;
+  }
+
+  .layer-category {
+    max-width: 1100px;
+  }
+
+  .tabs-category-slider .module-title {
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+
+  .tabs-category-slider .box-tab {
+    margin-top: 0px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="breadcrumbs container-pushed">
+  <div class="container">
+    <div class="inner">
+      <h1>Vehicules</h1>
+      <ul class="breadcrumb">
+        <li><a href="{{ path('homepage') }}">Home</a></li>
+        <li><a href="#">Vehicules</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div id="product-category" class="container layer-category">
+  <div class="row">
+    <div class="col-order">
+      <aside id="column-left" class="col-md-3 col-sm-12">
+        <div class="col-order-inner">
+
+          <div class="category-module">
+            <h3>Categories</h3>
+            <div class="ul list-unstyled">
+              <div class="li">
+                <a class="active" href="#">All <span>{{ vehicules|length }}</span></a>
+                {% for category in categories %}
+                <a href="#">{{ category.name }} <span>{{ category.amount }}</span></a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <div class="popular-tags">
+            <div class="title">
+              <h3>Popular Brands</h3>
+            </div>
+
+            <ul>
+              <li>
+                {% for brand in brands %}
+                <a href="#">{{ brand.name }}</a>
+                {% endfor %}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+      <div id="content" class="col-md-9 col-sm-12">
+
+
+
+
+        <div class="custom-category">
+          <div class="custom-category">
+
+            <div class="row">
+              {% for vehicule in vehicules %}
+              <div class="product-layout product-grid grid-style col-lg-4 col-md-4 col-sm-4 col-xs-4 product-item">
+                <div class="product-thumb">
+                  <div class="item item1">
+                    <div class="item-inner">
+
+                      <div class="image images-container">
+                        <div class="inner">
+                          <div class="box-label">
+
+                          </div>
+                          <div class="image rotate-image-container">
+                            <a href="{{ path('vehicule_show', { id: vehicule.id }) }}">
+                              <img src="{{ asset('image/voiture.jpg') }}" class="img-responsive img-default-image">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="caption">
+                        <div class="inner">
+                          <p class="manufacture-product ">
+                            <a
+                              href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/manufacturer/info&amp;manufacturer_id=8">{{ vehicule.category }}</a>
+                          </p>
+                          <div class="ratings">
+                            <div class="rating-box">
+                              <div class="rating4">rating</div>
+                            </div>
+                          </div>
+                          <h4 class="product-name">
+                            <a
+                              href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/product&amp;path=307&amp;product_id=57">{{ vehicule.brand }}
+                              {{ vehicule.model }}
+                            </a>
+                          </h4>
+                          <div class="price-box">
+                            <p class="regular-price"><span class="price">£{{ vehicule.price }}</span></p>
+                            <p class="price-tax"><span class="price">Ex Tax: £60.24</span>
+                            </p>
+                          </div>
+                          <p class="product-des">More room to move.
+
+                            With 80GB or 160GB of storage and up to 40 hours of battery
+                            life, the new iPod classic lets you enjoy up to 40,000 songs
+                            or..</p>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+
+
+            </div>
+            <div class="toolbar toolbar-products toolbar-bottom">
+              <div class="pages ajax_pagination"></div>
+              <div class="toolbar-amount"><span>
+                  {% if vehicules|length %}Showing 1 to {{ vehicules|length }} of {{ vehicules|length }}
+                  {% else %}No results{% endif %}
+                </span></div>
+            </div>
+          </div>
+          <script type="text/javascript">
+            // Product List
+            $('#list-view').click(function () {
+              $('#content .product-grid > .clearfix').remove();
+
+              $('#content .row > .product-grid').attr('class', 'product-layout product-list col-xs-12');
+              $('#grid-view').removeClass('active');
+              $('#list-view').addClass('active');
+
+              localStorage.setItem('display', 'list');
+            });
+
+            // Product Grid
+            $('#grid-view').click(function () {
+              var cols = $('#column-right, #column-left').length;
+
+              if (cols == 2) {
+                $('#content .product-list').attr('class', 'product-layout product-grid module-style1 col-lg-6 col-md-6 col-sm-6 col-xs-6');
+              } else if (cols == 1) {
+                $('#content .product-list').attr('class', 'product-layout product-grid module-style1 col-lg-4 col-md-4 col-sm-6 col-xs-6');
+              } else {
+                $('#content .product-list').attr('class', 'product-layout product-grid module-style1 col-lg-3 col-md-3 col-sm-6 col-xs-6');
+              }
+
+              $('#list-view').removeClass('active');
+              $('#grid-view').addClass('active');
+
+              localStorage.setItem('display', 'grid');
+            });
+          </script>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="{{ asset('javascript/grid.js') }}"></script>
+<script src="{{ asset('javascript/filter.js') }}"></script>
+{% endblock %}

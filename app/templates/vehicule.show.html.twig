@@ -1,0 +1,296 @@
+{% extends 'template.html.twig' %}
+{% set body = 'home1 product-category' %}
+{% set inBooking = booking and booking.vehicules.contains(vehicule) %}
+
+{% block stylesheet %}
+<style>
+  .item-inner .images-container {
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    background-image: url("{{ asset('image/voiture.jpg') }}");
+  }
+
+  .item-inner .caption .manufacture-product {
+    margin-bottom: 0px;
+  }
+
+  .label-product {
+    cursor: pointer;
+  }
+
+  .owl-stage {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .owl-item {
+    flex: 1 0 25%;
+    max-width: 25%;
+  }
+
+  @media (max-width: 991px) {
+    .owl-item {
+      flex: 1 0 50%;
+      max-width: 50%;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="breadcrumbs container-pushed">
+  <div class="container">
+    <div class="inner">
+      <h1>Vehicules</h1>
+      <ul class="breadcrumb">
+        <li><a href="{{ path('homepage') }}">Home</a></li>
+        <li><a href="#">Vehicules</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div id="product-product" class="container">
+
+  <div class="row">
+    <div id="content" class="col-sm-12">
+      <div class="column-main">
+        <div class="row">
+          <div class="product-image-main col-sm-6">
+            <div class="lightbox-container"></div>
+            <div class="product-zoom-image">
+              <div id="wrap">
+                <a>
+                  <img src="{{ asset('image/voiture.jpg') }}">
+                </a>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-sm-6 product-info-main">
+            <p>Brands <a href="#">{{ vehicule.brand }}</a>
+            </p>
+            <h1 class="product-name">{{ vehicule.brand }} {{ vehicule.model }}</h1>
+            <div class="ratings">
+              <div class="rating-box">
+                <div class="rating5">rating</div>
+              </div>
+            </div>
+            <div class="price-box box-regular">
+              <span class="regular-price">
+                <span class="price">£{{ vehicule.price }}</span>
+              </span>
+            </div>
+            <ul class="list-unstyled">
+              <li>Category: <span>{{ vehicule.category }}</span></li>
+              <li>Year: <span>{{ vehicule.year|date('Y') }}</span></li>
+              <li>Cylinder: <span>{{ vehicule.cylinder }}</span></li>
+              <li>Gearbox: <span>{{ vehicule.gearbox }}</span></li>
+              <li>Fuel: <span>{{ vehicule.fuel }}</span></li>
+              <li>Young driver allowed: <span>{% if vehicule.youngDriver %}Yes{% else %}No{% endif %}</span></li>
+            </ul>
+            <p class="short-des">A reflection of the past and a vision of the future. The silhouette: iconic. The
+              design: timeless. The technology: inspired by great racing victories and always one step ahead</p>
+
+            <div id="product">
+              <h3>Available Options</h3>
+              <div class="form-group required ">
+                <label class="control-label" for="input-option299">Color</label>
+                <select disabled name="option[299]" id="input-option299" class="form-control option-swatches">
+                  <option value="0"> --- Please Select --- </option>
+                  <option value="126">Green
+                  </option>
+                  <option value="125">Orange
+                  </option>
+                  <option value="124">Red
+                  </option>
+                  <option value="127">DarkOliveGreen
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <a {% if inBooking %}disabled{% endif %} class="btn button button-booking"
+                  {% if not inBooking %}href="{{ path('vehicule_add', { id: vehicule.id} ) }}" {% endif %}>
+                  {% if inBooking %}Already in Booking{% else %}Add to Booking{% endif %}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="related-products">
+        <div class="module-title">
+          <h2>Related Vehicules</h2>
+          <div class="module-description">
+            <p>Mirum est notare quam littera gothica, quam nunc putamus parum claram anteposuerit litterarum formas.
+            </p>
+          </div>
+        </div>
+        <div class="box-style">
+          <div class="col-product">
+            <div class="owl-container">
+              <div class="tt-product ">
+                <div class="tab-content">
+                  <div
+                    class="tab-container-23  owl-carousel owl-theme  tab-pane tab-product-container  fade  active in owl-loaded owl-drag"
+                    id="tab-230">
+
+                    <div class="owl-stage-outer">
+                      <div class="owl-stage">
+
+                        <div class="owl-item">
+                          <div class="row_items ">
+
+                            <div class="product-layout grid-style">
+                              <div class="product-thumb transition">
+                                <div class="item">
+                                  <div class="item-inner">
+
+                                    <div class="image images-container">
+                                      <a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/product&amp;product_id=54"
+                                        class="product-image">
+                                      </a>
+
+                                      <div class="box-label">
+                                        <div class="label-product"><span>New</span></div>
+                                      </div>
+
+                                    </div><!-- image -->
+                                    <div class="caption">
+                                      <div class="inner">
+
+                                        <p class="manufacture-product">
+                                          <a href="#">Category</a>
+                                        </p>
+                                        <h4 class="product-name"><a href="/public/index.php/vehicule/1">
+                                            Brand - Model</a></h4>
+
+                                      </div>
+                                    </div><!-- caption -->
+                                  </div>
+                                </div>
+                              </div><!-- product-thumb -->
+                            </div><!-- product-layout -->
+                          </div>
+                        </div>
+                        <div class="owl-item">
+                          <div class="row_items ">
+
+                            <div class="product-layout grid-style">
+                              <div class="product-thumb transition">
+                                <div class="item">
+                                  <div class="item-inner">
+
+                                    <div class="image images-container">
+                                      <a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/product&amp;product_id=54"
+                                        class="product-image">
+                                      </a>
+
+                                      <div class="box-label">
+                                        <div class="label-product"><span>New</span></div>
+                                      </div>
+
+                                    </div><!-- image -->
+                                    <div class="caption">
+                                      <div class="inner">
+
+                                        <p class="manufacture-product">
+                                          <a href="#">Category</a>
+                                        </p>
+                                        <h4 class="product-name"><a href="/public/index.php/vehicule/2">
+                                            Brand - Model</a></h4>
+
+                                      </div>
+                                    </div><!-- caption -->
+                                  </div>
+                                </div>
+                              </div><!-- product-thumb -->
+                            </div><!-- product-layout -->
+                          </div>
+                        </div>
+                        <div class="owl-item">
+                          <div class="row_items ">
+
+                            <div class="product-layout grid-style">
+                              <div class="product-thumb transition">
+                                <div class="item">
+                                  <div class="item-inner">
+
+                                    <div class="image images-container">
+                                      <a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/product&amp;product_id=54"
+                                        class="product-image">
+
+                                      </a>
+
+                                    </div><!-- image -->
+                                    <div class="caption">
+                                      <div class="inner">
+
+                                        <p class="manufacture-product">
+                                          <a href="#">Category</a>
+                                        </p>
+                                        <h4 class="product-name"><a href="/public/index.php/vehicule/1">
+                                            Brand - Model</a></h4>
+
+                                      </div>
+                                    </div><!-- caption -->
+                                  </div>
+                                </div>
+                              </div><!-- product-thumb -->
+                            </div><!-- product-layout -->
+                          </div>
+                        </div>
+                        <div class="owl-item">
+                          <div class="row_items ">
+
+                            <div class="product-layout grid-style">
+                              <div class="product-thumb transition">
+                                <div class="item">
+                                  <div class="item-inner">
+
+                                    <div class="image images-container">
+                                      <a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/product&amp;product_id=54"
+                                        class="product-image">
+
+                                      </a>
+
+                                    </div><!-- image -->
+                                    <div class="caption">
+                                      <div class="inner">
+
+                                        <p class="manufacture-product">
+                                          <a href="#">Category</a>
+                                        </p>
+                                        <h4 class="product-name"><a href="/public/index.php/vehicule/2">
+                                            Brand - Model</a></h4>
+
+                                      </div>
+                                    </div><!-- caption -->
+                                  </div>
+                                </div>
+                              </div><!-- product-thumb -->
+                            </div><!-- product-layout -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="owl-dots disabled"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

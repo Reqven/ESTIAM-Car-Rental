@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use App\Entity\Customer;
+use App\Entity\Vehicule;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookingRepository")
@@ -16,17 +20,21 @@ class Booking
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Serializer\Groups({"booking"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="Customer", cascade={"detach", "merge"}, inversedBy="bookings")
      * @ORM\JoinColumn(name="customer", referencedColumnName="id", nullable=false)
+     * @Serializer\Type("App\Entity\Customer")
+     * @Serializer\Groups({"booking"})
      */
     private $customer;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Serializer\Groups({"booking"})
      */
     private $status;
 
@@ -37,24 +45,30 @@ class Booking
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\GreaterThan("today")
+     * @Serializer\Groups({"booking"})
+     * @Serializer\Type("DateTime<'Y-m-d'>")
      */
     private $date_start;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\GreaterThan(propertyPath="date_start")
+     * @Serializer\Groups({"booking"})
+     * @Serializer\Type("DateTime<'Y-m-d'>")
      */
     private $date_end;
 
-    /* @ORM\ManyToMany(targetEntity="Vehicule")
-     * @ORM\JoinTable(name="booking_vehicule",
-     *    joinColumns={@ORM\JoinColumn(name="booking_id", referencedColumnName="id")},
-     *    inverseJoinColumns={@ORM\JoinColumn(name="vehicule_id", referencedColumnName="id")}
-     * )
+    /**
+     * @ORM\ManyToMany(targetEntity="Vehicule", inversedBy="bookings")
+     * @ORM\JoinTable(name="booking_vehicule")
+     * @Serializer\Groups({"booking"})
      */
     private $vehicules;
 
     /**
      * @ORM\Column(type="float")
+     * @Serializer\Groups({"booking"})
      */
     private $price;
 
@@ -124,6 +138,13 @@ class Booking
         return $this;
     }
 
+    /**
+     * @return Collection|Vehicules[]
+     */
+    public function getVehicules(): Collection
+    {
+        return $this->vehicules;
+    }
 
     public function addVehicule(Vehicule $vehicule)
     {
@@ -131,6 +152,7 @@ class Booking
             return;
         }
         $this->vehicules->add($vehicule);
+        $this->calculate();
         //$vehicule->addUser($this);
     }
 
@@ -140,6 +162,7 @@ class Booking
             return;
         }
         $this->vehicules->removeElement($vehicule);
+        $this->calculate();
         //$vehicule->removeUser($this);
     }
 
@@ -152,5 +175,32 @@ class Booking
     {
         $this->price = $price;
         return $this;
+    }
+
+    public function getVehiculePrice(Vehicule $vehicule): float
+    {
+        if (!$this->vehicules->contains($vehicule)) {
+            return 0;
+        }
+        try {
+            $interval = date_diff($this->date_start, $this->date_end);
+            return $vehicule->getPrice() * $interval->format('%a');
+        } catch(\Exception $e) {
+            return $vehicule->getPrice();
+        }
+    }
+
+    public function calculate(): self
+    {
+        $price = 0;
+        foreach($this->vehicules->getValues() as $vehicule) {
+            $price += $this->getVehiculePrice($vehicule);
+        }
+        return $this->setPrice($price);
+    }
+
+    public function isReady(): bool
+    {
+        return $this->date_start && $this->date_end && !$this->vehicules->isEmpty();
     }
 }

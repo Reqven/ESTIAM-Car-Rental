@@ -7,6 +7,8 @@ use App\Entity\Booking;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CustomerRepository")
@@ -19,6 +21,7 @@ class Customer extends User
      * @ORM\Id
      * @ORM\OneToOne(targetEntity="User")
      * @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * @Serializer\Groups({"booking"})
      */
     protected $id;
 

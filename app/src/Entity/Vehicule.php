@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VehiculeRepository")
@@ -13,8 +15,14 @@ class Vehicule
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Serializer\Groups({"booking"})
      */
     private $id;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Booking", mappedBy="vehicules")
+     */
+    private $bookings;
 
     /**
      * @ORM\ManyToOne(targetEntity="Agency", inversedBy="vehicules")
@@ -73,7 +81,11 @@ class Vehicule
     private $price;
 
 
-    
+    public function __construct()
+    {
+        $this->bookings = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

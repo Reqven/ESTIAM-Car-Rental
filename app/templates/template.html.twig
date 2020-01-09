@@ -10,9 +10,9 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Eposi 1 - Responsive Opencart Theme</title>
-	<!--base href="#" /-->
+	<title>Pull & Push Auto</title>
 	<meta name="description" content="Eposi, Responsive, Opencart Theme, Fashion Theme" />
+	<link href="{{ asset('plugin/jquery/jquery-ui.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('plugin/owl-carousel/owl.carousel.min.css') }}" rel="stylesheet" />
 	<link href="{{ asset('plugin/owl-carousel/owl.theme.green.min.css') }}" rel="stylesheet" />
 	<link href="{{ asset('theme/ocmegamenu/menu.css') }}" rel="stylesheet" />
@@ -32,8 +32,8 @@
 	<script src="{{ asset('theme/opentheme/ocslideshow/jquery.nivo.slider.js') }}"></script>
 	<script src="{{ asset('plugin/cloudzoom/cloud-zoom.1.0.2.min.js') }}"></script>
 	<script src="{{ asset('plugin/cloudzoom/zoom.js') }}"></script>
-	<script src="{{ asset('theme/ocquickview/ocquickview.js') }}"></script>
-	<link href="{{ asset('theme/ocquickview/ocquickview.css') }}" rel="stylesheet" type="text/css" />
+	{#<script src="{{ asset('theme/ocquickview/ocquickview.js') }}"></script>
+	<link href="{{ asset('theme/ocquickview/ocquickview.css') }}" rel="stylesheet" type="text/css" />#}
 	<link href="{{ asset('theme/ocajaxlogin/ocajaxlogin.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<link href="{{ asset('plugin/bootstrap/bootstrap-datetimepicker.min.css') }}" type="text/css" rel="stylesheet" media="screen" />
 	<link href="{{ asset('theme/ocpagebuilder.css') }}" type="text/css" rel="stylesheet" media="screen" />
@@ -42,10 +42,31 @@
 	<script src="{{ asset('theme/ocajaxlogin/ocajaxlogin.js') }}"></script>
 	<script src="{{ asset('plugin/moment/moment.min.js') }}"></script>
 	<script src="{{ asset('plugin/moment/moment-with-locales.min.js') }}"></script>
-	<script src="{{ asset('plugin/bootstrap/bootstrap-datetimepicker.min.js') }}"></script>
+	<script src="{{ asset('plugin/jquery/jquery.datepicker.min.js') }}"></script>
 	<script src="{{ asset('javascript/common.js') }}"></script>
-	<link href="{{ asset('image/cart.png') }}" rel="icon" />
 	<script src="{{ asset('plugin/bootstrap/bootstrap.min.js') }}"></script>
+	<style>
+	 #logo img {
+		height: 60px;
+	 }
+	 #logo {
+		padding: 15px 0;
+	 }
+	 .logo-footer img {
+		 height: 50px;
+	 }
+	 .fix-header {
+			background: white;
+	 }
+	 .container-pushed {
+			margin-top: 90px;
+	 }
+	 @media (max-width: 991px) {
+		.container-pushed {
+			margin-top: 0px;
+		}
+	 }
+	</style>
 
   {% block stylesheet %}
   {% endblock %}
@@ -56,7 +77,7 @@
 	<div class="wrapper">
 
 		<header>
-			<div class="header-inner fix">
+			<div class="header-inner fix fix-header">
 				<div class="container">
 					<div class="container-inner">
 						<div class="inner">
@@ -172,11 +193,37 @@
 
 										</div>
 										<ul class="ul-top-items">
-											<li class="li-top-item">
-												<a class="a-top-link a-item" href="#">
+											<li class="li-top-item {% if 'homepage' is same as(app.request.get('_route')) %}active{% endif %}">
+												<a class="a-top-link a-item" href="{{ path('homepage') }}">
 													<span>Home</span>
 												</a>
 											</li>
+											<li class="li-top-item {% if app.request.get('_route') starts with 'booking' %}active{% endif %}">
+												<a class="a-top-link a-item" href="{{ path('booking_create') }}">
+													<span>Booking</span>
+												</a>
+											</li>
+											<li class="li-top-item {% if app.request.get('_route') starts with 'vehicule' %}active{% endif %}">
+												<a class="a-top-link a-item" href="{{ path('vehicules') }}">
+													<span>Vehicules</span>
+												</a>
+											</li>
+											<li class="li-top-item">
+												<a class="a-top-link a-item" href="#">
+													<span>Specials</span>
+												</a>
+											</li>
+											<li class="li-top-item">
+												<a class="a-top-link a-item" href="#">
+													<span>About us</span>
+												</a>
+											</li>
+											<li class="li-top-item">
+												<a class="a-top-link a-item" href="#">
+													<span>Contact</span>
+												</a>
+											</li>
+											{#
 											<li class="li-top-item">
 												<a class="a-top-link a-item"
 													href="#">
@@ -186,7 +233,6 @@
 													<i class="fa fa-angle-down" aria-hidden="true"></i>
 													<i class="fa fa-angle-up" aria-hidden="true"></i>
 												</span>
-
 												<div class="sub-menu-container">
 													<ul class="ul-second-items">
 														<li class="li-second-items">
@@ -330,193 +376,6 @@
 											<li class="li-top-item">
 												<a class="a-top-link a-item"
 													href="#">
-													<span>Eyes</span>
-												</a>
-												<span class="top-click-show a-click-show">
-													<i class="fa fa-angle-down" aria-hidden="true"></i>
-													<i class="fa fa-angle-up" aria-hidden="true"></i>
-												</span>
-
-												<div class="sub-menu-container">
-													<ul class="ul-second-items">
-														<li class="li-second-items">
-															<a href="#"
-																class="a-second-link a-item">
-																<span class="a-second-title">Brushes</span>
-															</a>
-															<span class="second-click-show a-click-show">
-																<i class="fa fa-angle-down" aria-hidden="true"></i>
-																<i class="fa fa-angle-up" aria-hidden="true"></i>
-															</span>
-															<div class="flyout-third-items">
-																<ul class="ul-third-items">
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">Bags &amp; Cases</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">Binoculars &amp;
-																				Scopes</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">Digital Cameras</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">Film Photography</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">Lighting &amp; Studio</span></a>
-																	</li>
-																</ul>
-															</div>
-														</li>
-														<li class="li-second-items">
-															<a href="#"
-																class="a-second-link a-item">
-																<span class="a-second-title">Mascara</span>
-															</a>
-															<span class="second-click-show a-click-show">
-																<i class="fa fa-angle-down" aria-hidden="true"></i>
-																<i class="fa fa-angle-up" aria-hidden="true"></i>
-															</span>
-															<div class="flyout-third-items">
-																<ul class="ul-third-items">
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">DSLR Body &amp; Lens</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">DSLR Body Only</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">DSLR Lenses</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">DSLR Package Deals</span></a>
-																	</li>
-																</ul>
-															</div>
-														</li>
-														<li class="li-second-items">
-															<a href="#"
-																class="a-second-link a-item">
-																<span class="a-second-title">Eye Shadow</span>
-															</a>
-															<span class="second-click-show a-click-show">
-																<i class="fa fa-angle-down" aria-hidden="true"></i>
-																<i class="fa fa-angle-up" aria-hidden="true"></i>
-															</span>
-															<div class="flyout-third-items">
-																<ul class="ul-third-items">
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">Camera Lenses</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">DSLR Lenses</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">Lens Accessories</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">Lowepro</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">SanDisk</span></a>
-																	</li>
-																</ul>
-															</div>
-														</li>
-														<li class="li-second-items">
-															<a href="#"
-																class="a-second-link a-item">
-																<span class="a-second-title">Eye Brushes</span>
-															</a>
-															<span class="second-click-show a-click-show">
-																<i class="fa fa-angle-down" aria-hidden="true"></i>
-																<i class="fa fa-angle-up" aria-hidden="true"></i>
-															</span>
-															<div class="flyout-third-items">
-																<ul class="ul-third-items">
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">Bower</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">Celestron</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">Flipbac</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">Gary Fong</span></a>
-																	</li>
-																	<li class="li-third-items">
-																		<a href="#"
-																			class="a-third-link"><span class="a-third-title">GigaPan</span></a>
-																	</li>
-																</ul>
-															</div>
-														</li>
-													</ul>
-												</div>
-											</li>
-											<li class="li-top-item">
-												<a class="a-top-link a-item"
-													href="#">
-													<span>Lips</span>
-												</a>
-												<span class="top-click-show a-click-show">
-													<i class="fa fa-angle-down" aria-hidden="true"></i>
-													<i class="fa fa-angle-up" aria-hidden="true"></i>
-												</span>
-
-												<div class="sub-menu-container">
-													<ul class="ul-second-items">
-														<li class="li-second-items">
-															<a href="#"
-																class="a-second-link a-item">
-																<span class="a-second-title">Brake Tools</span>
-															</a>
-														</li>
-														<li class="li-second-items">
-															<a href="#"
-																class="a-second-link a-item">
-																<span class="a-second-title">Drive shafts</span>
-															</a>
-														</li>
-														<li class="li-second-items">
-															<a href="#"
-																class="a-second-link a-item">
-																<span class="a-second-title">Emergency Brake</span>
-															</a>
-														</li>
-														<li class="li-second-items">
-															<a href="#"
-																class="a-second-link a-item">
-																<span class="a-second-title">Spools</span>
-															</a>
-														</li>
-													</ul>
-												</div>
-											</li>
-											<li class="li-top-item">
-												<a class="a-top-link a-item"
-													href="#">
 													<span>Face</span>
 												</a>
 												<span class="top-click-show a-click-show">
@@ -553,27 +412,7 @@
 													</ul>
 												</div>
 											</li>
-											<li class="li-top-item">
-												<a class="a-top-link a-item"
-													href="#">
-													<span>About us</span>
-												</a>
-											</li>
-											<li class="li-top-item">
-												<a class="a-top-link a-item" href="#">
-													<span>Contact us</span>
-												</a>
-											</li>
-											<li class="li-top-item">
-												<a class="a-top-link a-item" href="#">
-													<span>Specials</span>
-												</a>
-											</li>
-											<li class="li-top-item">
-												<a class="a-top-link a-item" href="#">
-													<span>Blog</span>
-												</a>
-											</li>
+											#}
 										</ul>
 									</div>
 
@@ -582,7 +421,7 @@
 								<div class="logo-container">
 									<div id="logo">
 										<a href="{{ path('homepage') }}"><img
-												src="{{ asset('image/logo/logo.png') }}"title="Eposi1" alt="Eposi1" class="img-responsive" /></a>
+												src="{{ asset('image/logo/logo_pullpush_black.png') }}"title="Eposi1" alt="Eposi1" class="img-responsive" /></a>
 									</div>
 								</div>
 								<div class="col-hoz ">
@@ -691,18 +530,43 @@
 
 										<input type="hidden" id="menu-effect-8524" class="menu-effect" value="none" />
 										<ul class="ul-top-items">
-											<li class="li-top-item left " style="float: left">
-												<a class="a-top-link" href="#">
+											<li class="li-top-item left {% if 'homepage' is same as(app.request.get('_route')) %}active{% endif %}" style="float:left">
+												<a class="a-top-link" href="{{ path('homepage') }}">
 													<span>Home</span>
 												</a>
 											</li>
-											<li class="li-top-item left has-child" style="float: left">
+											<li class="li-top-item left {% if app.request.get('_route') starts with 'booking' %}active{% endif %}" style="float:left">
+												<a class="a-top-link" href="{{ path('booking_create') }}">
+													<span>Booking</span>
+												</a>
+											</li>
+											<li class="li-top-item left {% if app.request.get('_route') starts with 'vehicule' %}active{% endif %}" style="float:left">
+												<a class="a-top-link" href="{{ path('vehicules') }}">
+													<span>Vehicules</span>
+												</a>
+											</li>
+											<li class="li-top-item left " style="float: left">
+												<a class="a-top-link" href="#">
+													<span>Specials</span>
+												</a>
+											</li>
+											<li class="li-top-item left " style="float: left">
+												<a class="a-top-link" href="#">
+													<span>About us</span>
+												</a>
+											</li>
+											<li class="li-top-item left " style="float: left">
+												<a class="a-top-link" href="#">
+													<span>Contact</span>
+												</a>
+											</li>
+											{#
+											<li class="li-top-item left has-child" style="float:left">
 												<a class="a-top-link" href="#">
 													<span>Shop</span>
 													<i class="fa fa-angle-down" aria-hidden="true"></i>
 												</a>
 												<!-- Mega Menu -->
-
 
 												<div class="mega-menu-container sub-menu-container left ">
 													<div class="row">
@@ -814,6 +678,7 @@
 
 												<!-- Flyout Menu -->
 											</li>
+
 											<li class="li-top-item left has-child" style="float: left">
 												<a class="a-top-link"
 													href="#">
@@ -950,28 +815,9 @@
 													</ul>
 												</div>
 											</li>
-											<li class="li-top-item left " style="float: left">
-												<a class="a-top-link" href="#">
-													<span>Contact us</span>
-												</a>
-											</li>
-											<li class="li-top-item left " style="float: left">
-												<a class="a-top-link" href="#">
-													<span>Specials</span>
-												</a>
-											</li>
-											<li class="li-top-item left " style="float: left">
-												<a class="a-top-link" href="#">
-													<span>Blog</span>
-												</a>
-											</li>
+											#}
 										</ul>
-
 									</div>
-
-
-
-
 								</div>
 								<div class="box-cart">
 									<div id="search-by-category" class="input-group">
@@ -1446,7 +1292,7 @@
 					<div class="container">
 						<div class="container-inner">
 							<div class="logo-footer">
-								<a href="#"><img src="{{ asset('image/logo/logo.png') }}"alt="logo-footer"></a>
+								<a href="{{ path('homepage') }}"><img src="{{ asset('image/logo/logo_pullpush_black.png') }}"alt="logo-footer"></a>
 							</div>
 
 							<div class="footer-copyright">
@@ -1457,14 +1303,14 @@
 								<label>Follow Us On Social:</label>
 								<ul class="link-follow">
 									<li><a class="facebook fa fa-facebook" title="Facebook" target="_blank"
-											href="https://www.facebook.com/plazathemes1"><span>facebook</span></a></li>
+											href="https://www.facebook.com/"><span>facebook</span></a></li>
 									<li><a class="twitter fa fa-twitter" title="Twitter" target="_blank"
-											href="https://twitter.com/plazathemes"><span>twitter</span></a></li>
+											href="https://twitter.com/"><span>twitter</span></a></li>
 									<li><a class="google fa fa-google-plus" title="Google" target="_blank" href="#"><span>google
 											</span></a></li>
 
 									<li><a class="youtube fa fa-youtube" title="Youtube" target="_blank"
-											href="https://www.youtube.com/user/plazathemes"><span>youtube </span></a></li>
+											href="https://www.youtube.com/"><span>youtube </span></a></li>
 
 								</ul>
 							</div>
@@ -1497,7 +1343,28 @@
 				});
 			});
 		</script>
-  </div><!-- wrapper -->
+	</div><!-- wrapper -->
+	
+	<script>
+		$(document).ready(function () {
+			$.datepicker.setDefaults({
+				changeMonth: true,
+				changeYear: true,
+				showButtonPanel: true,
+				buttonImageOnly: false,
+				buttonImage: false,
+				dateFormat: "dd/mm/yy",
+				firstDay: 1,
+				isRTL: false,
+				showMonthAfterYear: false,
+				yearSuffix: ""
+			});
+						
+			$.each($('input.datepicker:text'), function () {
+				$(this).datepicker();
+			})
+		});
+	</script>
   
   {% block javascript %}
   {% endblock %}

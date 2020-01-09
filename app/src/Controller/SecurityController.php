@@ -14,6 +14,15 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
+    private $entityManager;
+    private $encoder;
+
+    public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder)
+    {
+        $this->entityManager = $entityManager;
+        $this->encoder = $encoder;
+    }
+
     /**
      * @Route("/login", name="login")
      */
@@ -33,11 +42,31 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig');
     }
 
+
+    /**
+     * @Route("/register/individual", name="register_individual")
+     */
+    public function registerIndividual(Request $request)
+    {
+        return $this->register($request, new Customer());
+    }
+
+    /**
+     * @Route("/register/professional", name="register_professional")
+     */
+    public function registerProfessional(Request $request)
+    {
+        return $this->register($request, new Customer());
+    }
+
     /**
      * @Route("/register", name="register")
      */
-    public function register(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder){
-        $user = new Customer();
+    public function register(Request $request, User $user)
+    {
+        if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('homepage');
+        }
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
         dump($form->getData());
@@ -45,11 +74,11 @@ class SecurityController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $user = $form->getData();
             $password = $form->get('password')->getNormData();
-            $password = $encoder->encodePassword($user, $password);
+            $password = $this->encoder->encodePassword($user, $password);
             $user->setPassword($password);
 
-            $manager->persist($user);
-            $manager->flush();
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('login');
         }

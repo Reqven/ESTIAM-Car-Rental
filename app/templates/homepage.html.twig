@@ -1,474 +1,102 @@
 {% extends 'template.html.twig' %}
+{% form_theme form 'form_div_layout.html.twig' %}
 
 {% block stylesheet %}
+<style>
+	.gauto-find-area {
+		position: relative;
+		top: -100px;
+		z-index: 6;
+	}
+
+	.find-form form p {
+		margin: 15px 0;
+	}
+
+	.find-form p input {
+		width: 100%;
+		border: 2px solid #ebebeb;
+		padding: 5px 10px;
+		height: 45px;
+		color: #111;
+		-webkit-transition: all 0.4s ease 0s;
+		transition: all 0.4s ease 0s;
+	}
+
+	.find-form p.error input {
+		border: 2px solid #ee3333;
+	}
+
+	.search-widget {
+		display: flex;
+		/*z-index: 999;*/
+		box-shadow: 3px 0 29px rgba(0, 0, 0, 0.26);
+	}
+
+	.search-widget .image {
+		flex: 1.25;
+		background: #fff url(/public/image/image.png) no-repeat scroll 0 0;
+		display: flex;
+		background-position: center;
+		background-size: cover;
+		min-height: 100px;
+		text-align: center;
+		padding: 30px;
+	}
+
+	.search-widget .image h3 {
+		color: #fff;
+		font-size: 33px;
+		font-weight: 600;
+		text-transform: uppercase;
+		align-self: center;
+		margin: 0;
+		width: 100%;
+	}
+
+	.search-widget .form {
+		flex: 3;
+		padding: 30px;
+		background: white;
+	}
+
+	.policy-block {
+		border-bottom: none;
+	}
+
+	@media(min-width: 768px) {
+		.policy-block {
+			margin-top: 0px !important;
+		}
+	}
+
+	@media(max-width: 767px) {
+		.search-widget {
+			flex-direction: column;
+			z-index: initial;
+		}
+		.gauto-find-area {
+			top: 20px;
+		}
+		.search-widget .image {
+			min-height: 220px;
+		}
+		.policy-block .inner {
+			grid-template-columns: 100%;
+		}
+	}
+</style>
 {% endblock %}
 
 {% block content %}
 
-	<div id="content">
+<div id="content">
 	<div class="main-row fluid-width">
 		<div class="container">
 			<div class="row">
 				<div class="main-col col-sm-12 col-md-12">
 					<div class="row sub-row">
 						<div class="sub-col col-sm-12 col-md-12">
-							<div class="newletter-popup">
-								<div id="boxes" class="newletter-container">
-									<div id="dialog" class="window">
-										<div id="popup2">
-											<span class="b-close"><span>Close</span></span>
-										</div>
-										<div class="box">
-											<div class="newletter-title">
-												<h2>Newsletter</h2>
-											</div>
-											<div class="box-content newleter-content">
-												<label>Subscribe to our newsletters now and stay up-to-date with new collections, the latest
-													lookbooks and exclusive offers.</label>
-												<div id="frm_subscribe">
-													<form name="subscribe" id="subscribe_popup">
-														<div>
-															<!-- <span class="required">*</span><span>Enter you email address here...</span>-->
-															<input type="text" value="" name="subscribe_pemail" id="subscribe_pemail"
-																placeholder="Enter you email address here...">
-															<input type="hidden" value="" name="subscribe_pname" id="subscribe_pname" />
-															<div id="notification"></div>
-															<a class="button" onclick="email_subscribepopup()"><span>Subscribe</span></a>
-
-														</div>
-													</form>
-													<div class="subscribe-bottom">
-														<input type="checkbox" id="newsletter_popup_dont_show_again">
-														<label for="newsletter_popup_dont_show_again">Don't show this popup again</label>
-													</div>
-												</div><!-- /#frm_subscribe -->
-											</div><!-- /.box-content -->
-										</div>
-									</div>
-									<script>
-										function email_subscribepopup() {
-											$.ajax({
-												type: 'post',
-												url: "#",
-												dataType: 'html',
-												data: $("#subscribe_popup").serialize(),
-												success: function (html) {
-													// $.cookie('shownewsletter', '1');
-													try {
-														eval(html);
-													}
-													catch (e) {
-													}
-												}
-											});
-										}
-										function email_unsubscribepopup() {
-											$.ajax({
-												type: 'post',
-												url: "#",
-												dataType: 'html',
-												data: $("#subscribe_popup").serialize(),
-												success: function (html) {
-													try {
-														eval(html);
-													}
-													catch (e) {
-													}
-												}
-											});
-											$('html, body').delay(1500).animate({ scrollTop: 0 }, 'slow');
-										}
-									</script>
-									<script>
-										$(document).ready(function () {
-
-											/*if ($.cookie('shownewsletter') == 1) $('.newletter-popup').hide();
-											$('#subscribe_pemail').keypress(function (e) {
-												if (e.which == 13) {
-													e.preventDefault();
-													email_subscribepopup();
-												}
-												var name = $(this).val();
-												$('#subscribe_pname').val(name);
-											});
-											$('#subscribe_pemail').change(function () {
-												var name = $(this).val();
-												$('#subscribe_pname').val(name);
-											});
-											//transition effect
-											if ($.cookie("shownewsletter") != 1) {
-												$('.newletter-popup').bPopup();
-											}
-											$('#newsletter_popup_dont_show_again').on('change', function () {
-												if ($.cookie("shownewsletter") != 1) {
-													$.cookie("shownewsletter", '1')
-												} else {
-													$.cookie("shownewsletter", '0')
-												}
-											});*/
-										});
-									</script>
-								</div><!-- /.box -->
-							</div>
-							<div id="ajax-login-block">
-							</div>
-							<div id="ajax-loader">
-								<img src="{{ asset('image/AjaxLoader.gif') }}" alt="" />
-							</div>
-							<div class="ajax-body-login">
-								<div class="account-login">
-									<div class="page-title">
-										<h1>Login or create an account</h1>
-										<a href="javascript:void(0);" class="a-close-frm"
-											onclick="ocajaxlogin.closeForm();"><span>Close</span></a>
-									</div>
-									<div class="ajax-content">
-										<div class="ajax-container">
-											<div class="login-form-content">
-												<h2>Returning Customer</h2>
-												<p><strong>I am a returning customer</strong></p>
-												<form action="#" method="post" id="ajax-login-form" enctype="multipart/form-data">
-													<div class="form-group">
-														<label class="control-label" for="input-email">E-Mail Address</label>
-														<input type="text" name="email" value="" placeholder="E-Mail Address" id="input-email"
-															class="form-control" />
-													</div>
-													<div class="form-group">
-														<label class="control-label" for="input-password">Password</label>
-														<input type="password" name="password" value="" placeholder="Password" id="input-password"
-															class="form-control" />
-														<a class="forgotten"
-															href="#">Forgotten
-															Password</a>
-													</div>
-													<div class="action">
-														<button class="button" type="button"
-															onclick="ocajaxlogin.loginAction(document.getElementById('input-email').value, document.getElementById('input-password').value)"><span>Login</span></button>
-														<button class="button" type="button" onclick="ocajaxlogin.appendRegisterForm()"><span>Create
-																an account</span></button>
-														<img class="ajax-load-img" alt="" src="{{ asset('image/AjaxLoader.gif') }}" width="30"
-															height="30" />
-													</div>
-												</form>
-											</div>
-										</div>
-
-										<script>
-											$(document).ready(function () {
-												var keycode = '';
-
-												$('#input-email').keypress(function (e) {
-													keycode = (e.keyCode ? e.keyCode : e.which);
-													if (keycode == '13') {
-														ocajaxlogin.loginAction(ocajaxlogin.loginAction(document.getElementById('input-email').value, document.getElementById('input-password').value));
-													}
-												});
-
-												$('#input-password').keypress(function (e) {
-													keycode = (e.keyCode ? e.keyCode : e.which);
-													if (keycode == '13') {
-														ocajaxlogin.loginAction(ocajaxlogin.loginAction(document.getElementById('input-email').value, document.getElementById('input-password').value));
-													}
-												});
-											});
-
-										</script>
-
-
-									</div>
-								</div>
-								<div class="account-register">
-									<div class="page-title">
-										<h1>Login or create an account</h1>
-										<a href="javascript:void(0);" class="a-close-frm"
-											onclick="ocajaxlogin.closeForm();"><span>Close</span></a>
-									</div>
-									<div class="ajax-content">
-										<div class="ajax-container">
-											<div class="register-form-content">
-												<h1>Register Account</h1>
-												<p>If you already have an account with us, please login at the <a
-														onclick="ocajaxlogin.appendLoginForm()" href="javascript:void(0);">login form</a>.</p>
-												<form action="#"
-													method="post" id="ajax-register-form" enctype="multipart/form-data" class="form-horizontal">
-													<fieldset id="account">
-														<legend>Your Personal Details</legend>
-														<div class="form-group required" style="display:  none ;">
-															<label class="col-sm-2 control-label">Customer Group</label>
-															<div class="col-sm-10">
-																<div class="radio">
-																	<label>
-																		<input type="radio" name="customer_group_id" value="1" checked="checked" />
-																		Default</label>
-																</div>
-															</div>
-														</div>
-														<div class="form-group required">
-															<label class="col-sm-2 control-label" for="input-firstname">First Name</label>
-															<div class="col-sm-10">
-																<input type="text" name="firstname" value="" placeholder="First Name" id="input-firstname"
-																	class="form-control" />
-																<!-- Error First Name -->
-																<div class="for-error error-firstname"></div>
-															</div>
-														</div>
-														<div class="form-group required">
-															<label class="col-sm-2 control-label" for="input-lastname">Last Name</label>
-															<div class="col-sm-10">
-																<input type="text" name="lastname" value="" placeholder="Last Name" id="input-lastname"
-																	class="form-control" />
-																<!-- Error Last Name -->
-																<div class="for-error error-lastname"></div>
-															</div>
-														</div>
-														<div class="form-group required">
-															<label class="col-sm-2 control-label" for="input-register-email">E-Mail</label>
-															<div class="col-sm-10">
-																<input type="email" name="email" value="" placeholder="E-Mail" id="input-register-email"
-																	class="form-control" />
-																<!-- Error Email -->
-																<div class="for-error error-email"></div>
-															</div>
-														</div>
-														<div class="form-group required">
-															<label class="col-sm-2 control-label" for="input-telephone">Telephone</label>
-															<div class="col-sm-10">
-																<input type="tel" name="telephone" value="" placeholder="Telephone" id="input-telephone"
-																	class="form-control" />
-																<!-- Error Phone -->
-																<div class="for-error error-telephone"></div>
-															</div>
-														</div>
-													</fieldset>
-													<fieldset>
-														<legend>Your Password</legend>
-														<div class="form-group required">
-															<label class="col-sm-2 control-label" for="input-register-password">Password</label>
-															<div class="col-sm-10">
-																<input type="password" name="password" value="" placeholder="Password"
-																	id="input-register-password" class="form-control" />
-																<!-- Error Password -->
-																<div class="for-error error-password"></div>
-															</div>
-														</div>
-														<div class="form-group required">
-															<label class="col-sm-2 control-label" for="input-confirm">Password Confirm</label>
-															<div class="col-sm-10">
-																<input type="password" name="confirm" value="" placeholder="Password Confirm"
-																	id="input-confirm" class="form-control" />
-																<!-- Error Confirm Password -->
-																<div class="for-error error-confirm"></div>
-															</div>
-														</div>
-													</fieldset>
-													<fieldset>
-														<legend>Newsletter</legend>
-														<div class="form-group">
-															<label class="col-sm-2 control-label">Subscribe</label>
-															<div class="col-sm-10">
-																<label class="radio-inline">
-																	<input type="radio" name="newsletter" value="1" />
-																	Yes</label>
-																<label class="radio-inline">
-																	<input type="radio" name="newsletter" value="0" checked="checked" />
-																	No</label>
-															</div>
-														</div>
-													</fieldset>
-
-													<div class="buttons">
-														<div class="pull-right">I have read and agree to the <a
-																href="#"
-																class="agree"><b>Privacy Policy</b></a>
-															<input type="checkbox" name="agree" value="1" />
-															&nbsp;
-															<input type="button" onclick="ocajaxlogin.registerAction();" value="Continue"
-																class="btn btn-primary" />
-															<img class="ajax-load-img" alt="" src="{{ asset('image/AjaxLoader.gif') }}" width="30"
-																height="30" />
-														</div>
-													</div>
-												</form>
-											</div>
-											<div class="alert alert-danger for-error error-warning"><i
-													class="fa fa-exclamation-circle"></i><span></span></div>
-										</div>
-										<!--script>
-												// Sort the custom fields
-												$('#account .form-group[data-sort]').detach().each(function () {
-													if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#account .form-group').length) {
-														$('#account .form-group').eq($(this).attr('data-sort')).before(this);
-													}
-
-													if ($(this).attr('data-sort') > $('#account .form-group').length) {
-														$('#account .form-group:last').after(this);
-													}
-
-													if ($(this).attr('data-sort') < -$('#account .form-group').length) {
-														$('#account .form-group:first').before(this);
-													}
-												});
-
-											$('#address .form-group[data-sort]').detach().each(function () {
-												if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#address .form-group').length) {
-													$('#address .form-group').eq($(this).attr('data-sort')).before(this);
-												}
-
-												if ($(this).attr('data-sort') > $('#address .form-group').length) {
-													$('#address .form-group:last').after(this);
-												}
-
-												if ($(this).attr('data-sort') < -$('#address .form-group').length) {
-													$('#address .form-group:first').before(this);
-												}
-											});
-
-											$('input[name=\'customer_group_id\']').on('change', function () {
-												$.ajax({
-													url: "#" + this.value,
-													dataType: 'json',
-													success: function (json) {
-														$('.custom-field').hide();
-														$('.custom-field').removeClass('required');
-
-														for (i = 0; i < json.length; i++) {
-															custom_field = json[i];
-
-															$('#custom-field' + custom_field['custom_field_id']).show();
-
-															if (custom_field['required']) {
-																$('#custom-field' + custom_field['custom_field_id']).addClass('required');
-															}
-														}
-
-
-													},
-													error: function (xhr, ajaxOptions, thrownError) {
-														console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-													}
-												});
-											});
-
-											$('input[name=\'customer_group_id\']:checked').trigger('change');
-										</script>
-										<script>
-												$('button[id^=\'button-custom-field\']').on('click', function () {
-													var element = this;
-
-													$('#form-upload').remove();
-
-													$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
-
-													$('#form-upload input[name=\'file\']').trigger('click');
-
-													if (typeof timer != 'undefined') {
-														clearInterval(timer);
-													}
-
-													timer = setInterval(function () {
-														if ($('#form-upload input[name=\'file\']').val() != '') {
-															clearInterval(timer);
-
-															$.ajax({
-																url: "#",
-																type: 'post',
-																dataType: 'json',
-																data: new FormData($('#form-upload')[0]),
-																cache: false,
-																contentType: false,
-																processData: false,
-																beforeSend: function () {
-																	$(element).button('loading');
-																},
-																complete: function () {
-																	$(element).button('reset');
-																},
-																success: function (json) {
-																	$(element).parent().find('.text-danger').remove();
-
-																	if (json['error']) {
-																		$(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
-																	}
-
-																	if (json['success']) {
-																		alert(json['success']);
-
-																		$(element).parent().find('input').val(json['code']);
-																	}
-																},
-																error: function (xhr, ajaxOptions, thrownError) {
-																	alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-																}
-															});
-														}
-													}, 500);
-												});
-										</script-->
-										<script>
-											$('.date').datetimepicker({
-												//language: document.cookie.match(new RegExp('language=([^;]+)'))[1],
-												pickTime: false
-											});
-
-											$('.time').datetimepicker({
-												//language: document.cookie.match(new RegExp('language=([^;]+)'))[1],
-												pickDate: false
-											});
-
-											$('.datetime').datetimepicker({
-												//language: document.cookie.match(new RegExp('language=([^;]+)'))[1],
-												pickDate: true,
-												pickTime: true
-											});
-										</script>
-									</div>
-								</div>
-								<div class="account-success">
-									<div class="ajax-content">
-										<div class="ajax-container">
-											<div class="success-content">
-												<div class="page-title">
-													<h1>Your Account Has Been Created!</h1>
-												</div>
-												<p>Thank you for registering with Eposi1!</p>
-												<p>You will be notified by e-mail once your account has been activated by the store owner.
-												</p>
-												<p>If you have ANY questions about the operation of this online shop, please <a
-														href="#">contact
-														the store owner</a>.</p>
-												<div class="buttons">
-													<div class="pull-right"><button class="button"
-															onclick="window.location.href='#'"><span>Continue</span></button>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="logout-success">
-									<div class="ajax-content">
-										<div class="ajax-container">
-											<div class="success-content">
-												<div class="page-title">
-													<h1>Account Logout</h1>
-												</div>
-												<p>You have been logged off your account. It is now safe to leave the computer.</p>
-												<p>Your shopping cart has been saved, the items inside it will be restored whenever you log
-													back into your account.</p>
-												<div class="buttons">
-													<div class="pull-right"><button class="button"
-															onclick="window.location.href='#'"><span>Continue</span></button>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="opc-hidden">
-								<input type="hidden" id="input-opc-status" value="1" />
-							</div>
-
 							<div class="banner7">
 								<div class="oc-banner7-container">
 									<div class="flexslider oc-nivoslider">
@@ -476,17 +104,24 @@
 										<div id="oc-inivoslider1" class="nivoSlider">
 
 											<a href="#">
-												<img style="display: none;" src="{{ asset('image/slider/slider2-eposi1-1820x785.jpg') }}" alt=""
-													title="#banner7-caption2" />
+												<img src="{{ asset('image/slider/slider1.jpg') }}" alt="" title="#banner7-caption2" />
 											</a>
 											<a href="#">
-												<img style="display: none;" src="{{ asset('image/slider/slider3-eposi1-1820x785.jpg') }}" alt=""
+												<img src="{{ asset('image/slider/slider2.jpg') }}" alt="" title="#banner7-caption2" />
+											</a>
+											<a href="#">
+												<img src="{{ asset('image/slider/slider3.jpg') }}" alt="" title="#banner7-caption2" />
+											</a>
+											{#
+											<a href="#">
+												<img style="display: none;" src="{{ asset('image/voiture2.jpg') }}" alt=""
 													title="#banner7-caption3" />
 											</a>
 											<a href="#">
 												<img style="display: none;" src="{{ asset('image/slider/slider1-eposi1-1820x785.jpg') }}" alt=""
 													title="#banner7-caption4" />
 											</a>
+											#}
 
 										</div>
 
@@ -617,6 +252,90 @@
 			</div>
 		</div>
 	</div>
+	<div class="main-row gauto-find-area">
+		<div class="container">
+			<div class="search-widget">
+				<div class="image">
+					<h3>Search Your Best Cars here.</h3>
+				</div>
+				<div class="form">
+					<div class="row">
+
+						<div class="col-md-12">
+							{{ form_start(form) }}
+							<div class="find-form">
+								<div class="row">
+									<div class="col-md-12">
+										<p>
+											{{ form_widget(form.address, { attr: { placeholder: 'Address' }}) }}
+										</p>
+									</div>
+									<div class="col-md-4">
+										<p{% if form.date_start.vars.errors|length %} class="error" {% endif %}>
+											{{ form_widget(form.date_start) }}
+											</p>
+									</div>
+									<div class="col-md-4">
+										<p{% if form.date_end.vars.errors|length %} class="error" {% endif %}>
+											{{ form_widget(form.date_end) }}
+											</p>
+									</div>
+									<div class="col-md-4">
+										<p>
+											<button class="btn-block button" type="submit"><span>Find Car</span></button>
+										</p>
+									</div>
+
+								</div>
+							</div>
+							{{ form_end(form) }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="main-row ">
+		<div class="container">
+			<div class="row">
+				<div class="main-col col-sm-12 col-md-12">
+					<div class="row sub-row">
+						<div class="sub-col col-sm-12 col-md-12">
+							<div class="policy-block">
+								<div class="inner">
+									<div class="col ">
+										<div class="box">
+											<div class="text">
+												<h4>Free Shipping Worldwide</h4>
+												<p>We offer free shipping via Standard Shipping on orders over $200.00</p>
+											</div>
+										</div>
+									</div>
+									<div class="col ">
+										<div class="box">
+											<div class="text">
+												<h4>Money Back Guarantee</h4>
+												<p>If you're not satisfied with our product, we'll refund the purchase price*.</p>
+											</div>
+										</div>
+									</div>
+									<div class="col ">
+										<div class="box">
+											<div class="text">
+												<h4>online support 24/7 </h4>
+												<p>Our friendly support team is available to help you 24 hours a day, seven days a week</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{#
 	<div class="main-row ">
 		<div class="container">
 			<div class="row">
@@ -627,8 +346,7 @@
 								<div class="inner">
 									<div class="col">
 										<div class="image">
-											<a href="#"><img
-													src="{{ asset('image/img1-top-eposi1.jpg') }}" alt="img1"></a>
+											<a href="#"><img src="{{ asset('image/img1-top-eposi1.jpg') }}" alt="img1"></a>
 											<div class="text">
 												<h3>Storage</h3>
 												<a href="#">Shop Now</a>
@@ -637,8 +355,7 @@
 									</div>
 									<div class="col">
 										<div class="image">
-											<a href="#"><img
-													src="{{ asset('image/img2-top-eposi1.jpg') }}" alt="img2"></a>
+											<a href="#"><img src="{{ asset('image/img2-top-eposi1.jpg') }}" alt="img2"></a>
 											<div class="text">
 												<h3>Lighting</h3>
 												<a href="#">Shop Now</a>
@@ -647,8 +364,7 @@
 									</div>
 									<div class="col">
 										<div class="image">
-											<a href="#"><img
-													src="{{ asset('image/img3-top-eposi1.jpg') }}" alt="img3"></a>
+											<a href="#"><img src="{{ asset('image/img3-top-eposi1.jpg') }}" alt="img3"></a>
 											<div class="text">
 												<h3>Decoration</h3>
 												<a href="#">Shop Now</a>
@@ -657,8 +373,7 @@
 									</div>
 									<div class="col">
 										<div class="image">
-											<a href="#"><img
-													src="{{ asset('image/img4-top-eposi1.jpg') }}" alt="img4"></a>
+											<a href="#"><img src="{{ asset('image/img4-top-eposi1.jpg') }}" alt="img4"></a>
 											<div class="text">
 												<h3>Living Room</h3>
 												<a href="#">Shop Now</a>
@@ -725,8 +440,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//2_1-600x800.jpg') }}"
 																						alt="Sony XBR-55X900E 55-inch 4K HDR Ultra HD" /> <img
 																						src="{{ asset('image/product//2-600x800.jpg') }}"
@@ -748,8 +462,9 @@
 																							onclick="wishlist.add('53');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('53');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('53');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -762,16 +477,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">HTC</a>
+																						<a href="#">HTC</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating3">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Sony
+																					<h4 class="product-name"><a href="#">Sony
 																							XBR-55X900E 55-inch 4K HDR Ultra HD</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -798,8 +511,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//11_1-600x800.jpg') }}"
 																						alt="Roush Mustang 4-Piston Black Front Brake Kit" /> <img
 																						src="{{ asset('image/product//11-600x800.jpg') }}"
@@ -820,8 +532,9 @@
 																							onclick="wishlist.add('56');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('56');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('56');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -834,16 +547,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating2">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Roush
+																					<h4 class="product-name"><a href="#">Roush
 																							Mustang 4-Piston Black Front Brake Kit</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -869,8 +580,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//12_1-600x800.jpg') }}"
 																						alt="Koss Porta Pro On Ear Headphones with Case" /> <img
 																						src="{{ asset('image/product//12-600x800.jpg') }}"
@@ -892,8 +602,9 @@
 																							onclick="wishlist.add('54');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('54');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('54');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -906,16 +617,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating5">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Koss
+																					<h4 class="product-name"><a href="#">Koss
 																							Porta Pro On Ear Headphones with Case</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -942,8 +651,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//8_1-600x800.jpg') }}"
 																						alt="Bose SoundLink Micro  Bluetooth Speaker" /> <img
 																						src="{{ asset('image/product//8-600x800.jpg') }}"
@@ -965,8 +673,9 @@
 																							onclick="wishlist.add('51');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('51');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('51');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -979,16 +688,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Canon</a>
+																						<a href="#">Canon</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating3">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Bose
+																					<h4 class="product-name"><a href="#">Bose
 																							SoundLink Micro Bluetooth Speaker</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -1015,8 +722,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//7_1-600x800.jpg') }}"
 																						alt="Beats Solo3 Wireless  On-Ear Headphones" /> <img
 																						src="{{ asset('image/product//7-600x800.jpg') }}"
@@ -1037,8 +743,9 @@
 																							onclick="wishlist.add('55');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('55');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('55');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -1051,16 +758,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Sony</a>
+																						<a href="#">Sony</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating4">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Beats
+																					<h4 class="product-name"><a href="#">Beats
 																							Solo3 Wireless On-Ear Headphones</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -1086,8 +791,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//6_1-600x800.jpg') }}"
 																						alt="Beats Solo2 Solo 2  Wired On-Ear Headphone" /> <img
 																						src="{{ asset('image/product//6-600x800.jpg') }}"
@@ -1108,8 +812,9 @@
 																							onclick="wishlist.add('61');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('61');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('61');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -1122,16 +827,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating3">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Beats
+																					<h4 class="product-name"><a href="#">Beats
 																							Solo2 Solo 2 Wired On-Ear Headphone</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -1157,8 +860,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//5_1-600x800.jpg') }}"
 																						alt="Beats solo wireless on ear headphones" /> <img
 																						src="{{ asset('image/product//5-600x800.jpg') }}"
@@ -1179,8 +881,9 @@
 																							onclick="wishlist.add('62');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('62');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('62');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -1193,16 +896,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Hewlett-Packard</a>
+																						<a href="#">Hewlett-Packard</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating5">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Beats
+																					<h4 class="product-name"><a href="#">Beats
 																							solo wireless on ear headphones</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -1228,8 +929,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//4_1-600x800.jpg') }}"
 																						alt="Apple iPhone SE Unlocked Phone -16 GB Retail" /> <img
 																						src="{{ asset('image/product//4-600x800.jpg') }}"
@@ -1250,8 +950,9 @@
 																							onclick="wishlist.add('59');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('59');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('59');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -1264,16 +965,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating3">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Apple
+																					<h4 class="product-name"><a href="#">Apple
 																							iPhone SE Unlocked Phone -16 GB Retail</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -1305,8 +1004,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//9_1-600x800.jpg') }}"
 																						alt="JBL Flip 3 Splashproof  Portable Bluetooth" /> <img
 																						src="{{ asset('image/product//9-600x800.jpg') }}"
@@ -1327,8 +1025,9 @@
 																							onclick="wishlist.add('139');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('139');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('139');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -1341,16 +1040,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating3">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">JBL
+																					<h4 class="product-name"><a href="#">JBL
 																							Flip 3 Splashproof Portable Bluetooth</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -1376,8 +1073,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//3_1-600x800.jpg') }}"
 																						alt="Beats EP Wired On-Ear  Headphone-Black" /> <img
 																						src="{{ asset('image/product//3-600x800.jpg') }}"
@@ -1399,8 +1095,9 @@
 																							onclick="wishlist.add('138');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('138');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('138');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -1413,16 +1110,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Canon</a>
+																						<a href="#">Canon</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating4">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Beats
+																					<h4 class="product-name"><a href="#">Beats
 																							EP Wired On-Ear Headphone-Black</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -1449,8 +1144,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//2_1-600x800.jpg') }}"
 																						alt="Sony XBR-55X900E 55-inch 4K HDR Ultra HD" /> <img
 																						src="{{ asset('image/product//2-600x800.jpg') }}"
@@ -1472,8 +1166,9 @@
 																							onclick="wishlist.add('53');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('53');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('53');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -1486,16 +1181,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">HTC</a>
+																						<a href="#">HTC</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating3">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Sony
+																					<h4 class="product-name"><a href="#">Sony
 																							XBR-55X900E 55-inch 4K HDR Ultra HD</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -1522,8 +1215,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//8_1-600x800.jpg') }}"
 																						alt="Bose SoundLink Micro  Bluetooth Speaker" /> <img
 																						src="{{ asset('image/product//8-600x800.jpg') }}"
@@ -1545,8 +1237,9 @@
 																							onclick="wishlist.add('51');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('51');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('51');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -1559,16 +1252,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Canon</a>
+																						<a href="#">Canon</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating3">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Bose
+																					<h4 class="product-name"><a href="#">Bose
 																							SoundLink Micro Bluetooth Speaker</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -1595,8 +1286,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//7_1-600x800.jpg') }}"
 																						alt="Beats Solo3 Wireless  On-Ear Headphones" /> <img
 																						src="{{ asset('image/product//7-600x800.jpg') }}"
@@ -1617,8 +1307,9 @@
 																							onclick="wishlist.add('55');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('55');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('55');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -1631,16 +1322,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Sony</a>
+																						<a href="#">Sony</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating4">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Beats
+																					<h4 class="product-name"><a href="#">Beats
 																							Solo3 Wireless On-Ear Headphones</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -1666,8 +1355,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//5_1-600x800.jpg') }}"
 																						alt="Beats solo wireless on ear headphones" /> <img
 																						src="{{ asset('image/product//5-600x800.jpg') }}"
@@ -1688,8 +1376,9 @@
 																							onclick="wishlist.add('62');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('62');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('62');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -1702,16 +1391,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Hewlett-Packard</a>
+																						<a href="#">Hewlett-Packard</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating5">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Beats
+																					<h4 class="product-name"><a href="#">Beats
 																							solo wireless on ear headphones</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -1743,8 +1430,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//14_1-600x800.jpg') }}"
 																						alt="Nokia | Steel HR Hybrid Smartwatch - Activity" /> <img
 																						src="{{ asset('image/product//14-600x800.jpg') }}"
@@ -1766,8 +1452,9 @@
 																							onclick="wishlist.add('143');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('143');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('143');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -1780,16 +1467,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating5">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Nokia
+																					<h4 class="product-name"><a href="#">Nokia
 																							| Steel HR Hybrid Smartwatch - Activity</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -1815,8 +1500,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//10_1-600x800.jpg') }}"
 																						alt="Kodak PIXPRO Astro Zoom AZ421 16 MP" /> <img
 																						src="{{ asset('image/product//10-600x800.jpg') }}"
@@ -1837,8 +1521,9 @@
 																							onclick="wishlist.add('60');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('60');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('60');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -1851,16 +1536,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating4">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Kodak
+																					<h4 class="product-name"><a href="#">Kodak
 																							PIXPRO Astro Zoom AZ421 16 MP</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -1886,8 +1569,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//7_1-600x800.jpg') }}"
 																						alt="Beats Solo3 Wireless  On-Ear Headphones" /> <img
 																						src="{{ asset('image/product//7-600x800.jpg') }}"
@@ -1908,8 +1590,9 @@
 																							onclick="wishlist.add('55');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('55');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('55');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -1922,16 +1605,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Sony</a>
+																						<a href="#">Sony</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating4">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Beats
+																					<h4 class="product-name"><a href="#">Beats
 																							Solo3 Wireless On-Ear Headphones</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -1957,8 +1638,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//5_1-600x800.jpg') }}"
 																						alt="Beats solo wireless on ear headphones" /> <img
 																						src="{{ asset('image/product//5-600x800.jpg') }}"
@@ -1979,8 +1659,9 @@
 																							onclick="wishlist.add('62');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('62');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('62');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -1993,16 +1674,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Hewlett-Packard</a>
+																						<a href="#">Hewlett-Packard</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating5">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Beats
+																					<h4 class="product-name"><a href="#">Beats
 																							solo wireless on ear headphones</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -2028,8 +1707,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//4_1-600x800.jpg') }}"
 																						alt="Apple iPhone SE Unlocked Phone -16 GB Retail" /> <img
 																						src="{{ asset('image/product//4-600x800.jpg') }}"
@@ -2050,8 +1728,9 @@
 																							onclick="wishlist.add('59');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('59');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('59');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -2064,16 +1743,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating3">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Apple
+																					<h4 class="product-name"><a href="#">Apple
 																							iPhone SE Unlocked Phone -16 GB Retail</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -2099,8 +1776,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//1_1-600x800.jpg') }}"
 																						alt="Amazon Cloud Cam Indoor Security Camera" /> <img
 																						src="{{ asset('image/product//1-600x800.jpg') }}"
@@ -2121,8 +1797,9 @@
 																							onclick="wishlist.add('57');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('57');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('57');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -2135,16 +1812,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating4">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Amazon
+																					<h4 class="product-name"><a href="#">Amazon
 																							Cloud Cam Indoor Security Camera</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -2176,8 +1851,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//14_1-600x800.jpg') }}"
 																						alt="Nokia | Steel HR Hybrid Smartwatch - Activity" /> <img
 																						src="{{ asset('image/product//14-600x800.jpg') }}"
@@ -2199,8 +1873,9 @@
 																							onclick="wishlist.add('143');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('143');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('143');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -2213,16 +1888,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating5">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Nokia
+																					<h4 class="product-name"><a href="#">Nokia
 																							| Steel HR Hybrid Smartwatch - Activity</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -2248,8 +1921,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//13_1-600x800.jpg') }}"
 																						alt="Marshall Kilburn Portable Bluetooth Speaker" /> <img
 																						src="{{ asset('image/product//13-600x800.jpg') }}"
@@ -2272,8 +1944,9 @@
 																							onclick="wishlist.add('140');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('140');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('140');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -2286,16 +1959,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating4">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Marshall
+																					<h4 class="product-name"><a href="#">Marshall
 																							Kilburn Portable Bluetooth Speaker</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -2322,8 +1993,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//9_1-600x800.jpg') }}"
 																						alt="JBL Flip 3 Splashproof  Portable Bluetooth" /> <img
 																						src="{{ asset('image/product//9-600x800.jpg') }}"
@@ -2344,8 +2014,9 @@
 																							onclick="wishlist.add('139');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('139');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('139');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -2358,16 +2029,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating3">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">JBL
+																					<h4 class="product-name"><a href="#">JBL
 																							Flip 3 Splashproof Portable Bluetooth</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -2393,8 +2062,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//3_1-600x800.jpg') }}"
 																						alt="Beats EP Wired On-Ear  Headphone-Black" /> <img
 																						src="{{ asset('image/product//3-600x800.jpg') }}"
@@ -2416,8 +2084,9 @@
 																							onclick="wishlist.add('138');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('138');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('138');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -2430,16 +2099,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Canon</a>
+																						<a href="#">Canon</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating4">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Beats
+																					<h4 class="product-name"><a href="#">Beats
 																							EP Wired On-Ear Headphone-Black</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -2466,8 +2133,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//11_1-600x800.jpg') }}"
 																						alt="Roush Mustang 4-Piston Black Front Brake Kit" /> <img
 																						src="{{ asset('image/product//11-600x800.jpg') }}"
@@ -2488,8 +2154,9 @@
 																							onclick="wishlist.add('56');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('56');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('56');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -2502,16 +2169,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating2">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Roush
+																					<h4 class="product-name"><a href="#">Roush
 																							Mustang 4-Piston Black Front Brake Kit</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -2537,8 +2202,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//12_1-600x800.jpg') }}"
 																						alt="Koss Porta Pro On Ear Headphones with Case" /> <img
 																						src="{{ asset('image/product//12-600x800.jpg') }}"
@@ -2560,8 +2224,9 @@
 																							onclick="wishlist.add('54');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('54');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('54');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -2574,16 +2239,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating5">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Koss
+																					<h4 class="product-name"><a href="#">Koss
 																							Porta Pro On Ear Headphones with Case</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -2610,8 +2273,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//10_1-600x800.jpg') }}"
 																						alt="Kodak PIXPRO Astro Zoom AZ421 16 MP" /> <img
 																						src="{{ asset('image/product//10-600x800.jpg') }}"
@@ -2632,8 +2294,9 @@
 																							onclick="wishlist.add('60');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('60');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('60');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -2646,16 +2309,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Apple</a>
+																						<a href="#">Apple</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating4">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Kodak
+																					<h4 class="product-name"><a href="#">Kodak
 																							PIXPRO Astro Zoom AZ421 16 MP</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -2681,8 +2342,7 @@
 																		<div class="item-inner">
 
 																			<div class="image images-container">
-																				<a href="#"
-																					class="product-image">
+																				<a href="#" class="product-image">
 																					<img class="img-r" src="{{ asset('image/product//7_1-600x800.jpg') }}"
 																						alt="Beats Solo3 Wireless  On-Ear Headphones" /> <img
 																						src="{{ asset('image/product//7-600x800.jpg') }}"
@@ -2703,8 +2363,9 @@
 																							onclick="wishlist.add('55');"><span>Add to
 																								Wish List</span></button>
 
-																						<button class="button btn-compare" type="button" title="Compare this Product"
-																							onclick="compare.add('55');"><span>Compare this
+																						<button class="button btn-compare" type="button"
+																							title="Compare this Product" onclick="compare.add('55');"><span>Compare
+																								this
 																								Product</span></button>
 																						<button class="button btn-quickview" type="button" title="Quick View"
 																							onclick="ocquickview.ajaxView('#')"><span>Quick
@@ -2717,16 +2378,14 @@
 																				<div class="inner">
 
 																					<p class="manufacture-product">
-																						<a
-																							href="#">Sony</a>
+																						<a href="#">Sony</a>
 																					</p>
 																					<div class="ratings">
 																						<div class="rating-box">
 																							<div class="rating4">rating</div>
 																						</div>
 																					</div>
-																					<h4 class="product-name"><a
-																							href="#">Beats
+																					<h4 class="product-name"><a href="#">Beats
 																							Solo3 Wireless On-Ear Headphones</a></h4>
 																					<div class="price-box">
 																						<label>Price:</label>
@@ -2860,8 +2519,7 @@
 																	<img src="{{ asset('image/testimonial/testimor1-72x72.png') }}" alt="Rebecka Filson">
 																</div>
 																<div class="testimonial-caption">
-																	<h4 class="title"><a
-																			href="#">A
+																	<h4 class="title"><a href="#">A
 																			really great experience</a></h4>
 																	<div class="testimonial-box">
 																		<a href="#">
@@ -2888,8 +2546,7 @@
 																		alt="Nathanael Jaworski">
 																</div>
 																<div class="testimonial-caption">
-																	<h4 class="title"><a
-																			href="#">A
+																	<h4 class="title"><a href="#">A
 																			really great experience</a></h4>
 																	<div class="testimonial-box">
 																		<a href="#">
@@ -2917,8 +2574,7 @@
 																		alt="Magdalena Valencia">
 																</div>
 																<div class="testimonial-caption">
-																	<h4 class="title"><a
-																			href="#">A
+																	<h4 class="title"><a href="#">A
 																			really great experience</a></h4>
 																	<div class="testimonial-box">
 																		<a href="#">
@@ -3016,8 +2672,7 @@
 															<div class="item">
 																<div class="item-inner">
 																	<div class="image images-container">
-																		<a href="#"
-																			class="product-image">
+																		<a href="#" class="product-image">
 																			<img class="img-r" src="{{ asset('image/product//14_1-600x800.jpg') }}"
 																				alt="Nokia | Steel HR Hybrid Smartwatch - Activity" /> <img
 																				src="{{ asset('image/product//14-600x800.jpg') }}"
@@ -3053,16 +2708,14 @@
 																	<div class="caption">
 																		<div class="inner">
 																			<p class="manufacture-product">
-																				<a
-																					href="#">Apple</a>
+																				<a href="#">Apple</a>
 																			</p>
 																			<div class="ratings">
 																				<div class="rating-box">
 																					<div class="rating5">rating</div>
 																				</div>
 																			</div>
-																			<h4 class="product-name"><a
-																					href="#">Nokia
+																			<h4 class="product-name"><a href="#">Nokia
 																					| Steel HR Hybrid Smartwatch - Activity</a></h4>
 
 
@@ -3094,8 +2747,7 @@
 															<div class="item">
 																<div class="item-inner">
 																	<div class="image images-container">
-																		<a href="#"
-																			class="product-image">
+																		<a href="#" class="product-image">
 																			<img class="img-r" src="{{ asset('image/product//13_1-600x800.jpg') }}"
 																				alt="Marshall Kilburn Portable Bluetooth Speaker" /> <img
 																				src="{{ asset('image/product//13-600x800.jpg') }}"
@@ -3132,16 +2784,14 @@
 																	<div class="caption">
 																		<div class="inner">
 																			<p class="manufacture-product">
-																				<a
-																					href="#">Apple</a>
+																				<a href="#">Apple</a>
 																			</p>
 																			<div class="ratings">
 																				<div class="rating-box">
 																					<div class="rating4">rating</div>
 																				</div>
 																			</div>
-																			<h4 class="product-name"><a
-																					href="#">Marshall
+																			<h4 class="product-name"><a href="#">Marshall
 																					Kilburn Portable Bluetooth Speaker</a></h4>
 
 
@@ -3174,8 +2824,7 @@
 															<div class="item">
 																<div class="item-inner">
 																	<div class="image images-container">
-																		<a href="#"
-																			class="product-image">
+																		<a href="#" class="product-image">
 																			<img class="img-r" src="{{ asset('image/product//9_1-600x800.jpg') }}"
 																				alt="JBL Flip 3 Splashproof  Portable Bluetooth" /> <img
 																				src="{{ asset('image/product//9-600x800.jpg') }}"
@@ -3211,16 +2860,14 @@
 																	<div class="caption">
 																		<div class="inner">
 																			<p class="manufacture-product">
-																				<a
-																					href="#">Apple</a>
+																				<a href="#">Apple</a>
 																			</p>
 																			<div class="ratings">
 																				<div class="rating-box">
 																					<div class="rating3">rating</div>
 																				</div>
 																			</div>
-																			<h4 class="product-name"><a
-																					href="#">JBL
+																			<h4 class="product-name"><a href="#">JBL
 																					Flip 3 Splashproof Portable Bluetooth</a></h4>
 
 
@@ -3252,8 +2899,7 @@
 															<div class="item">
 																<div class="item-inner">
 																	<div class="image images-container">
-																		<a href="#"
-																			class="product-image">
+																		<a href="#" class="product-image">
 																			<img class="img-r" src="{{ asset('image/product//3_1-600x800.jpg') }}"
 																				alt="Beats EP Wired On-Ear  Headphone-Black" /> <img
 																				src="{{ asset('image/product//3-600x800.jpg') }}"
@@ -3290,16 +2936,14 @@
 																	<div class="caption">
 																		<div class="inner">
 																			<p class="manufacture-product">
-																				<a
-																					href="#">Canon</a>
+																				<a href="#">Canon</a>
 																			</p>
 																			<div class="ratings">
 																				<div class="rating-box">
 																					<div class="rating4">rating</div>
 																				</div>
 																			</div>
-																			<h4 class="product-name"><a
-																					href="#">Beats
+																			<h4 class="product-name"><a href="#">Beats
 																					EP Wired On-Ear Headphone-Black</a></h4>
 
 
@@ -3332,8 +2976,7 @@
 															<div class="item">
 																<div class="item-inner">
 																	<div class="image images-container">
-																		<a href="#"
-																			class="product-image">
+																		<a href="#" class="product-image">
 																			<img class="img-r" src="{{ asset('image/product//2_1-600x800.jpg') }}"
 																				alt="Sony XBR-55X900E 55-inch 4K HDR Ultra HD" /> <img
 																				src="{{ asset('image/product//2-600x800.jpg') }}"
@@ -3370,16 +3013,14 @@
 																	<div class="caption">
 																		<div class="inner">
 																			<p class="manufacture-product">
-																				<a
-																					href="#">HTC</a>
+																				<a href="#">HTC</a>
 																			</p>
 																			<div class="ratings">
 																				<div class="rating-box">
 																					<div class="rating3">rating</div>
 																				</div>
 																			</div>
-																			<h4 class="product-name"><a
-																					href="#">Sony
+																			<h4 class="product-name"><a href="#">Sony
 																					XBR-55X900E 55-inch 4K HDR Ultra HD</a></h4>
 
 
@@ -3412,8 +3053,7 @@
 															<div class="item">
 																<div class="item-inner">
 																	<div class="image images-container">
-																		<a href="#"
-																			class="product-image">
+																		<a href="#" class="product-image">
 																			<img class="img-r" src="{{ asset('image/product//11_1-600x800.jpg') }}"
 																				alt="Roush Mustang 4-Piston Black Front Brake Kit" /> <img
 																				src="{{ asset('image/product//11-600x800.jpg') }}"
@@ -3449,16 +3089,14 @@
 																	<div class="caption">
 																		<div class="inner">
 																			<p class="manufacture-product">
-																				<a
-																					href="#">Apple</a>
+																				<a href="#">Apple</a>
 																			</p>
 																			<div class="ratings">
 																				<div class="rating-box">
 																					<div class="rating2">rating</div>
 																				</div>
 																			</div>
-																			<h4 class="product-name"><a
-																					href="#">Roush
+																			<h4 class="product-name"><a href="#">Roush
 																					Mustang 4-Piston Black Front Brake Kit</a></h4>
 
 
@@ -3490,8 +3128,7 @@
 															<div class="item">
 																<div class="item-inner">
 																	<div class="image images-container">
-																		<a href="#"
-																			class="product-image">
+																		<a href="#" class="product-image">
 																			<img class="img-r" src="{{ asset('image/product//12_1-600x800.jpg') }}"
 																				alt="Koss Porta Pro On Ear Headphones with Case" /> <img
 																				src="{{ asset('image/product//12-600x800.jpg') }}"
@@ -3528,16 +3165,14 @@
 																	<div class="caption">
 																		<div class="inner">
 																			<p class="manufacture-product">
-																				<a
-																					href="#">Apple</a>
+																				<a href="#">Apple</a>
 																			</p>
 																			<div class="ratings">
 																				<div class="rating-box">
 																					<div class="rating5">rating</div>
 																				</div>
 																			</div>
-																			<h4 class="product-name"><a
-																					href="#">Koss
+																			<h4 class="product-name"><a href="#">Koss
 																					Porta Pro On Ear Headphones with Case</a></h4>
 
 
@@ -3570,13 +3205,13 @@
 															<div class="item">
 																<div class="item-inner">
 																	<div class="image images-container">
-																		<a href="#"
-																			class="product-image">
+																		<a href="#" class="product-image">
 																			<img class="img-r" src="{{ asset('image/product//10_1-600x800.jpg') }}"
 																				alt="Kodak PIXPRO Astro Zoom AZ421 16 MP" /> <img
 																				src="{{ asset('image/product//10-600x800.jpg') }}"
 																				alt="Kodak PIXPRO Astro Zoom AZ421 16 MP"
-																				title="Kodak PIXPRO Astro Zoom AZ421 16 MP" class="img-responsive has-rotator" />
+																				title="Kodak PIXPRO Astro Zoom AZ421 16 MP"
+																				class="img-responsive has-rotator" />
 																		</a>
 																		<div class="box-label">
 
@@ -3606,16 +3241,14 @@
 																	<div class="caption">
 																		<div class="inner">
 																			<p class="manufacture-product">
-																				<a
-																					href="#">Apple</a>
+																				<a href="#">Apple</a>
 																			</p>
 																			<div class="ratings">
 																				<div class="rating-box">
 																					<div class="rating4">rating</div>
 																				</div>
 																			</div>
-																			<h4 class="product-name"><a
-																					href="#">Kodak
+																			<h4 class="product-name"><a href="#">Kodak
 																					PIXPRO Astro Zoom AZ421 16 MP</a></h4>
 
 
@@ -3715,8 +3348,7 @@
 								<div class="inner">
 									<div class="col">
 										<div class="image">
-											<a href="#"
-													alt="img1"></a>
+											<a href="#" alt="img1"></a>
 											<div class="text">
 												<h4>Black Friday</h4>
 												<h3>Save Up To 50% Off</h3>
@@ -3726,8 +3358,7 @@
 									</div>
 									<div class="col">
 										<div class="image">
-											<a href="#"><img
-													src="{{ asset('image/img2-middle-eposi1.jpg') }}" alt="img2"></a>
+											<a href="#"><img src="{{ asset('image/img2-middle-eposi1.jpg') }}" alt="img2"></a>
 											<div class="text">
 												<h4>Best Selling !</h4>
 												<h3>Living Room Up To 70% Off</h3>
@@ -3782,9 +3413,7 @@
 												<div class="row_items">
 													<div class="articles-inner ">
 														<div class="articles-image">
-															<a
-																href="#"><img
-																	src="{{ asset('image/blog/4-370x235.jpg') }}"
+															<a href="#"><img src="{{ asset('image/blog/4-370x235.jpg') }}"
 																	alt="Buy Used Engines and Used Transmissions" /><span class="icon-view"></span></a>
 															<p class="date-time-post">
 																<span class="year-post">2018</span>
@@ -3794,14 +3423,12 @@
 														</div>
 														<div class="aritcles-content">
 															<div class="content-inner">
-																<a class="articles-name"
-																	href="#">Buy
+																<a class="articles-name" href="#">Buy
 																	Used Engines and Used Transmissions</a>
 																<p class="author-name">by <span>Plaza Themes</span></p>
 																<div class="articles-intro">
 																	<p>It's no secret, engines and transmissions can be very expensive...</p>
-																</div> <a class="read-more"
-																	href="#">Read
+																</div> <a class="read-more" href="#">Read
 																	more</a>
 															</div>
 														</div>
@@ -3810,9 +3437,7 @@
 												<div class="row_items">
 													<div class="articles-inner ">
 														<div class="articles-image">
-															<a
-																href="#"><img
-																	src="{{ asset('image/blog/1-370x235.jpg') }}"
+															<a href="#"><img src="{{ asset('image/blog/1-370x235.jpg') }}"
 																	alt="Get Your Car or Truck Ready for the Summer Heat!" /><span
 																	class="icon-view"></span></a>
 															<p class="date-time-post">
@@ -3823,15 +3448,13 @@
 														</div>
 														<div class="aritcles-content">
 															<div class="content-inner">
-																<a class="articles-name"
-																	href="#">Get
+																<a class="articles-name" href="#">Get
 																	Your Car or Truck Ready for the Summer Heat!</a>
 																<p class="author-name">by <span>Plaza Themes</span></p>
 																<div class="articles-intro">
 																	<p>Summer is beautiful in Colorado but we can get some very, very, hot daytime
 																		temps...</p>
-																</div> <a class="read-more"
-																	href="#">Read
+																</div> <a class="read-more" href="#">Read
 																	more</a>
 															</div>
 														</div>
@@ -3840,9 +3463,7 @@
 												<div class="row_items">
 													<div class="articles-inner ">
 														<div class="articles-image">
-															<a
-																href="#"><img
-																	src="{{ asset('image/blog/5-370x235.jpg') }}"
+															<a href="#"><img src="{{ asset('image/blog/5-370x235.jpg') }}"
 																	alt="Minor Wreck? We Got The Auto Parts!" /><span class="icon-view"></span></a>
 															<p class="date-time-post">
 																<span class="year-post">2018</span>
@@ -3852,15 +3473,13 @@
 														</div>
 														<div class="aritcles-content">
 															<div class="content-inner">
-																<a class="articles-name"
-																	href="#">Minor
+																<a class="articles-name" href="#">Minor
 																	Wreck? We Got The Auto Parts!</a>
 																<p class="author-name">by <span>Plaza Themes</span></p>
 																<div class="articles-intro">
 																	<p>It’s winter in Colorado and we’ve had a number of snowy days and hairy
 																		commutes...</p>
-																</div> <a class="read-more"
-																	href="#">Read
+																</div> <a class="read-more" href="#">Read
 																	more</a>
 															</div>
 														</div>
@@ -3869,9 +3488,7 @@
 												<div class="row_items">
 													<div class="articles-inner ">
 														<div class="articles-image">
-															<a
-																href="#"><img
-																	src="{{ asset('image/blog/2-370x235.jpg') }}"
+															<a href="#"><img src="{{ asset('image/blog/2-370x235.jpg') }}"
 																	alt="Purchasing New Auto Parts in our Online Store" /><span
 																	class="icon-view"></span></a>
 															<p class="date-time-post">
@@ -3882,15 +3499,13 @@
 														</div>
 														<div class="aritcles-content">
 															<div class="content-inner">
-																<a class="articles-name"
-																	href="#">Purchasing
+																<a class="articles-name" href="#">Purchasing
 																	New Auto Parts in our Online Store</a>
 																<p class="author-name">by <span>Plaza Themes</span></p>
 																<div class="articles-intro">
 																	<p>Central Auto Parts has been a quality provider of used automotive parts in the
 																		Denver...</p>
-																</div> <a class="read-more"
-																	href="#">Read
+																</div> <a class="read-more" href="#">Read
 																	more</a>
 															</div>
 														</div>
@@ -3899,9 +3514,7 @@
 												<div class="row_items">
 													<div class="articles-inner ">
 														<div class="articles-image">
-															<a
-																href="#"><img
-																	src="{{ asset('image/blog/3-370x235.jpg') }}"
+															<a href="#"><img src="{{ asset('image/blog/3-370x235.jpg') }}"
 																	alt="The Life Cycle of Used Auto Parts and Wrecked Vehicles" /><span
 																	class="icon-view"></span></a>
 															<p class="date-time-post">
@@ -3912,15 +3525,13 @@
 														</div>
 														<div class="aritcles-content">
 															<div class="content-inner">
-																<a class="articles-name"
-																	href="#">The
+																<a class="articles-name" href="#">The
 																	Life Cycle of Used Auto Parts and Wrecked Vehicles</a>
 																<p class="author-name">by <span>Plaza Themes</span></p>
 																<div class="articles-intro">
 																	<p>I am often asked questions about my business when people find out what I do for
 																		a living.</p>
-																</div> <a class="read-more"
-																	href="#">Read
+																</div> <a class="read-more" href="#">Read
 																	more</a>
 															</div>
 														</div>
@@ -3971,7 +3582,8 @@
 			</div>
 		</div>
 	</div>
-	</div>
+	#}
+</div>
 
 {% endblock %}
 

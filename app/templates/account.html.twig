@@ -2,29 +2,138 @@
 {% set body = 'home1 product-category' %}
 
 {% block stylesheet %}
+  <style>
+    .item-inner .caption .manufacture-product {
+      margin-bottom: 0px;
+    }
+    h3 {
+      margin-top: 0px;
+    }
+    .owl-stage {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .owl-item {
+      flex: 1 0 50%;
+      max-width: 50%;
+    }
+  </style>
 {% endblock %}
 
 {% block content %}
 
-  <div class="breadcrumbs">
-    <div class="container">
-        <div class="inner">
-            <h1>My Account</h1>
-            <ul class="breadcrumb">
-                <li><a href="{{ path('homepage') }}">Home</a></li>
-                <li><a href="#">My Account</a>
-                </li>
-            </ul>
-        </div>
+<div class="breadcrumbs container-pushed">
+  <div class="container">
+    <div class="inner">
+      <h1>My Account</h1>
+      <ul class="breadcrumb">
+        <li><a href="{{ path('homepage') }}">Home</a></li>
+        <li><a href="#">My Account</a>
+        </li>
+      </ul>
     </div>
   </div>
-  <div id="product-category" class="container layer-category">
-    <div class="row">
-        <div class="container">
-          {{ dump(app.user) }}
+</div>
+<div id="checkout-cart" class="container layer-category">
+  <div class="row">
+    <div id="content" class="col-sm-12">
+
+      <h2>Bookings</h2>
+      <p>Review and follow your bookings.</p>
+      <div class="panel-group" id="accordion">
+        {% for booking in app.user.bookings %}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a href="#collapse-booking-{{ booking.id }}" class="accordion-toggle collapsed" data-toggle="collapse"
+                data-parent="#accordion" aria-expanded="false">#{{ booking.id }} - {{ booking.dateBooked|date('d/m/yy - H:m:s') }} <i class="fa fa-caret-down"></i>
+              </a>
+            </h4>
+          </div>
+          <div id="collapse-booking-{{ booking.id }}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-6">
+                  <h3>Vehicules</h3>
+                  <div class="box-style">
+                    <div class="col-product">
+                      <div class="owl-container">
+                        <div class="tt-product ">
+                          <div class="tab-content">
+                            <div
+                              class="tab-container-23  owl-carousel owl-theme  tab-pane tab-product-container  fade  active in owl-loaded owl-drag"
+                              id="tab-230">
+            
+                              <div class="owl-stage-outer">
+                                <div class="owl-stage">
+            
+                                  {% for vehicule in booking.vehicules %}
+                                  <div class="owl-item active">
+                                    <div class="row_items ">
+            
+                                      <div class="product-layout grid-style">
+                                        <div class="product-thumb transition">
+                                          <div class="item">
+                                            <div class="item-inner">
+            
+                                              <div class="caption">
+                                                <div class="inner">
+            
+                                                  <p class="manufacture-product">
+                                                    <a href="#">{{ vehicule.category }}</a>
+                                                  </p>
+                                                  <h4 class="product-name"><a href="{{ path('vehicule_show', { id: vehicule.id }) }}">
+                                                      {{ vehicule.brand }} {{ vehicule.model }}</a></h4>
+                                                </div>
+                                              </div><!-- caption -->
+                                            </div>
+                                          </div>
+                                        </div><!-- product-thumb -->
+                                      </div><!-- product-layout -->
+                                    </div>
+                                  </div>
+                                  {% endfor %}
+                                </div>
+                              </div>
+                              <div class="owl-dots disabled"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <h3>Details</h3>
+                  <ul class="list-unstyled">
+                    <li>Start: <span>{{ booking.dateStart|date('d/m/Y') }}</span></li>
+                    <li>End: <span>{{ booking.dateEnd|date('d/m/Y') }}</span></li>
+                  </ul>
+                  <table class="table table-bordered">
+                    <tbody>
+                      {% for vehicule in booking.vehicules %}
+                        <tr>
+                          <td class="text-right"><strong>{{ vehicule.brand }} {{ vehicule.model }} - £{{ vehicule.price }}/day</strong></td>
+                          <td class="text-right">£{{ booking.getVehiculePrice(vehicule) }}</td>
+                        </tr>
+                      {% endfor %}
+                      <tr>
+                        <td class="text-right"><strong>Total:</strong></td>
+                        <td class="text-right">£{{ booking.price }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        {% endfor %}
+      </div>
+
     </div>
   </div>
+</div>
 
 {% endblock %}
 

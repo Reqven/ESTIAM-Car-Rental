@@ -4,8 +4,6 @@ namespace App\Controller;
 use App\Entity\Booking;
 use App\Entity\Vehicule;
 use App\Form\BookingType;
-use App\Model\QuickSearch;
-use App\Form\QuickSearchType;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use JMS\Serializer\SerializationContext;
@@ -17,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class DefaultController extends AbstractController
+class VehiculeController extends AbstractController
 {
     private $entityManager;
     private $serializer;
@@ -30,33 +28,45 @@ class DefaultController extends AbstractController
         $this->session = $session;
     }
 
-    /**
-     * @Route("/", name="homepage")
+     /**
+     * @Route("/vehicules", name="vehicules")
      */
-    public function homepage(Request $request)
+    public function index()
     {
-        $form = $this->createForm(QuickSearchType::class, new QuickSearch());
-        $form->handleRequest($request);
+        $repository = $this->entityManager->getRepository(Vehicule::class);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $booking = $this->getFromSession() ?? new Booking();
-            $booking->setDateStart($form->get('date_start')->getData());
-            $booking->setDateEnd($form->get('date_end')->getData());
-
-            $this->saveToSession($this->serialize($booking));
-            return $this->redirectToRoute('vehicules');
-        }
-        return $this->render('homepage.html.twig', array(
-            'form' => $form->createView()
+        return $this->render('vehicules.html.twig', array(
+            'vehicules' => $repository->findAll(),
+            'categories' => $repository->findCategories(),
+            'brands' => $repository->findPopularBrands()
         ));
     }
 
     /**
-     * @Route("/account", name="account")
+     * @Route("/vehicule/{id}", name="vehicule_show")
      */
-    public function account()
+    public function show(Request $request, Vehicule $vehicule)
     {
-        return $this->render('account.html.twig');
+        return $this->render('vehicule.show.html.twig', array(
+            'vehicule' => $vehicule,
+            'booking' => $this->getFromSession()
+        ));
+    }
+
+    /**
+     * @Route("/vehicule/{id}/add", name="vehicule_add")
+     */
+    public function add(Request $request, Vehicule $vehicule = null)
+    {       
+        if (!$vehicule) {
+            return $this->redirectToRoute('vehicules');
+        }
+        $booking = $this->getFromSession() ?? new Booking();
+        if (!$booking->getVehicules()->contains($vehicule)) {
+            $booking->addVehicule($vehicule);
+        }
+        $this->saveToSession($this->serialize($booking));
+        return $this->redirectToRoute('booking_create');
     }
 
 

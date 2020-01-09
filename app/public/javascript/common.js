@@ -59,7 +59,7 @@ $(document).ready(function() {
 				
 					if(scrollP >= stickyOffset){
 						if( winInnW > 991 ){
-							$('.fix').addClass('fix-header');
+							//$('.fix').addClass('fix-header');
 						}
 						if( winInnW > 0 ){
 							$('.fix2').addClass('fix-header2');
@@ -67,7 +67,7 @@ $(document).ready(function() {
 						
 					} else {
 						if( winInnW > 991 ){
-							$('.fix').removeClass('fix-header');
+							//$('.fix').removeClass('fix-header');
 						}
 						if( winInnW > 0 ){
 							$('.fix2').removeClass('fix-header2');

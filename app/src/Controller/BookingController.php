@@ -2,10 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\Booking;
-use App\Entity\Vehicule;
 use App\Form\BookingType;
-use App\Model\QuickSearch;
-use App\Form\QuickSearchType;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use JMS\Serializer\SerializationContext;
@@ -17,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class DefaultController extends AbstractController
+class BookingController extends AbstractController
 {
     private $entityManager;
     private $serializer;
@@ -31,34 +28,67 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/", name="homepage")
+     * @Route("/booking/create", name="booking_create")
      */
-    public function homepage(Request $request)
+    public function bookingCreate(Request $request)
     {
-        $form = $this->createForm(QuickSearchType::class, new QuickSearch());
+        $booking = $this->getFromSession() ?? new Booking();
+        $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $booking = $this->getFromSession() ?? new Booking();
-            $booking->setDateStart($form->get('date_start')->getData());
-            $booking->setDateEnd($form->get('date_end')->getData());
+            $hasVehiculeForm = $form->has('vehicules');
+            $booking = $form->getData();
+            $form = $this->createForm(BookingType::class, $booking);
 
             $this->saveToSession($this->serialize($booking));
-            return $this->redirectToRoute('vehicules');
+
+            if ($booking->isReady() && $hasVehiculeForm) {
+                return $this->redirectToRoute('booking_create_confirm');
+            }
         }
-        return $this->render('homepage.html.twig', array(
+        return $this->render('booking.create.html.twig', array(
             'form' => $form->createView()
         ));
     }
 
     /**
-     * @Route("/account", name="account")
+     * @Route("/booking/create/confirm", name="booking_create_confirm")
      */
-    public function account()
+    public function bookingCreateConfirm(Request $request)
     {
-        return $this->render('account.html.twig');
+        $booking = $this->getFromSession();
+        if (!$booking || !$booking->isReady()) {
+            return $this->redirectToRoute('booking_create');
+        }
+        $booking->calculate();
+        return $this->render('booking.confirm.html.twig', array(
+            'booking' => $booking
+        ));
     }
 
+    /**
+     * @Route("/booking/create/checkout", name="booking_create_checkout")
+     */
+    public function bookingCreateCheckout(Request $request)
+    {
+        $booking = $this->getFromSession();
+        if (!$booking || !$booking->isReady()) {
+            return $this->redirectToRoute('booking_create');
+        }
+        $booking->calculate();
+        $booking->setStatus('waiting');
+        $booking->setDateBooked(new \DateTime());
+        $booking->setCustomer($this->getUser());
+
+        $this->entityManager->persist($booking);
+        $this->entityManager->flush();
+        $this->saveToSession(null);
+
+        return $this->render('booking.done.html.twig', array(
+            'booking' => $booking
+        ));
+    }
 
     private function serialize(Booking $booking): string
     {

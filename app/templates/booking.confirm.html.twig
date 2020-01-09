@@ -1,0 +1,153 @@
+{% extends 'template.html.twig' %}
+{% set body = 'home1 product-category' %}
+
+{% block stylesheet %}
+  <style>
+    .item-inner .images-container {
+      height: 200px;
+      background-position: center;
+      background-size: cover;
+      background-image: url("{{ asset('image/voiture.jpg') }}");
+    }
+    .item-inner .caption .manufacture-product {
+      margin-bottom: 0px;
+    }
+    h3 {
+      margin-top: 0px;
+    }
+    .owl-stage {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .owl-item {
+      flex: 1 0 50%;
+      max-width: 50%;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+  <div class="breadcrumbs container-pushed">
+    <div class="container">
+      <div class="inner">
+        <h1>Booking</h1>
+        <ul class="breadcrumb">
+          <li><a href="{{ path('homepage') }}">Home</a></li>
+          <li><a href="{{ path('booking_create') }}">Booking</a></li>
+          <li><a href="{{ path('booking_create_confirm') }}">Confirm</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="checkout-cart" class="container layer-category">
+    <div class="row">
+      <div id="content" class="col-sm-12">
+
+        <div class="row">
+          <div class="col-sm-6">
+            <h3>Vehicules</h3>
+            <div class="box-style">
+              <div class="col-product">
+                <div class="owl-container">
+                  <div class="tt-product ">
+                    <div class="tab-content">
+                      <div
+                        class="tab-container-23  owl-carousel owl-theme  tab-pane tab-product-container  fade  active in owl-loaded owl-drag"
+                        id="tab-230">
+      
+                        <div class="owl-stage-outer">
+                          <div class="owl-stage">
+      
+                            {% for vehicule in booking.vehicules %}
+                            <div class="owl-item active">
+                              <div class="row_items ">
+      
+                                <div class="product-layout grid-style">
+                                  <div class="product-thumb transition">
+                                    <div class="item">
+                                      <div class="item-inner">
+      
+                                        <div class="image images-container">
+                                          <a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/product&amp;product_id=54"
+                                            class="product-image">
+      
+                                          </a>
+      
+                                        </div><!-- image -->
+                                        <div class="caption">
+                                          <div class="inner">
+      
+                                            <p class="manufacture-product">
+                                              <a href="#">{{ vehicule.category }}</a>
+                                            </p>
+                                            <h4 class="product-name"><a href="{{ path('vehicule_show', { id: vehicule.id }) }}">
+                                                {{ vehicule.brand }} {{ vehicule.model }}</a></h4>
+                                            {#<div class="price-box">
+                                              <label>Price:</label>
+                                              <p class="special-price"><span class="price">£{{ vehicule.price }}</span></p>
+                                              <p class="old-price"><span class="price">£64.75</span></p>
+                                              <p class="price-tax"><span class="price">Ex Tax: £48.94</span></p>
+                                            </div>#}
+      
+                                          </div>
+                                        </div><!-- caption -->
+                                      </div>
+                                    </div>
+                                  </div><!-- product-thumb -->
+                                </div><!-- product-layout -->
+                              </div>
+                            </div>
+                            {% endfor %}
+                          </div>
+                        </div>
+                        <div class="owl-dots disabled"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <h3>Details</h3>
+            <ul class="list-unstyled">
+              <li>Start: <span>{{ booking.dateStart|date('d/m/Y') }}</span></li>
+              <li>End: <span>{{ booking.dateEnd|date('d/m/Y') }}</span></li>
+            </ul>
+            <table class="table table-bordered">
+              <tbody>
+                {% for vehicule in booking.vehicules %}
+                  <tr>
+                    <td class="text-right"><strong>{{ vehicule.brand }} {{ vehicule.model }} - £{{ vehicule.price }}/day</strong></td>
+                    <td class="text-right">£{{ booking.getVehiculePrice(vehicule) }}</td>
+                  </tr>
+                {% endfor %}
+                <tr>
+                  <td class="text-right"><strong>Total:</strong></td>
+                  <td class="text-right">£{{ booking.price }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="buttons clearfix">
+          <div class="pull-left"><a href="{{ path('booking_create') }}" class="btn btn-primary">Edit</a></div>
+          <div class="pull-right"><a href="{{ path('booking_create_checkout') }}" class="btn btn-primary">Checkout</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $(document).ready(function () {
+    $('.remove-vehicule').on('click', function () {
+      $(this).closest('.owl-item').remove();
+    })
+  });
+</script>
+{% endblock %}

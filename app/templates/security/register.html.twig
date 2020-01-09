@@ -9,12 +9,19 @@
         .layer-category {
             max-width: 1100px;
         }
+        .tabs-category-slider .module-title {
+            margin-top: 0px;
+            margin-bottom: 10px;
+        }
+        .tabs-category-slider .box-tab {
+            margin-top: 0px;
+        }
     </style>
 {% endblock %}
 
 {% block content %}
 
-    <div class="breadcrumbs">
+    <div class="breadcrumbs container-pushed">
         <div class="container">
             <div class="inner">
                 <h1>Register</h1>
@@ -26,8 +33,26 @@
             </div>
         </div>
     </div>
-    <div id="product-category" class="container layer-category">
-        <div class="row">
+    <div id="product-category" class="container layer-category tt_tabsproduct_module tabs-category-slider">
+
+            <div class="module-title">
+               
+                <div class="box-tab">
+                    <ul class="tab-heading tabs-categorys">
+                        <li{% if 'register_individual' is same as(app.request.get('_route')) %} class="active"{% endif %}>
+                            <a href="{{ path('register_individual') }}">
+                                <span>Individual</span>
+                            </a>
+                        </li>
+                        <li{% if 'register_professional' is same as(app.request.get('_route')) %} class="active"{% endif %}>
+                            <a href="{{ path('register_professional') }}">
+                                <span>Professional</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        
             {% if error is defined %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
@@ -78,7 +103,6 @@
                 <button class="button" type="submit"><span>Register</span></button>
                 {{form_end(form)}}
             </div>
-        </div>
     </div>
 
 {% endblock %}
