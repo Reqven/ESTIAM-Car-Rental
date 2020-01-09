@@ -3,6 +3,12 @@
 
 {% block stylesheet %}
   <style>
+    .item-inner .images-container {
+      height: 200px;
+      background-position: center;
+      background-size: cover;
+      background-image: url("{{ asset('image/voiture.jpg') }}");
+    }
     .item-inner .caption .manufacture-product {
       margin-bottom: 0px;
     }
@@ -25,10 +31,10 @@
 <div class="breadcrumbs container-pushed">
   <div class="container">
     <div class="inner">
-      <h1>My Account</h1>
+      <h1>Admin</h1>
       <ul class="breadcrumb">
         <li><a href="{{ path('homepage') }}">Home</a></li>
-        <li><a href="#">My Account</a>
+        <li><a href="#">Admin</a>
         </li>
       </ul>
     </div>
@@ -38,11 +44,10 @@
   <div class="row">
     <div id="content" class="col-sm-12">
 
-      {% if is_granted('ROLE_CUSTOMER') %}
       <h2>Bookings</h2>
-      <p>Review and follow your bookings.</p>
+      <p>Validation pending</p>
       <div class="panel-group" id="accordion">
-        {% for booking in app.user.bookings %}
+        {% for booking in bookings %}
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
@@ -77,6 +82,13 @@
                                           <div class="item">
                                             <div class="item-inner">
             
+                                              <div class="image images-container">
+                                                <a href="http://demo.towerthemes.com/tt_eposi/index.php?route=product/product&amp;product_id=54"
+                                                  class="product-image">
+            
+                                                </a>
+            
+                                              </div><!-- image -->
                                               <div class="caption">
                                                 <div class="inner">
             
@@ -85,6 +97,13 @@
                                                   </p>
                                                   <h4 class="product-name"><a href="{{ path('vehicule_show', { id: vehicule.id }) }}">
                                                       {{ vehicule.brand }} {{ vehicule.model }}</a></h4>
+                                                  {#<div class="price-box">
+                                                    <label>Price:</label>
+                                                    <p class="special-price"><span class="price">£{{ vehicule.price }}</span></p>
+                                                    <p class="old-price"><span class="price">£64.75</span></p>
+                                                    <p class="price-tax"><span class="price">Ex Tax: £48.94</span></p>
+                                                  </div>#}
+            
                                                 </div>
                                               </div><!-- caption -->
                                             </div>
@@ -106,11 +125,23 @@
                 </div>
                 <div class="col-sm-6">
                   <h3>Details</h3>
-                  <ul class="list-unstyled">
-                    <li><b>Start: </b><span>{{ booking.dateStart|date('d/m/Y') }}</span></li>
-                    <li><b>End: </b><span>{{ booking.dateEnd|date('d/m/Y') }}</span></li>
-                    <li><b>Status: </b><span>{{ booking.status }}</span></li>
-                  </ul>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <ul class="list-unstyled">
+                        <li><b>Customer: </b><span>{{ booking.customer.getFullname() }}</span></li>
+                        <li><b>Address: </b><span>{{ booking.customer.place.address }}</span></li>
+                        <li><b>Zipcode: </b><span>{{ booking.customer.place.zipcode }}</span></li>
+                        <li><b>City: </b><span>{{ booking.customer.place.city }}</span></li>
+                      </ul>
+                    </div>
+                    <div class="col-sm-6">
+                      <ul class="list-unstyled">
+                        <li><b>Start: </b><span>{{ booking.dateStart|date('d/m/Y') }}</span></li>
+                        <li><b>End: </b><span>{{ booking.dateEnd|date('d/m/Y') }}</span></li>
+                        <li><b>Status: </b><span>{{ booking.status }}</span></li>
+                      </ul>
+                    </div>
+                  </div>
                   <br>
                   <table class="table table-bordered">
                     <tbody>
@@ -130,8 +161,8 @@
               </div>
               <div class="buttons clearfix">
                 <div class="pull-right">
-                  <a class="btn button button-help" href="#">Help</a>
-                  <a href="#" class="btn btn-primary">Print</a>
+                  <a class="btn button button-contact" href="#">Contact</a>
+                  <a href="#" class="btn btn-primary">Edit status</a>
                 </div>
               </div>
             </div>
@@ -139,7 +170,6 @@
         </div>
         {% endfor %}
       </div>
-      {% endif %}
 
     </div>
   </div>

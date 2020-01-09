@@ -69,7 +69,6 @@ class SecurityController extends AbstractController
         }
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
-        dump($form->getData());
 
         if($form->isSubmitted() && $form->isValid()){
             $user = $form->getData();
@@ -85,5 +84,16 @@ class SecurityController extends AbstractController
         return $this->render('security/register.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/admin", name="admin")
+     */
+    public function admin(Request $request)
+    {
+        $repository = $this->entityManager->getRepository(Booking::class);
+        return $this->render('admin.html.twig', array(
+            'bookings' => $repository->findAll()
+        ));
     }
 }

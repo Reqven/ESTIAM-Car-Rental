@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Entity\Booking;
 use App\Entity\Vehicule;
+use App\Entity\Employee;
+use App\Entity\Customer;
+use App\Entity\Place;
 use App\Form\BookingType;
 use App\Model\QuickSearch;
 use App\Form\QuickSearchType;
@@ -16,6 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 
 class DefaultController extends AbstractController
 {

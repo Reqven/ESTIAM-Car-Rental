@@ -22,7 +22,7 @@ class Employee extends User
 
     /**
      * @ORM\ManyToOne(targetEntity="Agency", inversedBy="employees")
-     * @ORM\JoinColumn(name="agency_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="agency_id", referencedColumnName="id", nullable=true)
      */
     protected $agency;
 
@@ -57,5 +57,10 @@ class Employee extends User
     {
         $this->poste = $poste;
         return $this;
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_EMPLOYEE'];
     }
 }

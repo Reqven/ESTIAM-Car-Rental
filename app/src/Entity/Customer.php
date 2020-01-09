@@ -31,7 +31,7 @@ class Customer extends User
     protected $date_register;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $credit_card;
 
@@ -102,5 +102,10 @@ class Customer extends User
             }
         }
         return $this;
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_CUSTOMER'];
     }
 }

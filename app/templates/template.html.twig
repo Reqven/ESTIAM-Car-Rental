@@ -545,6 +545,13 @@
 													<span>Vehicules</span>
 												</a>
 											</li>
+											{% if is_granted('ROLE_ADMIN') %}
+											<li class="li-top-item left {% if app.request.get('_route') starts with 'admin' %}active{% endif %}" style="float:left">
+												<a class="a-top-link" href="{{ path('admin') }}">
+													<span>Admin</span>
+												</a>
+											</li>
+											{% endif %}
 											<li class="li-top-item left " style="float: left">
 												<a class="a-top-link" href="#">
 													<span>Specials</span>
@@ -1101,7 +1108,7 @@
 																	<a href="{{ path('account') }}">My Account</a>
 																</li>
 																<li>
-																	<a href="{{ path('logout') }}">Disconnect</a>
+																	<a href="{{ path('logout') }}">Logout</a>
 																</li>
 															{% else %}
 																<li>

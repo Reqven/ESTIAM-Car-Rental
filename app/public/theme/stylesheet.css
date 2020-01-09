@@ -5002,3 +5002,25 @@ footer .list-unstyled.text-content li a{display: block;line-height: 24px;color: 
 	margin-right: 10px;
 	font-weight: normal;
 }
+
+.button-contact:before {
+	content: "\f2eb";
+	font-family: "Ionicons";
+	font-size: 20px;
+	display: inline-block;
+	vertical-align: top;
+	line-height: inherit;
+	margin-right: 10px;
+	font-weight: normal;
+}
+
+.button-help:before {
+	content: "\f14a";
+	font-family: "Ionicons";
+	font-size: 20px;
+	display: inline-block;
+	vertical-align: top;
+	line-height: inherit;
+	margin-right: 10px;
+	font-weight: normal;
+}

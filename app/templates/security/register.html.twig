@@ -2,66 +2,69 @@
 {% set body = 'home1 product-category' %}
 
 {% block stylesheet %}
-    <style>
-        .badge-danger {
-            background-color: #ee3333;
-        }
-        .layer-category {
-            max-width: 1100px;
-        }
-        .tabs-category-slider .module-title {
-            margin-top: 0px;
-            margin-bottom: 10px;
-        }
-        .tabs-category-slider .box-tab {
-            margin-top: 0px;
-        }
-    </style>
+<style>
+  .badge-danger {
+    background-color: #ee3333;
+  }
+
+  .layer-category {
+    max-width: 1100px;
+  }
+
+  .tabs-category-slider .module-title {
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+
+  .tabs-category-slider .box-tab {
+    margin-top: 0px;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
 
-    <div class="breadcrumbs container-pushed">
-        <div class="container">
-            <div class="inner">
-                <h1>Register</h1>
-                <ul class="breadcrumb">
-                    <li><a href="{{ path('homepage') }}">Home</a></li>
-                    <li><a href="#">Register</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+<div class="breadcrumbs container-pushed">
+  <div class="container">
+    <div class="inner">
+      <h1>Register</h1>
+      <ul class="breadcrumb">
+        <li><a href="{{ path('homepage') }}">Home</a></li>
+        <li><a href="#">Register</a>
+        </li>
+      </ul>
     </div>
-    <div id="product-category" class="container layer-category tt_tabsproduct_module tabs-category-slider">
+  </div>
+</div>
+<div id="product-category" class="container layer-category tt_tabsproduct_module tabs-category-slider">
 
-            <div class="module-title">
-               
-                <div class="box-tab">
-                    <ul class="tab-heading tabs-categorys">
-                        <li{% if 'register_individual' is same as(app.request.get('_route')) %} class="active"{% endif %}>
-                            <a href="{{ path('register_individual') }}">
-                                <span>Individual</span>
-                            </a>
-                        </li>
-                        <li{% if 'register_professional' is same as(app.request.get('_route')) %} class="active"{% endif %}>
-                            <a href="{{ path('register_professional') }}">
-                                <span>Professional</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        
-            {% if error is defined %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
+  <div class="module-title">
 
-            <div class="login-form-content">
-                <h2>Register</h2>
+    <div class="box-tab">
+      <ul class="tab-heading tabs-categorys">
+        <li{% if 'register_individual' is same as(app.request.get('_route')) %} class="active" {% endif %}>
+          <a href="{{ path('register_individual') }}">
+            <span>Individual</span>
+          </a>
+          </li>
+          <li{% if 'register_professional' is same as(app.request.get('_route')) %} class="active" {% endif %}>
+            <a href="{{ path('register_professional') }}">
+              <span>Professional</span>
+            </a>
+            </li>
+      </ul>
+    </div>
+  </div>
 
-                {{ form_start(form) }}
-                {# form_row(form.email, {'label': 'Adresse email', 'attr': {'placeholder': 'plonge.dubois@estiam_car.com'}})
+  {% if error is defined %}
+  <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+  {% endif %}
+
+  <div class="login-form-content">
+    <h2>Register</h2>
+
+    {{ form_start(form) }}
+    {# form_row(form.email, {'label': 'Adresse email', 'attr': {'placeholder': 'plonge.dubois@estiam_car.com'}})
                 }}
                 {{ form_row(form.password, {'label': 'Mot de passe', 'attr': {'placeholder': '*******'}}) }}
                 {{ form_row(form.confirm_password, {'label': 'Confirmer mot de passe', 'attr': {'placeholder': '*******'}})
@@ -75,34 +78,52 @@
                 {{ form_row(form.ville,{'label': 'Ville'}) }}
                 {{ form_row(form.portable,{'label': 'Portable'}) #}
 
-                <div class="row">
-                    <div class="col-md-6">
-                        {{ form_row(form.firstname) }}
-                        {{ form_row(form.lastname) }}
-                        {{ form_row(form.email) }}
-                        {{ form_row(form.date_birth) }}
-                        {{ form_row(form.password.first) }}
-                        {{ form_row(form.password.second) }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ form_row(form.phone) }}
-                        {{ form_row(form.credit_card) }}
-                        {{ form_row(form.place.address) }}
-                        <div class="row">
-                            <div class="col-md-4">
-                                {{ form_row(form.place.zipcode) }}
-                            </div>
-                            <div class="col-md-8">
-                                {{ form_row(form.place.city) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="row">
+      <div class="col-md-6">
+        <legend class="col-form-label required">Personnal information</legend>
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.lastname) }}
+        {{ form_row(form.date_birth) }}
+      </div>
+      <div class="col-md-6">
+        <legend class="col-form-label required">Address</legend>
+        {{ form_row(form.place.address) }}
+        <div class="row">
+          <div class="col-md-4">
+            {{ form_row(form.place.zipcode) }}
+          </div>
+          <div class="col-md-8">
+            {{ form_row(form.place.city) }}
+          </div>
+        </div>
+        {{ form_row(form.phone) }}
+      </div>
 
-                {{form_widget(form)}}
-                <button class="button" type="submit"><span>Register</span></button>
-                {{form_end(form)}}
-            </div>
     </div>
+    <div class="row">
+      <div class="col-md-12">
+        <legend class="col-form-label required">Credentials</legend>
+
+        <div class="row">
+          <div class="col-md-6">
+            {{ form_row(form.email) }}
+          </div>
+          <div class="col-md-6">
+            {{ form_row(form.password.first) }}
+            {{ form_row(form.password.second) }}
+            <div class="buttons clearfix">
+              <div class="pull-right">
+                <button class="button" type="submit"><span>Register</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{form_widget(form)}}
+    {{form_end(form)}}
+  </div>
+</div>
 
 {% endblock %}

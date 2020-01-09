@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use App\Entity\Customer;
 use App\Form\PlaceType;
+use App\Form\DatePickerType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type as Types;
@@ -23,12 +24,12 @@ class RegistrationType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('place', PlaceType::class)
-            ->add('date_birth')
+            ->add('date_birth', DatePickerType::class)
             ->add('phone')
             ->add('email');
 
             if ($user instanceof Customer) {
-                $builder->add('credit_card');
+                //$builder->add('credit_card');
             }
 
             if ($user instanceof Employee) {
@@ -36,18 +37,14 @@ class RegistrationType extends AbstractType
                     ->add('agency')
                     ->add('poste');
             }
-
+            
             if (!$user->getId()) {
                 $builder->add(
                     'password', Types\RepeatedType::class, array(
                         'type' => Types\PasswordType::class,
-                        'mapped' => false,
-                        'first_options' => array(
-                            'label' => 'Password'
-                        ),
-                        'second_options' => array(
-                            'label' => 'Confirm',
-                        )
+                        'first_options' => array('label' => 'Password'),
+                        'second_options' => array('label' => 'Confirm'),
+                        'invalid_message' => 'Passwords do not match'
                     )
                 );
             }
@@ -56,8 +53,7 @@ class RegistrationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
-            'choice_translation_domain' => false
+            'data_class' => User::class
         ]);
     }
 }

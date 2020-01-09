@@ -32,16 +32,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     protected $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     protected $lastname;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank()
      */
     protected $date_birth;
 
@@ -49,23 +52,26 @@ class User implements UserInterface
     /**
      * @ORM\OneToOne(targetEntity="Place", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(name="place_id", referencedColumnName="id", nullable=false)
+     * @Assert\Valid()
      */
     protected $place;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      */
     protected $phone;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Email()
+     * @Assert\NotBlank()
      */
     protected $email;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min=8, minMessage="votre mot de passe doit faire minimum 8 caractères")
+     * @Assert\Length(min=8, minMessage="Password must be at least 8 characters")
      */
     protected $password;
 
@@ -95,6 +101,11 @@ class User implements UserInterface
     {
         $this->lastname = $lastname;
         return $this;
+    }
+
+    public function getFullname(): ?string
+    {
+        return $this->firstname.' '.$this->lastname;
     }
 
     public function getDateBirth(): ?\DateTimeInterface
