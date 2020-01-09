@@ -5,16 +5,17 @@
 Download and install `Docker for Windows` or `Docker for Mac`.  
 You have to be signed into your Docker account to download the images.
 
-### Windows / OSX
+### Windows / OSX / Linux
 If you're using Windows, make sure that you're using `Linux containers` (you can change this in settings).  
 If you're using Mac, make sure that you allowed Docker to access your filesystem (see Preferences - File sharing tab)  
 
-Open up the `Powershell` on Windows or a new terminal window on Mac, `cd` at root of the project and use
+Open up the `Powershell` on Windows or a new terminal window on Mac/Linux, `cd` at root of the project and use
 
     docker-compose up
 ___
-You need to wait until the container `dependencies` exits for the dependencies to be fully downloaded and installed.  
-If an error occurs before the container shuts down by itself, you may restart the container manually
+### Important note
+
+You **need to wait** until the container `dependencies` **exits itself** for the dependencies to be fully downloaded and installed. If an error occurs before the container shuts down by itself, you may restart the container manually
 
     docker container run dependencies
     
@@ -23,6 +24,7 @@ If it still doesn't work, you can manually install the dependencies using compos
     docker exec -it webserver /bin/bash
     composer install
 
+___
 ## Increase performance (OSX only)
 As you may know, using volumes with Docker on `OSX` / `Windows` will likely gives you poor performance,
 especially noticeable when browsing a web application. We can fix this issue using [docker-sync](http://docker-sync.io/).
